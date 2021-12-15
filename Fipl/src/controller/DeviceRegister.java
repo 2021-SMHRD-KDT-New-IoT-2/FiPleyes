@@ -12,8 +12,8 @@ import model.DeviceDAO;
 import model.DeviceVO;
 import model.EmployeeVO;
 
-@WebServlet("/DeviceRegi")
-public class DeviceRegi extends HttpServlet {
+@WebServlet("/DeviceRegister")
+public class DeviceRegister extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 

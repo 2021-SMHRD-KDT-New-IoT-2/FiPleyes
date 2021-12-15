@@ -1,0 +1,52 @@
+package controller;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.EmployeeVO;
+import model.ReportDAO;
+
+@WebServlet("/ReportStatusUp")
+public class ReportStatusUp extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 사용자가 신고 상태 변경을 선택했을 시
+
+		request.setCharacterEncoding("euc-kr");
+
+		// ★상태 변경을 하고자 하는 신고의 번호
+		String rep_no = request.getParameter("");
+
+		// 사용자 세션 사번
+		EmployeeVO vo = new EmployeeVO();
+		HttpSession session = request.getSession();
+		vo = (EmployeeVO) session.getAttribute("employee");
+		String emp_no = vo.getEmp_no();
+
+		ReportDAO dao = new ReportDAO();
+
+		// ★사용자가 어떤 상태로 변경을 선택했는지 가져오기
+		String change_rep_status = "★"; // ★사용자가 선택한 것
+
+		int cnt = dao.statusUpdate(rep_no, change_rep_status, emp_no);
+
+		if (cnt > 0) {
+			System.out.println("신고 상태 바꾸기 성공");
+			// ★신고 상태 바꾸기 성공시 페이지 이동
+			// response.sendRedirect("main.jsp");
+		} else {
+			System.out.println("신고 상태 바꾸기 실패");
+			// ★신고 상태 바꾸기 실패시 페이지 이동
+			// response.sendRedirect("main.jsp");
+		}
+
+	}
+
+}

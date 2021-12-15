@@ -15,7 +15,7 @@ public class DeviceDAO {
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	ArrayList<DeviceVO> al = null;
-	
+
 	// 디비 연결
 	private void Connection() {
 		try {
@@ -77,10 +77,11 @@ public class DeviceDAO {
 		}
 		return cnt;
 	}
-	
-	
+
 	// 장치목록
 	public ArrayList<DeviceVO> allDevice(String device_dept) {
+		// 세션에서 가져온 사용자의 부서를 입력받아서 해당 부서의 기기만 보여주게 한다
+
 		al = new ArrayList<DeviceVO>();
 
 		try {
@@ -115,10 +116,29 @@ public class DeviceDAO {
 		}
 		return al;
 	}
-	
+
 	// 장치 상태 업데이트
-	public int statusUpdate() {
-		return 0;
+	public int statusUpdate(String device_no) {
+		// 기기 이상 데이터가 들어온 기기 번호
+		try {
+			Connection();
+
+			String sql = "UPDATE DEVICES SET DEVICE_STATUS = '1' WHERE DEVICE_NO = ?";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, device_no);
+
+			cnt = psmt.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("장치 상태 변경 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return cnt;
 	}
-	
+
 }
