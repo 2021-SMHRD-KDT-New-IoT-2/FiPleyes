@@ -20,7 +20,7 @@ public class Logout extends HttpServlet {
 		// 세션을 지운다
 		session.removeAttribute("employee");
 		
-		// 페이지를 이동한다
+		// ★페이지를 이동한다
 		// response.sendRedirect("main.jsp");
 	}
 
