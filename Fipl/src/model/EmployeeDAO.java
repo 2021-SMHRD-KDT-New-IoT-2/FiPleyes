@@ -129,7 +129,7 @@ public class EmployeeDAO {
 
 			psmt.setString(1, name);
 			psmt.setString(2, phone);
-			psmt.setString(2, email);
+			psmt.setString(3, email);
 
 			rs = psmt.executeQuery();
 
@@ -160,6 +160,32 @@ public class EmployeeDAO {
 		}
 		
 		return vo;
+	}
+	
+	public boolean checkPw(String emp_no, String emp_pw) {
+		
+		boolean check = false;
+		
+		try {
+			Connection();
+			String sql = "select * from Employees where emp_no = ? and emp_pw=?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, emp_no);
+			psmt.setString(2, emp_pw);
+
+			rs = psmt.executeQuery();
+			
+			check = rs.next();
+	
+		} catch (Exception e) {
+			System.out.println("로그인 DAO 실패");
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return check;
 	}
 
 }
