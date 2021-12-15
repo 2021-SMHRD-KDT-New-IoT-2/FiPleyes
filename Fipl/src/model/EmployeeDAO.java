@@ -119,5 +119,47 @@ public class EmployeeDAO {
 		}
 		return cnt;
 	}
+	
+	public EmployeeVO findPw(String name, String phone, String email) {
+
+		try {
+			Connection();
+			String sql = "select * from Employees where emp_name = ? and emp_phone =? and emp_email=?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, name);
+			psmt.setString(2, phone);
+			psmt.setString(2, email);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				System.out.println("디비에 로그인 값 있음");
+
+				//디비에서 데이터 불러오기
+	            String get_emp_id = rs.getString(1);
+	            String get_emp_pw = rs.getString(2);
+	            String get_emp_name = rs.getString(3);
+	            String get_emp_phone = rs.getString(4);
+		        String get_emp_email = rs.getString(5);
+		        String get_dept_no = rs.getString(6);
+		        String get_emp_status = rs.getString(7);
+
+				// 불러온거 VO에 넣기
+	            vo = new EmployeeVO(get_emp_id, get_emp_pw, get_emp_name, get_emp_phone, get_emp_email, get_dept_no, get_emp_status);
+
+			} else {
+				System.out.println("디비에 로그인값 없음");
+			}
+
+		} catch (Exception e) {
+			System.out.println("로그인 DAO 실패");
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return vo;
+	}
 
 }

@@ -21,7 +21,7 @@ public class EmployeeVO {
 		this.dept_no = dept_no;
 		this.emp_status = emp_status;
 	}
-
+	
 	public EmployeeVO() {
 
 	}
