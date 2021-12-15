@@ -15,6 +15,5 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Users/smhrd/Desktop/apache-tomcat-8.5.72/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="C:/Users/smhrd/Desktop/apache-tomcat-8.5.72/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/smhrd/Desktop/안드로이드/gson-2.8.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
