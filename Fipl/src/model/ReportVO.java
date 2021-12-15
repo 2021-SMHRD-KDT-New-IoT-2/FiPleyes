@@ -8,10 +8,12 @@ public class ReportVO {
 	private String rep_file;
 	private String car_no;
 	private String rep_status;
+	private String rep_dept;
 	private String emp_no;
+	
 
 	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
-			String emp_no) {
+			String rep_dept, String emp_no) {
 		super();
 		this.rep_no = rep_no;
 		this.device_no = device_no;
@@ -19,6 +21,7 @@ public class ReportVO {
 		this.rep_file = rep_file;
 		this.car_no = car_no;
 		this.rep_status = rep_status;
+		this.rep_dept = rep_dept;
 		this.emp_no = emp_no;
 	}
 
@@ -73,6 +76,14 @@ public class ReportVO {
 	public void setRep_status(String rep_status) {
 		this.rep_status = rep_status;
 	}
+	
+	public String getRep_dept() {
+		return rep_dept;
+	}
+
+	public void setRep_dept(String rep_dept) {
+		this.rep_dept = rep_dept;
+	}
 
 	public String getEmp_no() {
 		return emp_no;
@@ -85,7 +96,8 @@ public class ReportVO {
 	@Override
 	public String toString() {
 		return "ReportVO [rep_no=" + rep_no + ", device_no=" + device_no + ", rep_time=" + rep_time + ", rep_file="
-				+ rep_file + ", car_no=" + car_no + ", rep_status=" + rep_status + ", emp_no=" + emp_no + "]";
+				+ rep_file + ", car_no=" + car_no + ", rep_status=" + rep_status + ", rep_dept=" + rep_dept
+				+ ", emp_no=" + emp_no + "]";
 	}
 
 }
