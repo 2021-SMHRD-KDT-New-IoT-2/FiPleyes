@@ -1,3 +1,4 @@
+<%@page import="model.EmployeeVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -13,8 +14,27 @@
   
 </head>
 <body class = "layout">
+<%
+// 자동로그인을 위한 쿠키 가져오기
+Cookie[] cookies = request.getCookies();
+if(cookies != null){
+	for(Cookie tempCookie : cookies){
+		if(tempCookie.getName().equals("emp_no")){
+			// 쿠기에 emp_no가 있으면 특정 페이지로 이동
+			session.setAttribute("emp_no", tempCookie.getValue());
+		}
+	}
+}
+ 
+// 그냥 로그인 했을때 세션 가져오기
+EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
+String name = vo.getEmp_name(); //가져올 값 지정하기 
+
+%>
+
     <header>
         <div class="head"><h1><a href="">FiPl.net</a></h1></div>
+        <div><h1> <%=name %>님 로그인되었습니다.</h1></div>
         <div class="container_h">
         <nav>
             <ul>
