@@ -5,12 +5,12 @@ header {
     top: 0;
     width:80%; 
     height:10vh; 
+    background-color: mintcream;
     margin:0 auto;
-    background-color: tomato;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 9999;
+    z-index: 1;
     } 
 
 .head{
@@ -21,9 +21,13 @@ header {
 	display : flex;
 	flex-wrap : nowrap;
 }
+.logo{
+	width:7vw;
+	height: auto;
+}
+
 a{
     text-decoration: none;
-
 }
 nav>ul>li{
     display: inline-block;
@@ -31,7 +35,7 @@ nav>ul>li{
     
 }
 nav>ul>li>a{
-    color : mintcream;
+    color : black;
     text-decoration: none;
 }
 nav>ul>li>a:hover{
@@ -61,62 +65,84 @@ h2{
 #page1{
     float:left; 
     width:100%; height: 100vh;
-    background-color:rgb(95, 141, 141); 
     text-align: center; padding: 0.073% 0 0 0; 
 }
-.container-pw > .btn {
-  margin: 60px;
-  padding: 20px 40px;
-  font-size: 30px;
-  border-radius: 40px;
-  position : relative;
-}
-.modal-pw {
-  background: #fff;
-  width: 70%;
-  height: 70%;
-  margin: 10% 0;
-  padding: 0;
-  transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
-  top: 100%;
-  position: fixed;
-  left: 15vw;
-  text-align: center;
-  z-index: 9999;
-}
-.modal_header {
-    padding:20px;
-    border-bottom: 1px solid #ddd;
-    font: 300 24px Lato;
-    position: relative;
+.modal_wrap{
+        display: none;
+        width: 500px;
+        height: 420px;
+        position: fixed;
+        top:50%;
+        left: 50%;
+        margin: -250px 0 0 -250px;
+        background:#eee;
+        z-index: 3;
     }
-.modal_main {
-    padding: 20px;
-    font: 300 16px Lato;
-  }
-
-.btn {
-   background: navy;
-  padding: 10px 25px;
-  display: inline-block;
-  border-radius: 25px;
-  margin: 20px 0;
-  color: #fff;
-  position: relative;
-  transition: all .4s ease;
-  cursor: pointer;
+.black_bg{
+    display: none;
+    position: fixed;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0,0, 0.5);
+    top:0;
+    left: 0;
+    z-index: 2;
+    }
+.modal_close{
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: -30px;
+    right: 0;
 }
-
-.container-pw.modal-open-pw .modal-pw {
-  top: 0;
+.modal_close> a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:url(https://img.icons8.com/metro/26/000000/close-window.png);
+    text-indent: -9999px;
 }
-
+.modal_btn{
+	background : none;
+    cursor: pointer;
+    outline: none;	
+}
+.pw_h, .pw_d{
+	text-align : center;
+}
+.pw_h{
+	position: relative;
+	top : 5vh;
+}
+.pw_d{
+	position: relative;
+	top : 12vh;
+}
+input{
+	width : 13vw;
+	height: 3vh;
+	margin :3px 0; 
+}
+.pw_d > button{
+	background : #1726aa;
+    cursor: pointer;
+ 	display: inline-block;
+    outline: none;
+    color: mintcream;
+    font-size: 15px;
+    font-weight: bold;
+    width : 13.5vw;
+    height : 4vh;
+    border-radius: 5px;
+    border: 2px solid white;
+    margin :3px 0;
+}
 /* page2 */
 
 #page2{ 
     float:left; 
     width:100%; height: 100vh; 
-    background-color:rgb(125,250,250); 
     text-align: center; padding: 0.073% 0 0 0; 
 }
 .container > .btn {
@@ -129,7 +155,7 @@ h2{
   background: #fff;
   width: 70%;
   height: 70%;
-  margin: 10% 0;
+  margin: 8% 0;
   padding: 0;
   transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
   top: 100%;
@@ -172,7 +198,7 @@ h2{
     color: mintcream;
     border: 2px solid white;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 15px;
     padding: 15px 20px;
     font-weight: bold;
 
@@ -190,7 +216,7 @@ h2{
 .detail_t{
     position: relative;
     top : 4vh;
-    left :33vw;
+    left :34vw;
 }
 tr{
     height: 5vh;
@@ -202,7 +228,7 @@ tr{
 	width : 25vw;
 	height : auto;
 	position : fixed;
-	left : 23vw;
+	left : 24vw;
 }
 
 
@@ -239,7 +265,6 @@ tr{
 #page3{
     float:left; 
     width:100%; height: 100vh;
-    background-color:rgb(95, 141, 141); 
     text-align: center; padding: 0.073% 0 0 0; 
 }
 .container-1 > .btn {
@@ -294,7 +319,6 @@ tr{
 #page4{ 
     float:left; 
     width:100%; height: 100vh; 
-    background-color:rgb(125,250,250); 
     text-align: center; padding: 0.073% 0 0 0; 
 }
 .page4_table{
@@ -308,7 +332,6 @@ tr{
 #page5{
     float:left; 
     width:100%; height: 90vh;
-    background-color:rgb(95, 141, 141); 
     text-align: center; padding: 0.073% 0 0 0; 
 }
 footer{ 
