@@ -170,6 +170,12 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 							<td></td>
 							<td><a class="btn js-click-modal">상세보기</a></td>
 						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><a class="btn js-click-modal">상세보기</a></td>
+						</tr>
 					</tbody>
 
 				</table>
