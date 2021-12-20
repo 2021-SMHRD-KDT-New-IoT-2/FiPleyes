@@ -184,22 +184,26 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			<h3>보류 신고</h3>
 		</div>
 		<main>
-			<table border="1px">
-				<tr>
-					<td class="id"><h3>ID</h3></td>
-					<td class="loca"><h3>위치</h3></td>
-					<td class="date"><h3>날짜/시간</h3></td>
-					<td class="detail"><h3>상세보기</h3></td>
-				</tr>
+			<table class="scrolltable">
+					<thead>
+						<tr>
+							<th class="id"><h3>ID</h3></th>
+							<th class="loca"><h3>위치</h3></th>
+							<th class="date"><h3>날짜/시간</h3></th>
+							<th class="detail"><h3>상세보기</h3></th>
+						</tr>
+					</thead>
+				<tbody>
 			<%
 				for(int i = 0; i< report_hold.size(); i++){ %>
 				<tr>
-					<td><%=report_hold.get(i).getRep_no()%></td>
-					<td><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
-					<td><%=report_hold.get(i).getRep_time() %></td>
-					<td><a class="btn js-click-modal-1">상세보기</a></td>
+					<td class="id"><%=report_hold.get(i).getRep_no()%></td>
+					<td class="loca"><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
+					<td class="date"><%=report_hold.get(i).getRep_time() %></td>
+					<td class="detail"><a class="btn js-click-modal-1">상세보기</a></td>
 				</tr>
 				<%} %>
+				</tbody>
 
 			</table>
 		</main>
@@ -252,20 +256,24 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			<h3>이상 기기 관리</h3>
 		</div>
 		<main>
-			<table border="1px" class="page4_table">
-				<tr>
-					<td class="id"><h3>ID</h3></td>
-					<td class="loca"><h3>위치</h3></td>
-					<td class="id"><h3>현재 상태</h3></td>
-				</tr>
+			<table class="scrolltable_1">
+					<thead>
+						<tr>
+							<th class="id"><h3>ID</h3></th>
+							<th class="loca"><h3>위치</h3></th>
+							<th class="id"><h3>기기 상태</h3></th>
+						</tr>
+					</thead>
+				<tbody>
 				<%
 				for(int i = 0; i< errorDevice.size(); i++){ %>
 				<tr>
-					<td><%=errorDevice.get(i).getDevice_no()%></td>
-					<td><%=errorDevice.get(i).getDevice_loc()%></td>
-					<td><%=errorDevice.get(i).getDevice_status()%></td>
+					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
+					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
+					<td class="id"><%=errorDevice.get(i).getDevice_status()%></td>
 				</tr>
 				<%} %>
+				</tbody>
 
 			</table>
 		</main>
@@ -280,21 +288,24 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			<h3>MY 기기 순찰</h3>
 		</div>
 		<main>
-			<table border="1px" class="page4_table">
-				<tr>
-					<td class="id"><h3>ID</h3></td>
-					<td class="loca"><h3>위치</h3></td>
-					<td class="id"><h3>현재 상태</h3></td>
-				</tr>
+			<table class="scrolltable_1">
+					<thead>
+						<tr>
+							<th class="id"><h3>ID</h3></th>
+							<th class="loca"><h3>위치</h3></th>
+							<th class="id"><h3>기기 상태</h3></th>
+						</tr>
+					</thead>
+				<tbody>
 				<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
 				<tr>
-					<td><%=allDevice.get(i).getDevice_no()%></td>
-					<td><%=allDevice.get(i).getDevice_loc()%></td>
-					<td><%=allDevice.get(i).getDevice_status()%></td>
+					<td class="id"><%=allDevice.get(i).getDevice_no()%></td>
+					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
+					<td class="id"><%=allDevice.get(i).getDevice_status()%></td>
 				</tr>
 				<%} %>
-				
+				</tbody>
 
 			</table>
 			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png">기기추가</button></div>
