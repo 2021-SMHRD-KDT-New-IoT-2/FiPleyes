@@ -26,7 +26,6 @@ public class EmployeeDAO {
 
 			conn = DriverManager.getConnection(url, dbid, dbpw);
 
-			System.out.println("Ä¿³¼¼Ç DAO ¼º°ø");
 
 		} catch (Exception e) {
 			e.printStackTrace();

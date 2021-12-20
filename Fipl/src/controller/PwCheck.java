@@ -18,12 +18,10 @@ public class PwCheck extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("euc-kr");
-		
-		System.out.println("pwcheck 진입");
 	
 		boolean check = false;
 		EmployeeVO vo = null;
-		String check_emp_pw =request.getParameter("emp_pw");
+		String check_emp_pw =request.getParameter("check_emp_pw");
 		
 		//현재 로그인한 사용자의 정보
 		HttpSession session = request.getSession();

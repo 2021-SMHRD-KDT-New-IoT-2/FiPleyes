@@ -65,7 +65,7 @@ public class Login extends HttpServlet {
 			System.out.println("로그인 실패");
 
 			// 로그인 실패시 이동할 페이지
-			response.sendRedirect("Login.html");
+			response.sendRedirect("Login.jsp");
 
 			// 안드로이드 로그인 실패때 뜨는 문구
 			out.print("fail");
