@@ -1,3 +1,8 @@
+<%@page import="model.DeviceVO"%>
+<%@page import="model.DeviceDAO"%>
+<%@page import="model.ReportVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.ReportDAO"%>
 <%@page import="model.EmployeeVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
@@ -30,7 +35,17 @@ if(cookies != null){
 // 그냥 로그인 했을때 세션 가져오기
 EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
 String name = vo.getEmp_name(); //가져올 값 지정하기 
+String dept = vo.getDept_no();
 
+//신고 리스트
+ReportDAO reportDao = new ReportDAO();
+ArrayList<ReportVO> report_yet = reportDao.reportList(dept, "0");
+ArrayList<ReportVO> report_hold = reportDao.reportList(dept, "1");
+ArrayList<ReportVO> report_delete = reportDao.reportList(dept, "2");
+
+DeviceDAO deviceDao = new DeviceDAO();
+ArrayList<DeviceVO> allDevice = deviceDao.allList(dept);
+ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 %>
 	<header>
 		<div class="head">
@@ -75,11 +90,11 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 	<div class="modal_wrap">
 	<div class="pw_h"><h3>비밀번호 수정</h3></div>
 	<div class="pw_d">
-		<input type="text" placeholder="기존 비밀번호를 입력해주세요"><br>
-		<button>확인하기</button><br>
-		<input type="text" placeholder="변경할 비밀번호를 입력해주세요"><br>
-		<input type="text" placeholder="비밀번호를 한번 더 입력해주세요"><br>
-		<button>수정하기</button>				
+		<input type="text" name = "check_emp_pw" id = "check_emp_pw" placeholder="기존 비밀번호를 입력해주세요"><br>
+		<button onclick = "pwcheck()">확인하기</button><br>
+		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" placeholder="변경할 비밀번호를 입력해주세요"><br>
+		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" placeholder="비밀번호를 한번 더 입력해주세요"><br>
+		<button onclick = "pwchange()">수정하기</button>
 	</div>
 		<div class="modal_close">
 			<a href="#">close</a>
@@ -103,82 +118,19 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 							<th class="detail"><h3>상세보기</h3></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td class="id"></td>
-							<td class="loca"></td>
-							<td class="date"></td>
-							<td class="detail"><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td><a class="btn js-click-modal">상세보기</a></td>
-						</tr>
-					</tbody>
+				<tbody>
+					
+					<%for (int i = 0; i < report_yet.size(); i++) {%>
+					<tr>
+						<td id="rep_no" class="id"><%=report_yet.get(i).getRep_no()%></td>
+						<td class="loca"><%=reportDao.reportLoc(report_yet.get(i).getDevice_no())%></td>
+						<td class="date"><%=report_yet.get(i).getRep_time()%></td>
+						<td class="detail"><a class="btn js-click-modal" onclick="repDetail()">상세보기</a></td>
+					</tr>
+					<%}%>
+				</tbody>
 
-				</table>
+			</table>
 			
 			<!--상세보기 페이지 -->
 			<div class="container">
@@ -213,8 +165,8 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 						</table>
 
 						<div class="btn_p">
-							<button>보류</button>
-							<button>신고</button>
+							<a href="ReportStatusUp?rep_no=2&status=1">보류</a>
+							<a href="ReportStatusUp?rep_no=2&status=2">신고</a>
 						</div>
 						<div class="btn_c_p">
 							<a class="btn js-close-modal">Close</a>
@@ -239,36 +191,15 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 					<td class="date"><h3>날짜/시간</h3></td>
 					<td class="detail"><h3>상세보기</h3></td>
 				</tr>
+			<%
+				for(int i = 0; i< report_hold.size(); i++){ %>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><%=report_hold.get(i).getRep_no()%></td>
+					<td><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
+					<td><%=report_hold.get(i).getRep_time() %></td>
 					<td><a class="btn js-click-modal-1">상세보기</a></td>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><a class="btn js-click-modal-1">상세보기</a></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><a class="btn js-click-modal-1">상세보기</a></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><a class="btn js-click-modal-1">상세보기</a></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><a class="btn js-click-modal-1">상세보기</a></td>
-				</tr>
+				<%} %>
 
 			</table>
 		</main>
@@ -327,26 +258,14 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 					<td class="loca"><h3>위치</h3></td>
 					<td class="id"><h3>현재 상태</h3></td>
 				</tr>
+				<%
+				for(int i = 0; i< errorDevice.size(); i++){ %>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><%=errorDevice.get(i).getDevice_no()%></td>
+					<td><%=errorDevice.get(i).getDevice_loc()%></td>
+					<td><%=errorDevice.get(i).getDevice_status()%></td>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<%} %>
 
 			</table>
 		</main>
@@ -367,26 +286,15 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 					<td class="loca"><h3>위치</h3></td>
 					<td class="id"><h3>현재 상태</h3></td>
 				</tr>
+				<%
+				for(int i = 0; i< allDevice.size(); i++){ %>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><%=allDevice.get(i).getDevice_no()%></td>
+					<td><%=allDevice.get(i).getDevice_loc()%></td>
+					<td><%=allDevice.get(i).getDevice_status()%></td>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<%} %>
+				
 
 			</table>
 			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png">기기추가</button></div>
@@ -415,5 +323,98 @@ String name = vo.getEmp_name(); //가져올 값 지정하기
 	</section>
 
 
+ <script src="js/jquery-3.6.0.min.js"></script>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/browser.min.js"></script>
+   <script src="js/breakpoints.min.js"></script>
+   <script src="js/util.js"></script>
+   <script src="js/main.js"></script>
+<!-- 비밀번호 중복체크 -->
+     <script>
+		function pwcheck() {
+			var input = $('#check_emp_pw').val();
+			console.log("pwcheck() : " + input);
+			
+			$.ajax({
+				type : "post", // 데이터 전송 방식
+				data : {
+					"check_emp_pw" : input
+				}, // 전송하는 데이터
+				url :  "PwCheck", // 데이터를 전송하는 페이지
+				dataType : "json", // 응답데이터의 형식
+				success : function(data) {
+					if (data == true) {
+		                  alert("비밀번호가 일치합니다.")
+		               } else {
+		                  alert("비밀번호가 다릅니다.")
+		               }
+				},
+				 error : function() { // 실패
+		               alert("잠시후 다시 시도해주세요")
+		            }
+			})
+			
+		}
+	  </script>
+	
+	<!-- 입력한 두 비밀번호가 일치하는지 확인하고 같다면 변경-->
+	  <script>
+		function pwchange() {
+			var input1 = $('#new_emp_pw1').val();
+			var input2 = $('#new_emp_pw2').val();
+	
+			$.ajax({
+				type : "post", // 데이터 전송 방식
+				data : {
+					"new_emp_pw1" : input1,
+					"new_emp_pw2" : input2
+				}, // 전송하는 데이터
+				url :  "Update", // 데이터를 전송하는 페이지
+				dataType : "json", // 응답데이터의 형식
+				success : function(data) {
+					
+					console.log(data);
+					if (data == true) {
+						alert("비밀번호를 변경하였습니다.")
+					}else {
+				 		alert("비밀번호 변경에 실패하였습니다.")
+					}
+				},
+				 error : function() { // 실패
+		               alert("잠시후 다시 시도해주세요")
+		            }
+			})
+			}
+		</script>
+
+		<!-- 선택한 신고 아이디가 넘어옵니다. -->
+		 <script>
+		function pwchange() {
+			var input1 = $('#new_emp_pw1').val();
+			var input2 = $('#new_emp_pw2').val();
+	
+			$.ajax({
+				type : "post", // 데이터 전송 방식
+				data : {
+					"new_emp_pw1" : input1,
+					"new_emp_pw2" : input2
+				}, // 전송하는 데이터
+				url :  "Update", // 데이터를 전송하는 페이지
+				dataType : "json", // 응답데이터의 형식
+				success : function(data) {
+					
+					console.log(data);
+					if (data == true) {
+						alert("비밀번호를 변경하였습니다.")
+					}else {
+				 		alert("비밀번호 변경에 실패하였습니다.")
+					}
+				},
+				 error : function() { // 실패
+		               alert("잠시후 다시 시도해주세요")
+		            }
+			})
+			}
+		</script>
 	<footer> </footer>
 	
