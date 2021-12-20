@@ -25,6 +25,7 @@ public class Update extends HttpServlet {
 		// 세션 가져오기
 		HttpSession session = request.getSession();
 		
+		// 여기서 본인 비밀번호 1차 확인가능하면 하고, 아니면 PwCheck 서블릿으로 가야됨!!
 		//현재 로그인한 사용자의 정보
 		vo = (EmployeeVO)session.getAttribute("employee");
 		String emp_no = vo.getEmp_no(); // 사용자 세션 사번

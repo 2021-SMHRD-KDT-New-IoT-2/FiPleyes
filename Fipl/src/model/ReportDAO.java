@@ -82,7 +82,7 @@ public class ReportDAO {
 
 	
 	// 신고 목록
-	public ArrayList<ReportVO> unhandledReport(String report_dept, String rep_status) {
+	public ArrayList<ReportVO> ReportList(String rep_dept, String rep_status) {
 		// 세션에서 가져온 사용자의 부서를 입력받고,
 		// 미처리 신고 목록페이지에서는 rep_status = 0, 
 		// 보류 신고 목록페이지에서는 rep_status = 1, 벌금 rep_status = 2, 삭제 rep_status = 3를 가지고 와서 목록 보여주기
@@ -92,11 +92,11 @@ public class ReportDAO {
 		try {
 			Connection();
 
-			String sql = "select * from REPORTS where REP_STATUS= ? and REPORT_DEPT = ?";
+			String sql = "select * from REPORTS where REP_STATUS= ? and REP_DEPT = ?";
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, rep_status);
-			psmt.setString(2, report_dept);
+			psmt.setString(2, rep_dept);
 
 			rs = psmt.executeQuery();
 
