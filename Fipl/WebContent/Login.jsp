@@ -11,7 +11,11 @@
 </head>
 <body class="layout">
 
-	<%
+
+<%
+
+session.removeAttribute("employee");
+
 // 자동로그인을 위한 쿠키 가져오기
 Cookie[] cookies = request.getCookies();
 if(cookies != null){
@@ -38,5 +42,7 @@ if(cookies != null){
 			<br> <br> <input type="submit" value="로그인" class="login_s">
 		</div>
 	</form>
+
 </body>
+
 </html>
