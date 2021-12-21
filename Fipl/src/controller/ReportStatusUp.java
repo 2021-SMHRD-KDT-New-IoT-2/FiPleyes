@@ -21,8 +21,8 @@ public class ReportStatusUp extends HttpServlet {
 
 		request.setCharacterEncoding("euc-kr");
 
-		// ★상태 변경을 하고자 하는 신고의 번호
-		String rep_no = request.getParameter("");
+		// 상태 변경을 하고자 하는 신고의 번호
+		String rep_no = request.getParameter("rep_no");
 
 		// 사용자 세션 사번
 		EmployeeVO vo = new EmployeeVO();

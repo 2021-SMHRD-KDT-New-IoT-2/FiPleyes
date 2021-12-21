@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,77 +13,59 @@ import javax.servlet.http.HttpSession;
 import model.EmployeeDAO;
 import model.EmployeeVO;
 
-@WebServlet("/update")
+@WebServlet("/Update")
 public class Update extends HttpServlet {
-	
+
 	EmployeeVO vo = null;
-	
+
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.setCharacterEncoding("euc-kr");
-		
+
 		// 세션 가져오기
 		HttpSession session = request.getSession();
-		
-		//현재 로그인한 사용자의 정보
-		vo = (EmployeeVO)session.getAttribute("employee");
+
+		// 여기서 본인 비밀번호 1차 확인가능하면 하고, 아니면 PwCheck 서블릿으로 가야됨!!
+		// 현재 로그인한 사용자의 정보
+		vo = (EmployeeVO) session.getAttribute("employee");
 		String emp_no = vo.getEmp_no(); // 사용자 세션 사번
-		String emp_pw = vo.getEmp_pw(); // 사용자 세션 비밀번호 
-		
-		
+		String emp_pw = vo.getEmp_pw(); // 사용자 세션 비밀번호
+
 		// vo 재설정하기 위해 세션의 값을 불러오는 것
-		String emp_name = vo.getEmp_name(); 
-		String emp_phone = vo.getEmp_phone(); 
-		String emp_email = vo.getEmp_email(); 
-		String dept_no = vo.getDept_no(); 
-		String emp_status = vo.getEmp_status(); 
-		
-		
-		// input 태그 네임값 (비밀번호 확인을 위해 입력한 사번)
-		String check_emp_pw = request.getParameter(""); // ★input태그 네임값 입력필요
-				
+		String emp_name = vo.getEmp_name();
+		String emp_phone = vo.getEmp_phone();
+		String emp_email = vo.getEmp_email();
+		String dept_no = vo.getDept_no();
+		String emp_status = vo.getEmp_status();
+
+		boolean check = false;
+
 		EmployeeDAO dao = new EmployeeDAO();
+
+		// 변경할 비밀번호 입력
+		String new_emp_pw1 = request.getParameter("new_emp_pw1");
+		String new_emp_pw2 = request.getParameter("new_emp_pw2");
 		
-		if(emp_pw.equals(check_emp_pw)) { // 세션의 비밀번호와  입력한 비밀번호가 일치하다면 -> 업데이트를 진행한다
-			
-			System.out.println("세션 비밀번호와 입력한 비밀번호 일치");
-			
-			// 변경할 비밀번호 입력
-			String new_emp_pw1 = request.getParameter(""); // ★input태그 네임값 입력필요
-			String new_emp_pw2 = request.getParameter(""); // ★input태그 네임값 입력필요
-			
-			if(new_emp_pw1.equals(new_emp_pw2)) { // 새로입력한 두 비밀번호가 같으면
-				
-				System.out.println("새로 입력한 두 비밀번호 같음");
-				int cnt = dao.update(emp_no, new_emp_pw1);
-				
-				if(cnt > 0) {
-					System.out.println("비밀번호 수정성공");
-					
-					vo = new EmployeeVO(emp_no, new_emp_pw1, emp_name, emp_phone, emp_email, dept_no, emp_status);
-					session.setAttribute("Employee",vo);
-					
-					// ★수정 성공시 페이지 이동
-					//response.sendRedirect("main.jsp");
-					
-				}else {
-					System.out.println("비밀번호 수정실패");
-					// ★수정 실패시 페이지 이동
-					//response.sendRedirect("main.jsp");
-				}
-				
-			}else { // 입력한 두 비밀번호가 다르면
-				System.out.println("새로 입력한 두 비밀번호가 다름");
-				// ★새로 입력한 두 비밀번호가 다를시 페이지 이동
-				//response.sendRedirect("main.jsp");
-			}			
+		PrintWriter out = response.getWriter();
 		
-		} else { // 세션 비밀번호와 비밀번호가 일치하지 않다면
-			System.out.println("세션 아이디와 비밀번호 다름");
-			// ★세션 비밀번호와 비밀번호가 일치하지 않다면 갈 페이지
-			//response.sendRedirect(".html");
+		if(new_emp_pw1.equals(new_emp_pw2)) {
+			int cnt = dao.update(emp_no, new_emp_pw1);
+
+			if (cnt > 0) {
+				System.out.println("비밀번호 수정성공");
+				vo = new EmployeeVO(emp_no, new_emp_pw1, emp_name, emp_phone, emp_email, dept_no, emp_status);
+				session.setAttribute("Employee", vo);
+				check = true;
+			} else {
+				System.out.println("비밀번호 수정실패");
+			}
+			
 		}
+		out.print(check);
+		
+
 	}
 }

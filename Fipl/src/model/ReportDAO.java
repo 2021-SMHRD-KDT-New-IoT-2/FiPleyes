@@ -27,7 +27,6 @@ public class ReportDAO {
 
 			conn = DriverManager.getConnection(url, dbid, dbpw);
 
-			System.out.println("DAO 커낵션 성공");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +81,7 @@ public class ReportDAO {
 
 	
 	// 신고 목록
-	public ArrayList<ReportVO> unhandledReport(String report_dept, String rep_status) {
+	public ArrayList<ReportVO> reportList(String rep_dept, String rep_status) {
 		// 세션에서 가져온 사용자의 부서를 입력받고,
 		// 미처리 신고 목록페이지에서는 rep_status = 0, 
 		// 보류 신고 목록페이지에서는 rep_status = 1, 벌금 rep_status = 2, 삭제 rep_status = 3를 가지고 와서 목록 보여주기
@@ -98,7 +97,7 @@ public class ReportDAO {
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, rep_status);
-			psmt.setString(2, report_dept);
+			psmt.setString(2, rep_dept);
 
 			rs = psmt.executeQuery();
 
@@ -159,6 +158,73 @@ public class ReportDAO {
 
 	}
 
+	// 디바이스 번호를 통해 신고 위치 파악
+	public String reportLoc(String device_no) {
+		String get_device_no = null;
+		try {
+			Connection();
+			String sql = "select device_loc from devices where device_no= ?";
+			
+			psmt = conn.prepareStatement(sql);
 
+			psmt.setString(1, device_no);
 
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				get_device_no = rs.getString(1);
+			}
+		} catch (Exception e) {
+			System.out.println("신고 상태 변경 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return get_device_no;
+	}
+
+	// 신고 번호 돌려주기
+	public String rep_no(String rep_no) {
+		return rep_no;
+	}
+	
+	// 신고 상세내역 보기
+	public ReportVO getReport (String rep_no) {
+	 System.out.println(rep_no);
+		try {
+			Connection();
+
+			String sql = "select * from REPORTS where REP_NO= ?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, rep_no);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+
+				String get_rep_no = rs.getString(1);
+				String get_device_no = rs.getString(2);
+				String get_rep_time = rs.getString(3);
+				String get_rep_file = rs.getString(4);
+				String get_car_no = rs.getString(5);
+				String get_rep_status = rs.getString(6);
+				String get_rep_dept = rs.getString(7);
+				String get_emp_no = rs.getString(8);
+
+				vo = new ReportVO(get_rep_no, get_device_no, get_rep_time, get_rep_file, get_car_no, get_rep_status,
+						get_rep_dept, get_emp_no);
+
+			}
+
+		} catch (Exception e) {
+			System.out.println("신고 상세내역 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return vo;
+	}
+	
 }
