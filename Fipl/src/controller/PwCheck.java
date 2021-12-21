@@ -28,15 +28,13 @@ public class PwCheck extends HttpServlet {
 		vo = (EmployeeVO)session.getAttribute("employee");
 		String emp_pw = vo.getEmp_pw(); // 사용자 세션 비밀번호 
 
-		
+		PrintWriter out = response.getWriter();
 		// 에이젝스 사용해서 비밀번호 체크하는 방법
 		if(check_emp_pw.equals(emp_pw)) {
 			check = true;
-			//출력 스트림(통로)
-			PrintWriter out = response.getWriter();
-			//통로를 통해서 응답데이터를 출력
-			out.print(check);
+			//출력 스트림(통로)			
 		}
-		
+		//통로를 통해서 응답데이터를 출력
+		out.print(check);
 	}
 }

@@ -18,11 +18,12 @@ public class ReportStatusUp extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 사용자가 신고 상태 변경을 선택했을 시
-
+		
 		request.setCharacterEncoding("euc-kr");
 
 		// 상태 변경을 하고자 하는 신고의 번호
 		String rep_no = request.getParameter("rep_no");
+		System.out.println("서블릿 신고 번호"+rep_no);
 
 		// 사용자 세션 사번
 		EmployeeVO vo = new EmployeeVO();
@@ -32,19 +33,20 @@ public class ReportStatusUp extends HttpServlet {
 
 		ReportDAO dao = new ReportDAO();
 
-		// ★사용자가 어떤 상태로 변경을 선택했는지 가져오기
-		String change_rep_status = "★"; // ★사용자가 선택한 것
+		//사용자가 어떤 상태로 변경을 선택했는지 가져오기
+		String status = request.getParameter("status");
+		System.out.println("서블릿 상태값"+status);
 
-		int cnt = dao.statusUpdate(rep_no, change_rep_status, emp_no);
+		int cnt = dao.statusUpdate(rep_no, status, emp_no);
 
 		if (cnt > 0) {
 			System.out.println("신고 상태 바꾸기 성공");
 			// ★신고 상태 바꾸기 성공시 페이지 이동
-			// response.sendRedirect("main.jsp");
+			response.sendRedirect("Main.jsp#detail_rep");
 		} else {
 			System.out.println("신고 상태 바꾸기 실패");
 			// ★신고 상태 바꾸기 실패시 페이지 이동
-			// response.sendRedirect("main.jsp");
+			response.sendRedirect("Main.jsp#detail_rep");
 		}
 
 	}

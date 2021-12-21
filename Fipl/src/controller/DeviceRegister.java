@@ -38,12 +38,10 @@ public class DeviceRegister extends HttpServlet {
 		
 		if (cnt > 0) {
 			System.out.println("장치 등록 성공!");
-			//★ 장치 등록 성공 후 이동 할페이지
-			//response.sendRedirect("");
+			response.sendRedirect("Main.jsp#add_device");
 		} else {
 			System.out.println("장치 등록 실패!");
-			//★ 장치 등록 실패 후 이동 할페이지
-			//response.sendRedirect("");
+			response.sendRedirect("Main.jsp#add_device");
 		}
 
 	}

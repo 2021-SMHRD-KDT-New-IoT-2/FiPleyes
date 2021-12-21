@@ -39,7 +39,6 @@ public class Login extends HttpServlet {
 
 		if (vo != null) {
 			System.out.println("로그인 성공");
-
 			// 세션 객체 생성
 			HttpSession session = request.getSession();
 			// 세션 값 설정
@@ -52,23 +51,11 @@ public class Login extends HttpServlet {
 				cookie.setPath("/");
 				response.addCookie(cookie);
 			}
-
-			// 로그인 성공시 이동할 페이지
-			response.sendRedirect("Main.jsp");
-
-			// 안드로이드 로그인
-			Gson gson = new Gson();
-			String result = gson.toJson(vo);
-			out.print(result);
-
+			response.sendRedirect("ReportRegister");
+		
 		} else {
 			System.out.println("로그인 실패");
-
-			// 로그인 실패시 이동할 페이지
 			response.sendRedirect("Login.jsp");
-
-			// 안드로이드 로그인 실패때 뜨는 문구
-			out.print("fail");
 		}
 	}
 

@@ -12,6 +12,9 @@
 <body class = "layout">
 
 <%
+
+session.removeAttribute("employee");
+
 // 자동로그인을 위한 쿠키 가져오기
 Cookie[] cookies = request.getCookies();
 if(cookies != null){
@@ -28,11 +31,12 @@ if(cookies != null){
     <form action="Login" method="post" class="loginForm">
         <div class="fullS">
             <img class="logo" src="img/logo.png"><br><br>	
-            <input name = "emp_no" class="log_t" type="text" placeholder="사번"><br>
-            <input name = "emp_pw" class="log_t" type="password" placeholder="PW"><br>
-            <input type="checkbox" name = "logincheck" value = "true">로그인 유지 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input id = "emp_no" name = "emp_no" class="log_t" type="text" placeholder="사번"><br>
+            <input id = "emp_pw" name = "emp_pw" class="log_t" type="password" placeholder="PW"><br>
+            <input id = "logincheck" type="checkbox" name = "logincheck" value = "true">로그인 유지 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="submit" value="로그인">
         </div>
     </form>
 </body>
+
 </html>

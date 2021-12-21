@@ -22,7 +22,7 @@ public class ReportRegister extends HttpServlet {
 		// 신고등록을 위한 장치의 데이터 가져오기
 		
 		String device_no = "★데이터를 보내온 장치 번호";
-		String rep_file = "★톰캣의 파일 주소 값";
+		String rep_file = "C:\\Users\\smhrd\\Desktop\\2차프로젝트\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Fipl\\upload\\파일명";
 		String car_no = "★사진에서 추출한 차량번호";
 		
 		ReportDAO dao = new ReportDAO();
