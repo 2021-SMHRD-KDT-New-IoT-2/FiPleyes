@@ -35,7 +35,7 @@ public class SearchReportLocation_android extends HttpServlet {
 
 		System.out.println(device_loc);
 		
-		out.print(device_no);
+		out.print(device_loc);
 	}
 
 

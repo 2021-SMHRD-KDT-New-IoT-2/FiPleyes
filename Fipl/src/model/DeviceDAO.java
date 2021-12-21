@@ -192,7 +192,7 @@ public class DeviceDAO {
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
-				get_device_loc = rs.getString("device_no");
+				get_device_loc = rs.getString("device_loc");
 			}
 
 		} catch (Exception e) {

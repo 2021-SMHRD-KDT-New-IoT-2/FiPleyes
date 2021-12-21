@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import model.DeviceDAO;
 import model.ReportDAO;
 import model.ReportVO;
 
@@ -30,8 +31,15 @@ public class SearchReportInfo_android extends HttpServlet {
 		System.out.println("받아온값 -------------- " + status + "/" + emp_dept);
 
 		ReportDAO dao = new ReportDAO();
+		DeviceDAO dao2 = new DeviceDAO();
 		ArrayList<ReportVO> reports = dao.reportList(emp_dept, status);
 
+		for(int i=0;i<reports.size();i++) {
+			String device_loc = dao2.deviceLocation(reports.get(i).getDevice_no());
+			reports.get(i).setDevice_loc(device_loc);
+		}
+		
+		
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 
