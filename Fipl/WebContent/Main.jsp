@@ -184,6 +184,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			<h3>보류 신고</h3>
 		</div>
 		<main>
+
 			<table border="1px">
 				<tr>
 					<td class="id"><h3>ID</h3></td>
@@ -191,15 +192,19 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 					<td class="date"><h3>날짜/시간</h3></td>
 					<td class="detail"><h3>상세보기</h3></td>
 				</tr>
+
 			<%
 				for(int i = 0; i< report_hold.size(); i++){ %>
 				<tr>
+
 					<td><%=report_hold.get(i).getRep_no()%></td>
 					<td><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
 					<td><%=report_hold.get(i).getRep_time() %></td>
 					<td><a class="btn js-click-modal-1" onclick="holdDetail(<%= report_hold.get(i).getRep_no()%>)">상세보기</a></td>
+
 				</tr>
 				<%} %>
+				</tbody>
 
 			</table>
 		</main>
@@ -252,12 +257,14 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			<h3>이상 기기 관리</h3>
 		</div>
 		<main>
+
 			<table border="1px" class="page4_table">
 				<tr>
 					<td class="id"><h3>ID</h3></td>
 					<td class="loca"><h3>위치</h3></td>
 					<td class="id"><h3>현재 상태</h3></td>
 				</tr>
+
 				<%
 				for(int i = 0; i< errorDevice.size(); i++){ %>
 				<tr>
@@ -266,6 +273,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 					<td>🔴</td>
 				</tr>
 				<%} %>
+				</tbody>
 
 			</table>
 		</main>
@@ -299,7 +307,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 					<%} %>
 				</tr>
 				<%} %>
-				
+				</tbody>
 
 			</table>
 			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png">기기추가</button></div>

@@ -20,6 +20,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	z-index: 1;
+	font-size: 2vh;
 	
 }
 
@@ -324,10 +325,10 @@ tr {
 	top: 18vh;
 }
 
-table {
+.scrolltable {
 	position: relative;
 	top: 25vh;
-	left: 12.5%;
+	left: 12%;
 }
 
 tr {
@@ -402,11 +403,30 @@ tr {
 	text-align: center;
 	padding: 0.073% 0 0 0;
 }
-
-.page4_table {
+.scrolltable_1 {
 	position: relative;
 	top: 25vh;
-	left: 18%;
+	left: 15vw;
+}
+.scrolltable_1 thead {
+    display:block;
+    background: navy;
+    color : #fff;
+}
+.scrolltable_1 tbody{
+    display:block;
+    overflow:auto;
+    height:480px;
+
+}
+.scrolltable_1 th, .scrolltable_1 td {
+  padding: 10px;
+  text-align: left;
+  text-align: center;
+  font-size: 0.875em;
+}
+.scrolltable_1 tbody tr:nth-child(2n+1){
+    background-color: #f0f0f0;
 }
 
 /* page5 */
@@ -420,7 +440,7 @@ tr {
 
 .add_p {
 	position: relative;
-	top: 30vh;
+	top: 20vh;
 }
 
 .add_d {

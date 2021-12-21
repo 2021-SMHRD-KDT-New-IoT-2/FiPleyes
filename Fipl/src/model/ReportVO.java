@@ -12,20 +12,6 @@ public class ReportVO {
 	private String emp_no;
 	private String device_loc;
 	
-
-	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
-			String rep_dept, String emp_no) {
-		super();
-		this.rep_no = rep_no;
-		this.device_no = device_no;
-		this.rep_time = rep_time;
-		this.rep_file = rep_file;
-		this.car_no = car_no;
-		this.rep_status = rep_status;
-		this.rep_dept = rep_dept;
-		this.emp_no = emp_no;
-	}
-
 	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
 			String rep_dept, String emp_no, String device_loc) {
 		super();
@@ -37,7 +23,20 @@ public class ReportVO {
 		this.rep_status = rep_status;
 		this.rep_dept = rep_dept;
 		this.emp_no = emp_no;
-		this.setDevice_loc(device_loc);
+		this.device_loc = device_loc;
+	}
+	
+	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
+			String rep_dept, String emp_no) {
+		super();
+		this.rep_no = rep_no;
+		this.device_no = device_no;
+		this.rep_time = rep_time;
+		this.rep_file = rep_file;
+		this.car_no = car_no;
+		this.rep_status = rep_status;
+		this.rep_dept = rep_dept;
+		this.emp_no = emp_no;
 	}
 	
 	public ReportVO() {
@@ -107,7 +106,7 @@ public class ReportVO {
 	public void setEmp_no(String emp_no) {
 		this.emp_no = emp_no;
 	}
-
+	
 	public String getDevice_loc() {
 		return device_loc;
 	}
