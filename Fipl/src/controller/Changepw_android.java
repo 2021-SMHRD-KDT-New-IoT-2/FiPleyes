@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.EmployeeDAO;
 
 
-@WebServlet("/Chagepw_android")
-public class Chagepw_android extends HttpServlet {
+@WebServlet("/Changepw_android")
+public class Changepw_android extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
