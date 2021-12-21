@@ -91,7 +91,7 @@ public class ReportDAO {
 		try {
 			Connection();
 			
-			System.out.println("DAO 매개변수 report_dept : "+report_dept+"/ rep_status : "+rep_status);
+			System.out.println("DAO 매개변수 report_dept : "+rep_dept+"/ rep_status : "+rep_status);
 
 			String sql = "select * from REPORTS where REP_STATUS= ? and REP_DEPT = ?";
 			psmt = conn.prepareStatement(sql);

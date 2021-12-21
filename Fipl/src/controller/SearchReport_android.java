@@ -30,7 +30,7 @@ public class SearchReport_android extends HttpServlet {
 		System.out.println("받아온값 -------------- "+status+"/"+emp_dept);
 		
 		ReportDAO dao = new ReportDAO();
-		ArrayList<ReportVO> reports = dao.unhandledReport(emp_dept, status);
+		ArrayList<ReportVO> reports = dao.reportList(emp_dept, status);
 		
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
