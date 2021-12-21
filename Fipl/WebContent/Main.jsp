@@ -53,7 +53,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 				<a href="#"><img class = "logo" src = "img/logo_1.png"> </a>
 			</h1>
 		</div>
-		<div> <h1> <%= name %>님 환영합니다.</h1></div>
+		<div> <h3 class="name_s"> <%= name %>님 환영합니다.</h3></div>
 		<div class="container_h">
 			<nav>
 				<ul>
@@ -72,14 +72,15 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			<div class=d1 onclick="window.location.href='#page2'">
 				<a class ="box_text">미처리신고</a>
 			</div>
+			<img src="img/fireplug_1.png" class = "fireplug_1">
 			<div class=d2 onclick="window.location.href='#page3'">
 				<a class ="box_text">보류 신고</a>
 			</div>
 			<div class=d3 onclick="window.location.href='#page4'">
-				<a class ="box_text">이상 기기 관리</a>
+				<a class ="box_text">이상기기 관리</a>
 			</div>
 			<div class=d4 onclick="window.location.href='#page5'">
-				<a class ="box_text">MY 기기 관리</a>
+				<a class ="box_text">MY 기기관리</a>
 			</div>
 		</div>
 
@@ -106,7 +107,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 	<section id="page2">
 		<div id="ti_mi">
-			<h3>미처리 신고</h3>
+			<h1>미처리 신고</h1>
 		</div>
 		<main>
 			<table class="scrolltable">
@@ -181,7 +182,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 	<section id="page3">
 		<div id="ti_mi">
-			<h3>보류 신고</h3>
+			<h1>보류 신고</h1>
 		</div>
 		<main>
 			<table class="scrolltable">
@@ -253,7 +254,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 	<section id="page4">
 		<div id="ti_mi">
-			<h3>이상 기기 관리</h3>
+			<h1>이상 기기 관리</h1>
 		</div>
 		<main>
 			<table class="scrolltable_1">
@@ -285,7 +286,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 	<section id="page5">
 		<div id="ti_mi">
-			<h3>MY 기기 순찰</h3>
+			<h1>MY 기기 순찰</h1>
 		</div>
 		<main>
 			<table class="scrolltable_1">

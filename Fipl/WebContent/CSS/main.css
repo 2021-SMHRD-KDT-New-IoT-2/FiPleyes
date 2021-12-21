@@ -14,14 +14,17 @@ header {
 	top: 0;
 	width: 80%;
 	height: 10vh;
-	background-color: mintcream;
+	background-color: whitesmoke;
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	z-index: 1;
 	font-size: 2vh;
-	
+}
+
+.name_s{
+	color : grey;
 }
 
 .head {
@@ -66,25 +69,35 @@ nav>ul>li>a:hover {
 .d1, .d2, .d3, .d4 {
 	position: relative;
 	top: 30vh;
-	width: 10vw;
-	height: 45vh;
+	width: 13vw;
+	height: 55vh;
 	background-color: black;
-    opacity: 0.6;
+    opacity: 0.7;
 	display: inline-block;
     cursor: pointer;
+	z-index: 5;
+}
+
+.fireplug_1{
+	width: 13vw;
+	height: 55vh;
+	position: absolute;
+	left: 23.28vw;
+	top: 30vh;
 }
 
 .box_text{
     position : absolute;
-    left : 5px;
-    top : 5px;
-    color: blanchedalmond;
+    left : 1vw;
+    top : 2vh;
+    color: white;
+	font-size: 25px;
+	font-weight: bold;
+	z-index: 15;
+	opacity: 1;
 }
 
-h2 {
-	position: relative;
-	left: 150%;
-}
+
 
 /* page1 */
 #page1 {
@@ -93,7 +106,6 @@ h2 {
 	height: 100vh;
 	text-align: center;
 	padding: 0.073% 0 0 0;
-	font-family: 'IBMPlexSansKR-Regular';
 }
 
 .modal_wrap {
@@ -298,6 +310,7 @@ tr {
     table-layout: fixed;
     border-collapse: collapse;
     border: none;
+    font-size: 1vw;
 }
 .scrolltable thead {
     display:block;
@@ -407,6 +420,7 @@ tr {
 	position: relative;
 	top: 25vh;
 	left: 15vw;
+	font-size: 1vw;
 }
 .scrolltable_1 thead {
     display:block;

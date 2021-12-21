@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel = "stylesheet" href="CSS/Login.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="CSS/Login.css">
 </head>
-<body class = "layout">
+<body class="layout">
 
-<%
+	<%
 // 자동로그인을 위한 쿠키 가져오기
 Cookie[] cookies = request.getCookies();
 if(cookies != null){
@@ -25,14 +25,18 @@ if(cookies != null){
 
 %>
 
-    <form action="Login" method="post" class="loginForm">
-        <div class="fullS">
-            <img class="logo" src="img/logo.png"><br><br>	
-            <input name = "emp_no" class="log_t" type="text" placeholder="사번"><br>
-            <input name = "emp_pw" class="log_t" type="password" placeholder="PW"><br>
-            <input type="checkbox" name = "logincheck" value = "true">로그인 유지 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="submit" value="로그인">
-        </div>
-    </form>
+	<form action="Login" method="post" class="loginForm">
+		<div class="fullS">
+
+			<img class="logo" src="img/logo.png"> <br> <br>
+			<input name="emp_no" class="log_t" type="text" placeholder=  "  사번"><br>
+			<hr>
+			<br> <input name="emp_pw" class="log_t" type="password" placeholder="  PW"><br>
+			<hr>
+			<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <a>비밀번호 찾기</a>
+			<br> <br> <input type="submit" value="로그인" class="login_s">
+		</div>
+	</form>
 </body>
 </html>

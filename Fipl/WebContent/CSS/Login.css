@@ -4,17 +4,64 @@
     position: absolute;
     left: 50%;
     top:50%;
-    transform: translate(-30%, -65%);
-    margin-bottom: 0%;
+    transform: translate(-15vw, -28vh);
+    margin: 0 auto;
+    
+    width: 30vw;
+    height: 22vw;
+    border: 1px black;
+    border-radius: 10px;
 }
 
 .logo{
 	position: relative;
-	left : -4vw;
+	left : 4.5vw;
 	width:20vw;
 	height: auto;
+    animation-name: box_ani;
+    animation-duration: 3s;
+}
+
+@keyframes box_ani {
+    from{
+        
+        opacity: 0;
+    }
+    to{
+       
+        opacity: 1;
+    }
+}
+hr{
+    width: 13vw;
 }
 .log_t{
-	width : 12vw;
+	width : 13vw;
 	height : 3vh;
+    border : 0 solid;
+    position : relative;
+    
+}
+.log_t:focus{
+    outline: none;
+}
+.login_s{
+    width: 13vw;
+    height: 4.5vh;
+    border: 2px solid #030D56;
+    background-color: #030D56;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight:500;
+    font-size: 18px;
+    cursor : pointer;
+}
+input, hr, a{
+	position : relative;
+	left : 8vw;
+    font-size: 15px;
+}
+a{
+	cursor : pointer;
 }

@@ -1,7 +1,7 @@
 @font-face {
-    font-family: 'paybooc-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
-    font-weight: normal;
+    font-family: 'Pretendard-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -13,5 +13,5 @@
 }
 
 body{
-	font-family: 'Pretendard-Regular';
+	font-family: 'Pretendard-Bold';
 }
