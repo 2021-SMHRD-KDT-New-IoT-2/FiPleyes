@@ -60,7 +60,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 				<ul>
 					<li><a href="#page2">미처리신고</a></li>
 					<li><a href="#page3">보류신고</a></li>
-					<li><a href="#page4">이상기기</a></li>
+					<li><a href="#page4">이상기기관리</a></li>
 					<li><a href="#page5">MY기기순찰</a></li>
 					<li><a id="modal_btn">비밀번호수정</a></li>
 				</ul>
@@ -72,16 +72,20 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		<div class="fullD">
 			<div class=d1 onclick="window.location.href='#page2'">
 				<a class ="box_text">미처리신고</a>
+				<img src="img/fireplug.png" class = "fireplug_1">
 			</div>
-			<img src="img/fireplug_1.png" class = "fireplug_1">
-			<div class=d2 onclick="window.location.href='#page3'">
+			<div class=d2 onclick="window.location.href='#page3'">				
 				<a class ="box_text">보류 신고</a>
+				<img src="img/pages_4.png" class = "pages">
 			</div>
+			
 			<div class=d3 onclick="window.location.href='#page4'">
 				<a class ="box_text">이상 기기 관리</a>
+				<img src="img/machine.png" class = "machine">
 			</div>
 			<div class=d4 onclick="window.location.href='#page5'">
 				<a class ="box_text">MY 기기 관리</a>
+				<img src="img/my_machine.png" class = "my_machine">
 			</div>
 		</div>
 
@@ -191,26 +195,28 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		</div>
 		<main>
 
-			<table>
+			<table class="scrolltable">
+			<thead>
 				<tr>
 					<td class="id"><h3>ID</h3></td>
 					<td class="loca"><h3>위치</h3></td>
 					<td class="date"><h3>날짜/시간</h3></td>
 					<td class="detail"><h3>상세보기</h3></td>
 				</tr>
-
+			</thead>
+			<tbody>
 			<%
 				for(int i = 0; i< report_hold.size(); i++){ %>
 				<tr>
 
-					<td><%=report_hold.get(i).getRep_no()%></td>
-					<td><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
-					<td><%=report_hold.get(i).getRep_time() %></td>
-					<td><a class="btn js-click-modal-1" onclick="holdDetail(<%= report_hold.get(i).getRep_no()%>)">상세보기</a></td>
+					<td class="id"><%=report_hold.get(i).getRep_no()%></td>
+					<td class="loca"><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
+					<td class="date"><%=report_hold.get(i).getRep_time() %></td>
+					<td class="detail"><a class="btn js-click-modal-1" onclick="holdDetail(<%= report_hold.get(i).getRep_no()%>)">상세보기</a></td>
 
 				</tr>
 				<%} %>
-				</tbody>
+			</tbody>
 
 			</table>
 		</main>
@@ -266,22 +272,24 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		</div>
 		<main>
 
-			<table class="page4_table">
+			<table class="scrolltable_1">
+			<thead>
 				<tr>
 					<td class="id"><h3>ID</h3></td>
 					<td class="loca"><h3>위치</h3></td>
 					<td class="id"><h3>현재 상태</h3></td>
 				</tr>
-
+			</thead>
+			<tbody>
 				<%
 				for(int i = 0; i< errorDevice.size(); i++){ %>
 				<tr>
-					<td><%=errorDevice.get(i).getDevice_no()%></td>
-					<td><%=errorDevice.get(i).getDevice_loc()%></td>
-					<td>🔴</td>
+					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
+					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
+					<td class="id">🔴</td>
 				</tr>
 				<%} %>
-				</tbody>
+			</tbody>
 
 			</table>
 		</main>
@@ -297,26 +305,29 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 		</div>
 		<main>
-			<table class="page4_table">
+			<table class="scrolltable_1">
+			<thead>
 				<tr>
 					<td class="id"><h3>ID</h3></td>
 					<td class="loca"><h3>위치</h3></td>
 					<td class="id"><h3>현재 상태</h3></td>
 				</tr>
+			</thead>
+			<tbody>
 				<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
 				<tr>
-					<td><%=allDevice.get(i).getDevice_no()%></td>
-					<td><%=allDevice.get(i).getDevice_loc()%></td>
+					<td class="id"><%=allDevice.get(i).getDevice_no()%></td>
+					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
-						<td>🟢</td>
+						<td class="id">🟢</td>
 					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
-						<td>🔴</td>
+						<td class="id">🔴</td>
 					<%} %>
 				</tr>
 				<%} %>
-				</tbody>
+			</tbody>
 
 			</table>
 			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png">기기추가</button></div>

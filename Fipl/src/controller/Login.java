@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
 				response.addCookie(cookie);
 			}
 
-			response.sendRedirect("ReportRegister");
+			response.sendRedirect("Main.jsp");
 
 		} else {
 			System.out.println("로그인 실패");
