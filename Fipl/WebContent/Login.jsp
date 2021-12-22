@@ -44,19 +44,25 @@ if(cookies != null){
 			<br> <br> <input type="submit" value="로그인" class="login_s">
 		</div>
 	</form>
+	
 	<!-- 비밀번호 수정 모달 -->
 	<div class="black_bg"></div>
 	<div class="modal_wrap">
 	<div class="pw_h"><h3>비밀번호 찾기</h3></div>
 	<div class="pw_d">
-		<input type="text" placeholder="이름" class="log_t"><br>
-		<hr class="modal_hr"><br>
-		<input type="text" placeholder="전화번호" class="log_t"><br>
-		<hr class="modal_hr"><br>
-		<input type="text" placeholder="이메일" class="log_t"><br>
-		<hr class="modal_hr"><br><br>
-		<input type="submit" value="임시 비밀번호 발급" class="login_m">
-	</div>
+			<form action="SendPwEmail" method="post">
+				<input type="text" name="emp_name" placeholder="이름" class="log_t"><br>
+				<hr class="modal_hr">
+				<br> 
+				<input type="text" name="emp_phone" placeholder="전화번호" class="log_t"><br>
+				<hr class="modal_hr">
+				<br> 
+				<input type="text" name="emp_email" placeholder="이메일" class="log_t"><br>
+				<hr class="modal_hr">
+				<br>
+				<br> <input type="submit" value="임시 비밀번호 발급" class="login_m">
+			</form>
+		</div>
 		<div class="modal_close">
 			<a href="#">close</a>
 		</div>

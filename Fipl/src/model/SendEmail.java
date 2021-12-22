@@ -33,11 +33,6 @@ public class SendEmail {
 	ResultSet rs = null;
 	ArrayList<EmployeeVO> al = null;
 	
-//	public static void main(String args[]) {
-//		String emp_email = "hwayoung306@gmail.com";
-//		String temp_pw = "1234";
-//		sendMail(emp_email, temp_pw);
-//	}
 	
 	// 메일을 보내기 
 	public void sendMail(String emp_email, String temp_pw) {
@@ -55,8 +50,7 @@ public class SendEmail {
 		// 메일에 출력할 텍스트
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>Fipl.net의 임시비밀번호를 발송해 드립니다.</h3>\n");
-		sb.append("<h4>"+temp_pw+"</h4>\n");
-		sb.append("<h4>로그인 후 비밀번호 변경을 권장드립니다.</h4>\n");
+		sb.append("<h4>임시 비밀번호 : "+temp_pw+"<br> 로그인 후 비밀번호 변경을 권장드립니다.</h4>\n");
 		String html = sb.toString();
 
 		// 메일 옵션 설정

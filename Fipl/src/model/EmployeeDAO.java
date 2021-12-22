@@ -226,8 +226,6 @@ public class EmployeeDAO {
         for (int x = 0; x < 8; x++) {
             int random = (int) (Math.random() * str.length);
             newCode += str[random];
-            System.out.println("임시비밀번호 발급 성공");
-            System.out.println(newCode);
         }
         return newCode;
     }
