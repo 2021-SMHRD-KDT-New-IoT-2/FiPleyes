@@ -152,7 +152,7 @@ public class EmployeeDAO {
 			}
 
 		} catch (Exception e) {
-			System.out.println("로그인 DAO 실패");
+			System.out.println("비밀번호 찾기 DAO 실패");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -178,7 +178,7 @@ public class EmployeeDAO {
 			check = rs.next();
 	
 		} catch (Exception e) {
-			System.out.println("로그인 DAO 실패");
+			System.out.println("비밀번호 확인 DAO 실패");
 			e.printStackTrace();
 		} finally {
 			close();
@@ -187,4 +187,72 @@ public class EmployeeDAO {
 		return check;
 	}
 
+	
+	// 본인 인증
+	public boolean checkEmp(String emp_name, String emp_phone, String emp_email) {
+		boolean check = false;
+		try {
+		
+			Connection();
+
+			String sql = "Select * from employees where emp_name = ? and emp_phone = ? and emp_email = ?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, emp_name);
+			psmt.setString(2, emp_phone);
+			psmt.setString(3, emp_email);
+
+			cnt = psmt.executeUpdate();
+			
+			if(cnt == 1) {
+				check = true;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("본인인증 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return check;
+	}
+	
+	// 임시 비밀번호 생성
+	public String createTempPW() { 
+
+        String[] str = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        String newCode = new String();
+        for (int x = 0; x < 8; x++) {
+            int random = (int) (Math.random() * str.length);
+            newCode += str[random];
+            System.out.println("임시비밀번호 발급 성공");
+            System.out.println(newCode);
+        }
+        return newCode;
+    }
+	
+	// 비밀번호 업데이트
+	public int tempPwUpdate(String emp_email, String temp_pw) {
+		try {
+			Connection();
+
+			String sql = "UPDATE employees SET emp_pw = ? WHERE emp_email = ?";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, temp_pw);
+			psmt.setString(2, emp_email);
+
+			cnt = psmt.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("비밀번호 찾고 나서 비밀번호 변경 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return cnt;
+	}
 }

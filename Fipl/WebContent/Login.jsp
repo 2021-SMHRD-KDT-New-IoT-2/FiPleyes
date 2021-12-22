@@ -39,7 +39,7 @@ if(cookies != null){
 			<hr>
 			<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              <a>비밀번호 찾기</a>
-			<br> <br> <input type="submit" value="로그인" class="login_s">
+			<br> <br> <input type="submit" value="로그인" class="login_s" onclick = "">
 		</div>
 	</form>
 

@@ -191,7 +191,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		</div>
 		<main>
 
-			<table>
+			<table class = "scrolltable">
 				<tr>
 					<td class="id"><h3>ID</h3></td>
 					<td class="loca"><h3>위치</h3></td>
@@ -266,7 +266,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		</div>
 		<main>
 
-			<table class="page4_table">
+			<table class="scrolltable_1">
 				<tr>
 					<td class="id"><h3>ID</h3></td>
 					<td class="loca"><h3>위치</h3></td>
@@ -297,7 +297,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 		</div>
 		<main>
-			<table class="page4_table">
+			<table class="scrolltable_1">
 				<tr>
 					<td class="id"><h3>ID</h3></td>
 					<td class="loca"><h3>위치</h3></td>

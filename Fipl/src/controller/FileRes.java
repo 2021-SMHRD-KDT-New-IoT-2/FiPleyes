@@ -17,14 +17,16 @@ public class FileRes extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("접속확인...");
+		System.out.println("접속!");
 	      int maxSize = 100*1024*1024;   
 	      String save_path = getServletContext().getRealPath("upload");
+	      System.out.println("전송중!");
 	      try {
 	         MultipartRequest multi = new MultipartRequest(request, save_path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
+	      System.out.println("전송완료!");
 	}
 
 }
