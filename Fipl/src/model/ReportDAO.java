@@ -27,7 +27,6 @@ public class ReportDAO {
 
 			conn = DriverManager.getConnection(url, dbid, dbpw);
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("DAO 커낵션 실패");
@@ -79,19 +78,19 @@ public class ReportDAO {
 		return cnt;
 	}
 
-	
 	// 신고 목록
 	public ArrayList<ReportVO> reportList(String rep_dept, String rep_status) {
 		// 세션에서 가져온 사용자의 부서를 입력받고,
-		// 미처리 신고 목록페이지에서는 rep_status = 0, 
-		// 보류 신고 목록페이지에서는 rep_status = 1, 벌금 rep_status = 2, 삭제 rep_status = 3를 가지고 와서 목록 보여주기
-		
+		// 미처리 신고 목록페이지에서는 rep_status = 0,
+		// 보류 신고 목록페이지에서는 rep_status = 1, 벌금 rep_status = 2, 삭제 rep_status = 3를 가지고 와서
+		// 목록 보여주기
+
 		al = new ArrayList<ReportVO>();
 
 		try {
 			Connection();
-			
-			System.out.println("DAO 매개변수 report_dept : "+rep_dept+"/ rep_status : "+rep_status);
+
+			System.out.println("DAO 매개변수 report_dept : " + rep_dept + "/ rep_status : " + rep_status);
 
 			String sql = "select * from REPORTS where REP_STATUS= ? and REP_DEPT = ?";
 			psmt = conn.prepareStatement(sql);
@@ -129,7 +128,6 @@ public class ReportDAO {
 		return al;
 	}
 
-	
 	// 신고 상태 변경
 	public int statusUpdate(String rep_no, String rep_status, String emp_no) {
 		// 가져온 신고 번호의 신고 상태를 변경
@@ -164,7 +162,7 @@ public class ReportDAO {
 		try {
 			Connection();
 			String sql = "select device_loc from devices where device_no= ?";
-			
+
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, device_no);
@@ -188,10 +186,10 @@ public class ReportDAO {
 	public String rep_no(String rep_no) {
 		return rep_no;
 	}
-	
+
 	// 신고 상세내역 보기
-	public ReportVO getReport (String rep_no) {
-	 System.out.println(rep_no);
+	public ReportVO getReport(String rep_no) {
+		System.out.println(rep_no);
 		try {
 			Connection();
 
@@ -226,5 +224,48 @@ public class ReportDAO {
 		}
 		return vo;
 	}
-	
+
+	// 차량 번호당 이전까지 누적 신고 횟수 조회
+	public int accumulateCounter(String car_no) {
+		al = new ArrayList<ReportVO>();
+		try {
+			Connection();
+
+			System.out.println("DAO 매개변수 car_not : " + car_no);
+
+			String sql = "select * from REPORTS where CAR_NO= ?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, car_no);
+
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+
+				// 실내용이면 get_car_no은 null, get_emp_no 처리하기 전엔 null
+				String get_rep_no = rs.getString(1);
+				String get_device_no = rs.getString(2);
+				String get_rep_time = rs.getString(3);
+				String get_rep_file = rs.getString(4);
+				String get_car_no = rs.getString(5);
+				String get_rep_status = rs.getString(6);
+				String get_rep_dept = rs.getString(7);
+				String get_emp_no = rs.getString(8);
+
+				vo = new ReportVO(get_rep_no, get_device_no, get_rep_time, get_rep_file, get_car_no, get_rep_status,
+						get_rep_dept, get_emp_no);
+
+				al.add(vo);
+			}
+
+		} catch (Exception e) {
+			System.out.println("신고 목록 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return al.size()-1;
+	}
+
 }
