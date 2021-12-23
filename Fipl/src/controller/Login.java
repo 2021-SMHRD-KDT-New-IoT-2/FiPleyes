@@ -47,6 +47,13 @@ public class Login extends HttpServlet {
 			if (logincheck != null) {
 				// 로그인 유지 체크가 되어 있다면 -> 로그인 유지하기
 				Cookie cookie = new Cookie("emp_no", emp_no);
+				response.addCookie(new Cookie("emp_pw", vo.getEmp_pw()));
+				response.addCookie(new Cookie("emp_phone", vo.getEmp_phone()));
+				response.addCookie(new Cookie("emp_email", vo.getEmp_email()));
+				response.addCookie(new Cookie("emp_name", vo.getEmp_name()));
+				response.addCookie(new Cookie("dept_no", vo.getDept_no()));
+				
+				System.out.println(cookie);
 				cookie.setMaxAge(60); // 유지되는 시간
 				cookie.setPath("/");
 				response.addCookie(cookie);
