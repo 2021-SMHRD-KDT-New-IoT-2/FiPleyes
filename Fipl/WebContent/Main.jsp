@@ -346,7 +346,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
 				<tr>
-					<td class="id"><a class = "delete_id" onclick = "deviceDelete(<%=allDevice.get(i).getDevice_no()%>)"><%=allDevice.get(i).getDevice_no()%></a></td>
+					<td class="id"><a href = "DeviceDelete?device_no=<%=allDevice.get(i).getDevice_no() %>" 
+					onclick = "if(!confirm('삭제 하시겠습니까?')){return false;}" class = "delete_id"><%=allDevice.get(i).getDevice_no()%></a></td>
+					
 					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
@@ -515,6 +517,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	<script>
 		function deviceDelete(device_no) {
 			alert("함수 호출 가능");
+			
+			if(confirm("장치를 삭제 하시겠습니까?")){
 				$.ajax({
 					type : "post", // 데이터 전송 방식
 					data : {"device_no" : device_no }, // 전송하는 데이터
@@ -533,6 +537,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			            }
 				})
 			}
+		}
 	</script>
 	
 <!-- 장치 중복 확인  -->

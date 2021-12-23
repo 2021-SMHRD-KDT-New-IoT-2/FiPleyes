@@ -19,16 +19,15 @@ public class DeviceDelete extends HttpServlet {
 		
 		request.setCharacterEncoding("euc-kr");
 	
-		boolean check = false;
 		String device_no = request.getParameter("device_no");
 		
 		DeviceDAO dao = new DeviceDAO();
-		int cnt = dao.deviceDelete(device_no);
+		int cnt = dao.deleteDevice(device_no);
 		
 		if (cnt > 0) {
 			System.out.println("장치 삭제 성공!");
 			response.sendRedirect("Main.jsp#page5");
-			check = true;
+			
 		} else {
 			System.out.println("장치 삭제 실패!");
 			response.sendRedirect("Main.jsp#page5");

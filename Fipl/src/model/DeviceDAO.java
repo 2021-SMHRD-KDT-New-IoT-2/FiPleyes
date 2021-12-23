@@ -257,28 +257,6 @@ public class DeviceDAO {
 		}
 
 	
-	// 장치 삭제
-	public int deviceDelete(String device_no) {
-		
-		try {
-			Connection();
-			
-			String sql = "delete from devices where device_no = ?";
-
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, device_no);
-			cnt = psmt.executeUpdate();
-			
-		} catch (Exception e) {
-			System.out.println("장치 삭제   DAO 실패");
-			
-		}finally {
-			close();
-		}
-		
-		return cnt;
-	}
-	
 	// 장치 중복 확인 
 	public boolean deviceCheck(String device_no) {
 		boolean check = false;
