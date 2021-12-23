@@ -20,7 +20,7 @@ import model.EmployeeVO;
 public class Login_android extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("euc-kr");
+request.setCharacterEncoding("utf-8");
 		
 		String emp_no = request.getParameter("emp_no");
 		String emp_pw = request.getParameter("emp_pw");
@@ -31,7 +31,7 @@ request.setCharacterEncoding("euc-kr");
 		EmployeeDAO dao = new EmployeeDAO();
 		EmployeeVO vo = dao.login(emp_no, emp_pw);
 
-		response.setCharacterEncoding("euc-kr");
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 
 		if (vo != null) {
