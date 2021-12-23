@@ -182,18 +182,7 @@ public class ReportDAO {
 		return get_device_loc;
 	}
 
-<<<<<<< HEAD
-	// 신고 번호 돌려주기
-	public String rep_no(String rep_no) {
-		return rep_no;
-	}
-
-=======
-	
-		System.out.println(rep_no);
-=======
-	public ReportVO getReport (String rep_no) {
->>>>>>> branch 'master' of https://github.com/2021-SMHRD-KDT-New-IoT-2/FiPleyes.git
+	public ReportVO getReport(String rep_no) {
 		try {
 			Connection();
 
@@ -214,7 +203,7 @@ public class ReportDAO {
 				String get_rep_dept = rs.getString(7);
 				String get_emp_no = rs.getString(8);
 				String device_loc = reportLoc(get_device_no);
-				
+
 				vo = new ReportVO(get_rep_no, get_device_no, get_rep_time, get_rep_file, get_car_no, get_rep_status,
 						get_rep_dept, get_emp_no, device_loc);
 
@@ -270,7 +259,7 @@ public class ReportDAO {
 		} finally {
 			close();
 		}
-		return al.size()-1;
+		return al.size() - 1;
 	}
 
 }
