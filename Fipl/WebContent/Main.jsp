@@ -7,6 +7,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
+
+<%!
+	public String getCookieValue(Cookie[] cookies, String cookieName){
+		for (Cookie cookie : cookies) {
+			if(cookie.getName().equals(cookieName)){
+				return cookie.getValue();
+			}
+		}
+		return "";
+}
+%>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -21,30 +33,45 @@
 </head>
 <body class = "layout">
 <%
+
+String emp_no = null;
+String emp_name =null; //가져올 값 지정하기 
+String dept_no =null;
+String emp_pw = null;
+String emp_phone = null;
+String emp_email = null;
+
+
 // 자동로그인을 위한 쿠키 가져오기
 Cookie[] cookies = request.getCookies();
 if(cookies != null){
 	for(Cookie tempCookie : cookies){
-		if(tempCookie.getName().equals("emp_no")){
-			session.setAttribute("emp_no", tempCookie.getValue());
-		}
+			emp_no = getCookieValue(cookies, "emp_no");
+			emp_pw = getCookieValue(cookies, "emp_pw");
+			emp_phone = getCookieValue(cookies, "emp_phone");
+			emp_email = getCookieValue(cookies, "emp_email");
+			emp_name = getCookieValue(cookies, "emp_name");
+			dept_no = getCookieValue(cookies, "dept_no");
 	}
+}else { // 쿠키가 없으면 세션에서 값 가져오기
+	EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
+	emp_name = vo.getEmp_name(); //가져올 값 지정하기 
+	dept_no = vo.getDept_no();
+	emp_no = vo.getEmp_no();
+	emp_pw = vo.getEmp_pw();
+	emp_phone = vo.getEmp_phone();
+	emp_email = vo.getEmp_phone();
 }
- 
-// 그냥 로그인 했을때 세션 가져오기
-EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
-String name = vo.getEmp_name(); //가져올 값 지정하기 
-String dept = vo.getDept_no();
 
 //신고 리스트
 ReportDAO reportDao = new ReportDAO();
-ArrayList<ReportVO> report_yet = reportDao.reportList(dept, "0");
-ArrayList<ReportVO> report_hold = reportDao.reportList(dept, "1");
-ArrayList<ReportVO> report_delete = reportDao.reportList(dept, "2");
+ArrayList<ReportVO> report_yet = reportDao.reportList(dept_no, "0");
+ArrayList<ReportVO> report_hold = reportDao.reportList(dept_no, "1");
+ArrayList<ReportVO> report_delete = reportDao.reportList(dept_no, "2");
 
 DeviceDAO deviceDao = new DeviceDAO();
-ArrayList<DeviceVO> allDevice = deviceDao.allList(dept);
-ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
+ArrayList<DeviceVO> allDevice = deviceDao.allList(dept_no);
+ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 %>
 	<header>
 		<div class="head">
@@ -53,7 +80,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			</h1>
 		</div>
 
-		<div> <h3 class="name_s"> <%= name %>님 환영합니다.</h3></div>
+		<div> <h3 class="name_s"> <%= emp_name %>님 환영합니다.</h3></div>
 
 		<div class="container_h">
 			<nav>
@@ -108,7 +135,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		</div>
 		<div></div>
 	</div>
-	
+
 	<!-- 미처리 신고 관리 페이지 / page2  -->
 
 	<section id="page2">
@@ -119,63 +146,63 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		</div>
 		<main>
 			<table class="scrolltable">
-					<thead>
-						<tr>
-							<th class="id"><h3>ID</h3></th>
-							<th class="loca"><h3>위치</h3></th>
-							<th class="date"><h3>날짜/시간</h3></th>
-							<th class="detail"><h3>상세보기</h3></th>
-						</tr>
-					</thead>
+				<thead>
+					<tr>
+						<th class="id"><h3>ID</h3></th>
+						<th class="loca"><h3>위치</h3></th>
+						<th class="date"><h3>날짜/시간</h3></th>
+						<th class="detail"><h3>상세보기</h3></th>
+					</tr>
+				</thead>
 				<tbody>
-					
+
 					<%for (int i = 0; i < report_yet.size(); i++) {%>
 					<tr>
 						<td id="rep_no" class="id"><%=report_yet.get(i).getRep_no()%></td>
 						<td class="loca"><%=reportDao.reportLoc(report_yet.get(i).getDevice_no())%></td>
 						<td class="date"><%=report_yet.get(i).getRep_time()%></td>
-						<td class="detail"><a class="btn js-click-modal" onclick="repDetail(<%=report_yet.get(i).getRep_no()%>)">상세보기</a></td>
+						<td class="detail"><a class="btn js-click-modal"
+							onclick="repDetail(<%=report_yet.get(i).getRep_no()%>)">상세보기</a></td>
 					</tr>
 					<%}%>
 				</tbody>
 
 			</table>
-			
+
 			<!--상세보기 페이지 -->
-			<div class="container" id = "detail_rep">
+			<div class="container" id="detail_rep">
 				<div class="black_bg"></div>
 				<div class="modal">
-				
+
 					<div class="modal_header">미처리 신고</div>
 					<div class="modal_main">
-						<img id = "detail_rep_img" src="" class="numberpad">
+						<img id="detail_rep_img" src="" class="numberpad">
 						<table class="detail_t">
 							<tr>
 								<td class="id_d"><h3>ID</h3></td>
-								<td id = "detail_rep_no"></td>
+								<td id="detail_rep_no"></td>
 							</tr>
 							<tr>
 								<td class="loca_d"><h3>주소</h3></td>
-								<td id = "detail_rep_loc"></td>
+								<td id="detail_rep_loc"></td>
 							</tr>
 							<tr>
 								<td class="date_d"><h3>날짜</h3></td>
-								<td id = "detail_rep_data"></td>
+								<td id="detail_rep_data"></td>
 							</tr>
 							<tr>
 								<td class="number"><h3>번호</h3></td>
-								<td id = "detail_car_no"></td>
+								<td id="detail_car_no"></td>
 							</tr>
 							<tr>
 								<td class="accu"><h3>누적</h3></td>
-								<td id = "detail_rep_add"></td>
+								<td id="detail_rep_add"></td>
 
 							</tr>
 						</table>
 
 						<div class="btn_p">
-							<a id = "hold_rep" href="">보류</a>
-							<a id = "fine_rep" href="">신고</a>
+							<a id="hold_rep" href="">보류</a> <a id="fine_rep" href="">신고</a>
 						</div>
 						<div class="btn_c_p">
 							<a class="btn js-close-modal">Close</a>
@@ -185,7 +212,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 			</div>
 		</main>
 	</section>
-	
+
 	<!-- 보류신고 관리 페이지 / page3-->
 
 	<section id="page3">
