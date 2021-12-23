@@ -1,5 +1,12 @@
 @charset "EUC-KR";
 
+
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -242,6 +249,7 @@ nav>ul>li>a:hover {
 	overflow: auto;
 	height: 550px;
 	scrollbar-width: thin;
+	font-size : 1.2vw
 }
 
 tbody::-webkit-scrollbar {
@@ -337,7 +345,14 @@ tbody::-webkit-scrollbar-thumb {
 
 .pw_d {
 	position: relative;
-	top: 10vh;
+	top: 11vh;
+}
+.pw_input {
+	width : 13vw;
+	height : 3vh;
+    border : 0 solid;
+    padding : 3px;
+    margin : 3px;
 }
 
 
@@ -359,7 +374,7 @@ input {
 	height: 4vh;
 	border-radius: 5px;
 	border: 2px solid white;
-	margin: 3px 0;
+	margin: 7px 0;
 }
 
 .container>.btn {
@@ -378,7 +393,7 @@ input {
 	transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
 	top: 100%;
 	position: fixed;
-	left: 15vw;
+	left: 20vw;
 	text-align: center;
 	z-index: 9999;
 }
@@ -391,8 +406,10 @@ input {
 }
 
 .modal_main {
-	padding: 20px;
+	padding: 50px;
 	font: 300 16px Lato;
+	position : relative;
+	top :1vh;
 }
 
 .btn {
@@ -409,8 +426,8 @@ input {
 
 .btn_p {
 	position: relative;
-	top: 5vh;
-	left: 12vw;
+	top: 4vh;
+	left: 10vw;
 }
 
 .btn, #hold_rep, #fine_rep, #fine_hold_rep, #delet_rep{
@@ -431,8 +448,8 @@ input {
 
 .detail_t {
 	position: relative;
-	top: 4vh;
-	left: 34vw;
+	top: 2.5vh;
+	left: 31vw;
 }
 
 tr {
@@ -465,7 +482,7 @@ tr {
 	width: 26px;
 	height: 26px;
 	position: absolute;
-	top: -30px;
+	top: -12vh;
 	right: 0;
 }
 
@@ -473,7 +490,7 @@ tr {
 	width: 25vw;
    height: auto;
    position: fixed;
-   left: 24vw;
+   left: 27vw;
 	
 	
 }
@@ -515,28 +532,16 @@ tr {
 
 .modal-1 {
 	background: #fff;
-	width: 70%;
-	height: 70%;
+	width: 60%;
+	height: 60%;
 	margin: 10% 0;
 	padding: 0;
 	transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
 	top: 100%;
 	position: fixed;
-	left: 15vw;
+	left: 20vw;
 	text-align: center;
 	z-index: 9999;
-}
-
-.modal_header {
-	padding: 20px;
-	border-bottom: 1px solid #ddd;
-	font: 300 24px Lato;
-	position: relative;
-}
-
-.modal_main {
-	padding: 20px;
-	font: 300 16px Lato;
 }
 
 .container-1.modal-open-1 .modal-1 {
@@ -547,7 +552,7 @@ tr {
 	width: 26px;
 	height: 26px;
 	position: absolute;
-	top: -30px;
+	top: -12vh;
 	right: 0;
 }
 
@@ -580,8 +585,9 @@ tr {
 .scrolltable_1 tbody {
 	display: block;
 	overflow: auto;
-	height: 480px;
+	height: 350px;
 	scrollbar-width: thin;
+	font-size : 1.2vw
 }
 
 .scrolltable_1 th, .scrolltable_1 td {
@@ -596,14 +602,26 @@ tr {
 }
 
 /* page5 */
+.delete_id{
+	
+	border: 0;
+	outline: none;
+	cursor: pointer;
+	vertical-align: middle;
+	background-color: transparent;
+	
+}
+.delete_id:hover{
+	color:babyblue;
+}
 
 .add_p {
 	position: relative;
-	top: 20vh;
+	top: 28vh;
 }
 
 .add_d {
-	width: 1.5vw;
+	width: 5vw;
 	height: auto;
 }
 
@@ -657,25 +675,39 @@ tr {
 	left: 0;
 	z-index: 2;
 }
-
-.add_input {
-	border: 0 solid;
+.add_t{
+	position:relative;
+	left : -5vw;
 }
 
+
+.add_input {
+	width : 13vw;
+	height : 3vh;
+    border : 0 solid;
+    padding : 3px;
+    margin : 3px;
+}
 .add_input:focus {
 	outline: none;
 }
+
+input:focus::-webkit-input-placeholder {
+	color:transparent; }
+
+
 #adding_btn{
 	border: 2px solid #252D59;
 	background-color: #252D59;
 	color : #fff;
 	padding: 5px;
     border-radius: 5px;
-    font-weight:500;
+    font-weight:bold;
     font-size: 18px;
     cursor : pointer;
     width: 13vw;
     height: 4.5vh;
+    font-family: 'Pretendard-Bold';
 }
 
 .hr_one {
@@ -686,7 +718,9 @@ tr {
 footer {
 	clear: both;
 	width: 100%;
-	height: 200px;
+	height: 150px;
 	background-color: rgb(100, 100, 255);
 	text-align: center;
+	position:relative;
+	top:40vh;
 }

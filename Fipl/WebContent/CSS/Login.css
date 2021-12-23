@@ -162,3 +162,4 @@ a{
     font-size: 18px;
     cursor : pointer;
 }
+input:focus::-webkit-input-placeholder {color:transparent; }
