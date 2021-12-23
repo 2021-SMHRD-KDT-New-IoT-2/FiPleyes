@@ -125,12 +125,12 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	<div class="modal_wrap">
 	<div class="pw_h"><h3>비밀번호 수정</h3></div>
 	<div class="pw_d">
-		<input type="text" name = "check_emp_pw" id = "check_emp_pw" class="add_input" placeholder="기존 비밀번호를 입력해주세요" ><br>
+		<input type="text" name = "check_emp_pw" id = "check_emp_pw" class="pw_input" placeholder="기존 비밀번호를 입력해주세요" ><br>
 		<em id = "pw_check"></em> <hr class="hr_one">
 		<button onclick = "pwcheck()" class="login_m">확인하기</button><br><br>
-		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" class="add_input" placeholder="변경할 비밀번호를 입력해주세요"><br>
-		 <hr class="hr_one"><br>
-		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" class="add_input" placeholder="비밀번호를 한번 더 입력해주세요"><br>
+		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" class="pw_input" placeholder="변경할 비밀번호를 입력해주세요"><br>
+		 <hr class="hr_one">
+		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" class="pw_input" placeholder="비밀번호를 한번 더 입력해주세요"><br>
 		 <hr class="hr_one">
 		<button onclick = "pwchange()" >수정하기</button>
 	</div>
@@ -346,15 +346,15 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
 				<tr>
-					<td class="id"><%=allDevice.get(i).getDevice_no()%></td>
+					<td class="id"><button class="delete_id"><%=allDevice.get(i).getDevice_no()%></button></td>
 					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
 						<td class="id">			
-						&#128308;</td>
+						&#128994;</td>
 					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
 						<td class="id">	
-						&#128994;</td>
+						&#128308;</td>
 					<%} %>
 				</tr>
 				<%} %>
@@ -376,11 +376,11 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	            </div>
 	            <form action = "DeviceRegister" method = "post">
 	            <div class="pw_d">
-	               <h4>기기 번호</h4>
+	               <h4 class="add_t">기기 번호</h4>
 	               <br> <input type="text" placeholder="기기 번호를 입력해주세요" class="add_input" name = "device_no"><br>
 	               <hr class="hr_one">
-	               <br>
-	               <h4>기기 위치</h4>
+	               <br><br>
+	               <h4 class="add_t">기기 위치</h4>
 	               <br> <input type="text" placeholder="기기의 위치를 입력해주세요" class="add_input" name = "device_loc"><br>
 	               <hr class="hr_one">
 	               <br>
@@ -391,13 +391,14 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	         </div>
 	      </article>
       </div>
-
-
+    
+    <footer></footer>
 
 	</section>
+	
 
 
- <script src="js/jquery-3.6.0.min.js"></script>
+   <script src="js/jquery-3.6.0.min.js"></script>
    <script src="js/jquery.min.js"></script>
    <script src="js/browser.min.js"></script>
    <script src="js/breakpoints.min.js"></script>
@@ -509,5 +510,4 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			})
 			}
 		</script>
-	<footer> </footer>
 	
