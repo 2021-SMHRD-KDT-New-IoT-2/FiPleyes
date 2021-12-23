@@ -35,6 +35,5 @@ public class PwCheck extends HttpServlet {
 			//출력 스트림(통로)			
 		}
 		//통로를 통해서 응답데이터를 출력
-		out.print(check);
 	}
 }

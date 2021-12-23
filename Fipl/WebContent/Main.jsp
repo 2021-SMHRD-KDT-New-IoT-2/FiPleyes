@@ -397,20 +397,18 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					<div class="pw_h">
 						<h3>새로운 기기 등록</h3>
 					</div>
-					<form action="DeviceRegister" method="post">
 						<div class="pw_d">
 							<h4 class="add_t">기기 번호</h4>
-							<br> <input type="text" placeholder="기기 번호를 입력해주세요"
+							<br> <input id = "device_no" type="text" placeholder="기기 번호를 입력해주세요"
 								class="add_input" name="device_no"><br>
 							<hr class="hr_one">
 							<br>
 							<br>
 							<h4 class="add_t">기기 위치</h4>
-							<br> <input type="text" placeholder="기기의 위치를 입력해주세요"
+							<br> <input id="device_loc" type="text" placeholder="기기의 위치를 입력해주세요"
 								class="add_input" name="device_loc"><br>
 							<hr class="hr_one">
-							<br> <br> <input id="adding_btn" type="submit"
-								value="등록하기 ">
+							<br> <br> <button onclick = "deviceRegi()">등록하기</button>
 						</div>
 					</form>
 				</div>
@@ -624,11 +622,10 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					"device_loc" : input2
 				}, // 전송하는 데이터
 				url :  "DeviceRegister", // 데이터를 전송하는 페이지
-				dataType : "json", // 응답데이터의 형식
+				dataType : "text", // 응답데이터의 형식
 				success : function(data) {
-					if (data == true) {
+					if (data == "true") {
 						alert("장치를 정상적으로 등록하였습니다.");
-						location.href = "Login.jsp#page5";
 					}else {
 				 		alert("장치 등록에 실패하였습니다.");
 					}
