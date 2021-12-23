@@ -45,7 +45,7 @@ String emp_email = null;
 
 
 // 자동로그인을 위한 쿠키 가져오기
-Cookie[] cookies = request.getCookies();
+/* Cookie[] cookies = request.getCookies();
 if(cookies != null){
 	for(Cookie tempCookie : cookies){
 			emp_no = getCookieValue(cookies, "emp_no");
@@ -55,7 +55,8 @@ if(cookies != null){
 			emp_name = getCookieValue(cookies, "emp_name");
 			dept_no = getCookieValue(cookies, "dept_no");
 	}
-}else { // 쿠키가 없으면 세션에서 값 가져오기
+} */
+
 	EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
 	emp_name = vo.getEmp_name(); //가져올 값 지정하기 
 	dept_no = vo.getDept_no();
@@ -63,7 +64,6 @@ if(cookies != null){
 	emp_pw = vo.getEmp_pw();
 	emp_phone = vo.getEmp_phone();
 	emp_email = vo.getEmp_phone();
-}
 
 //신고 리스트
 ReportDAO reportDao = new ReportDAO();
@@ -199,7 +199,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 							</tr>
 							<tr>
 								<td class="accu"><h3>누적</h3></td>
-								<td id="detail_rep_add"></td>
+								<td id="detail_total_report"></td>
 
 							</tr>
 						</table>
@@ -274,7 +274,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						</tr>
 						<tr>
 							<td class="accu"><h3>누적</h3></td>
-							<td>0</td>
+							<td id = "detail_hold_total_report"></td>
 						</tr>
 					</table>
 
@@ -351,10 +351,10 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
 						<td class="id">			
-						&#128308;</td>
+						&#128994;</td>
 					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
 						<td class="id">	
-						&#128994;</td>
+						&#128308;</td>
 					<%} %>
 				</tr>
 				<%} %>
@@ -474,6 +474,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					$("#detail_rep_loc").html(res.device_loc);
 					$("#detail_rep_data").html(res.rep_time);
 					$("#detail_car_no").html(res.car_no);
+					$("#detail_total_report").html(res.total_report);
 					$("#hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=1");
 					$("#fine_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
 					$("#detail_rep_img").attr("src", res.rep_file);
@@ -499,6 +500,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					$("#detail_hold_loc").html(res.device_loc);
 					$("#detail_hold_date").html(res.rep_time);
 					$("#detail_hold_car_no").html(res.car_no);
+					$("#detail_hold_total_report").html(res.total_report);
 					$("#fine_hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
 					$("#delet_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=3");
 					$("#hold_rep_img").attr("src", res.rep_file);

@@ -11,7 +11,9 @@ public class ReportVO {
 	private String rep_dept;
 	private String emp_no;
 	private String device_loc;
+	private int total_report;
 	
+	// 디바이스 위치 포함 VO
 	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
 			String rep_dept, String emp_no, String device_loc) {
 		super();
@@ -26,6 +28,7 @@ public class ReportVO {
 		this.device_loc = device_loc;
 	}
 	
+	// 기본 VO
 	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
 			String rep_dept, String emp_no) {
 		super();
@@ -37,6 +40,22 @@ public class ReportVO {
 		this.rep_status = rep_status;
 		this.rep_dept = rep_dept;
 		this.emp_no = emp_no;
+	}
+	
+	// 누적 포함된 VO
+	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
+			String rep_dept, String emp_no, String device_loc, int total_report) {
+		super();
+		this.rep_no = rep_no;
+		this.device_no = device_no;
+		this.rep_time = rep_time;
+		this.rep_file = rep_file;
+		this.car_no = car_no;
+		this.rep_status = rep_status;
+		this.rep_dept = rep_dept;
+		this.emp_no = emp_no;
+		this.device_loc = device_loc;
+		this.setTotal_report(total_report);
 	}
 	
 	public ReportVO() {
@@ -115,11 +134,19 @@ public class ReportVO {
 		this.device_loc = device_loc;
 	}
 
+	public int getTotal_report() {
+		return total_report;
+	}
+
+	public void setTotal_report(int total_report) {
+		this.total_report = total_report;
+	}
+
 	@Override
 	public String toString() {
 		return "ReportVO [rep_no=" + rep_no + ", device_no=" + device_no + ", rep_time=" + rep_time + ", rep_file="
 				+ rep_file + ", car_no=" + car_no + ", rep_status=" + rep_status + ", rep_dept=" + rep_dept
-				+ ", emp_no=" + emp_no + ", device_loc=" + device_loc + "]";
+				+ ", emp_no=" + emp_no + ", device_loc=" + device_loc + ", total_report=" + total_report + "]";
 	}
 
 	
