@@ -206,4 +206,26 @@ public class DeviceDAO {
 		return get_device_loc;
 	}
 
+	
+	// 장치 삭제
+	public int deviceDelete(String device_no) {
+		
+		try {
+			Connection();
+			
+			String sql = "delete from devices where device_no = ?";
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, device_no);
+			cnt = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("장치 삭제   DAO 실패");
+			
+		}finally {
+			close();
+		}
+		
+		return cnt;
+	}
 }

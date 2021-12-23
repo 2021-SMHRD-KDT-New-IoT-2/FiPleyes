@@ -315,7 +315,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<tr>
 					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
 					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
-					<td class="id">🔴</td>
+					<td class="id">&#128308;</td>
 				</tr>
 				<%} %>
 			</tbody>
@@ -346,7 +346,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
 				<tr>
-					<td class="id"><button class="delete_id"><%=allDevice.get(i).getDevice_no()%></button></td>
+					<td class="id"><a class = "delete_id" onclick = "deviceDelete(<%=allDevice.get(i).getDevice_no()%>)"><%=allDevice.get(i).getDevice_no()%></a></td>
 					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
@@ -377,8 +377,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	            <form action = "DeviceRegister" method = "post">
 	            <div class="pw_d">
 	               <h4 class="add_t">기기 번호</h4>
-	               <br> <input type="text" placeholder="기기 번호를 입력해주세요" class="add_input" name = "device_no"><br>
-	               <hr class="hr_one">
+	               <br> <input id = "input_device_no" type="text" placeholder="기기 번호를 입력해주세요" class="add_input" name = "device_no"><br>
+	               <em id = "pw_check"></em> <hr class="hr_one">
+				   <button onclick = "deviceCheck()" class="login_m">확인하기</button><br><br>
 	               <br><br>
 	               <h4 class="add_t">기기 위치</h4>
 	               <br> <input type="text" placeholder="기기의 위치를 입력해주세요" class="add_input" name = "device_loc"><br>
@@ -432,8 +433,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		}
 	  </script>
 	
-	<!-- 입력한 두 비밀번호가 일치하는지 확인하고 같다면 변경-->
-	  <script>
+<!-- 입력한 두 비밀번호가 일치하는지 확인하고 같다면 변경-->
+	<script>
 		function pwchange() {
 			var input1 = $('#new_emp_pw1').val();
 			var input2 = $('#new_emp_pw2').val();
@@ -459,11 +460,11 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
-		</script>
+	</script>
 
 
-		<!-- 선택한 미처리 신고 상세보기  -->
-		 <script>
+<!-- 선택한 미처리 신고 상세보기  -->
+	<script>
 		function repDetail(rep_no) {
 			$.ajax({
 				type : "post", // 데이터 전송 방식
@@ -485,11 +486,11 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
-		</script>
-		
-		
-		<!-- 선택한 보류 신고 상세보기  -->
-		 <script>
+	</script>
+
+
+<!-- 선택한 보류 신고 상세보기  -->
+	<script>
 		function holdDetail(rep_no) {
 			$.ajax({
 				type : "post", // 데이터 전송 방식
@@ -511,5 +512,54 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
-		</script>
+	</script>
+
+	<script>
+		function deviceDelete(device_no) {
+			alert("함수 호출 가능");
+				$.ajax({
+					type : "post", // 데이터 전송 방식
+					data : {"device_no" : device_no }, // 전송하는 데이터
+					url :  "DeviceDelete", // 데이터를 전송하는 페이지
+					dataType : "json", // 응답데이터의 형식
+					success : function(res) {
+						if (data == true) {
+							alert("장치를 삭제하였습니다.");
+							location.href = "Main.jsp#page5";
+						}else {
+					 		alert("장치 삭제에 실패하였습니다.");
+						}
+					},
+					 error : function() { // 실패
+			               alert("잠시후 다시 시도해주세요");
+			            }
+				})
+			}
+	</script>
+	
+	<script>
+		function deviceCheck() {
+			var input = $('#input_device_no').val();
+			
+			$.ajax({
+				type : "post", // 데이터 전송 방식
+				data : {
+					"input_device_no" : input
+				}, // 전송하는 데이터
+				url :  "DeviceCheck", // 데이터를 전송하는 페이지
+				dataType : "json", // 응답데이터의 형식
+				success : function(data) {
+					if (data == true) {
+						$("#pw_check").html("비밀번호가 일치합니다.");
+		               } else {
+		            	$("#pw_check").html("비밀번호가 일치하지 않습니다.");
+		               }
+				},
+				 error : function() { // 실패
+		               alert("잠시후 다시 시도해주세요");
+		            }
+			})
+			
+		}
+	  </script>
 	
