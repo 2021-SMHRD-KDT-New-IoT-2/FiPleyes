@@ -35,13 +35,15 @@ if(cookies != null){
 		<div class="fullS">
 
 			<img class="logo" src="img/logo.png"> <br> <br>
-			<input name="emp_no" class="log_t" type="text" placeholder=  "  사번"><br>
-			<hr>
-			<br> <input name="emp_pw" class="log_t" type="password" placeholder="  PW"><br>
-			<hr>
-			<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <a id = "modal_btn">비밀번호 찾기</a>
-			<br> <br> <input type="submit" value="로그인" class="login_s">
+			<div class="white">
+				<input name="emp_no" class="log_t" type="text" placeholder=  "  사번"><br>
+				<hr>
+				<br> <input name="emp_pw" class="log_t" type="password" placeholder="  PW"><br>
+				<hr>
+				<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	             <a id = "modal_btn">비밀번호 찾기</a>
+				<br> <br> <input type="submit" value="로그인" class="login_s">
+			</div>
 		</div>
 	</form>
 	<!-- 비밀번호 수정 모달 -->

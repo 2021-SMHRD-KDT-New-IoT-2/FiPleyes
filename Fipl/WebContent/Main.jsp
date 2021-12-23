@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="CSS/Font.css">
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/script.js" defer></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
 
 </head>
 <body class = "layout">
@@ -68,7 +70,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 		</div>
 	</header>
 	<!-- 메인 화면 -->
-	<section id="page1">
+	<section id="page1" class="page">
 		<div class="fullD">
 			<div class=d1 onclick="window.location.href='#page2'">
 				<a class ="box_text">미처리신고</a>
@@ -96,22 +98,23 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 	<div class="modal_wrap">
 	<div class="pw_h"><h3>비밀번호 수정</h3></div>
 	<div class="pw_d">
-		<input type="text" name = "check_emp_pw" id = "check_emp_pw" placeholder="기존 비밀번호를 입력해주세요"><br>
-		<em id = "pw_check"></em><br>
-		<button onclick = "pwcheck()">확인하기</button><br>
-		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" placeholder="변경할 비밀번호를 입력해주세요"><br>
-		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" placeholder="비밀번호를 한번 더 입력해주세요"><br>
-		<button onclick = "pwchange()">수정하기</button>
+		<input type="text" name = "check_emp_pw" id = "check_emp_pw" class="add_input" placeholder="기존 비밀번호를 입력해주세요" ><br>
+		<em id = "pw_check"></em> <hr class="hr_one">
+		<button onclick = "pwcheck()" class="login_m">확인하기</button><br><br>
+		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" class="add_input" placeholder="변경할 비밀번호를 입력해주세요"><br>
+		 <hr class="hr_one"><br>
+		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" class="add_input" placeholder="비밀번호를 한번 더 입력해주세요"><br>
+		 <hr class="hr_one">
+		<button onclick = "pwchange()" >수정하기</button>
 	</div>
 		<div class="modal_close">
-			<a href="#">close</a>
+			<a>close</a>
 		</div>
-		<div></div>
 	</div>
 	
 	<!-- 미처리 신고 관리 페이지 / page2  -->
 
-	<section id="page2">
+	<section id="page2" class="page">
 		<div id="ti_mi">
 
 			<h1>미처리 신고</h1>
@@ -177,8 +180,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 							<a id = "hold_rep" href="">보류</a>
 							<a id = "fine_rep" href="">신고</a>
 						</div>
-						<div class="btn_c_p">
-							<a class="btn js-close-modal">Close</a>
+						<div class = "modal_close_div">
+							<a class="modal_close_1_1">close</a>
 						</div>
 					</div>
 				</div>
@@ -188,7 +191,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 	
 	<!-- 보류신고 관리 페이지 / page3-->
 
-	<section id="page3">
+	<section id="page3" class="page">
 		<div id="ti_mi">
 			<h1>보류 신고</h1>
 
@@ -253,8 +256,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 						<a id = "fine_hold_rep" href="">신고</a>
 						<a id = "delet_rep" href="">삭제</a>
 					</div>
-					<div class="btn_c_p">
-						<a class="btn js-close-modal-1">Close</a>
+					<div class = "modal_close_div_1">
+							<a class="modal_close_1">close</a>
 					</div>
 				</div>
 			</div>
@@ -264,7 +267,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 	
 	<!-- 이상 기기 관리 페이지  / page4 -->
 
-	<section id="page4">
+	<section id="page4" class="page">
 		<div id="ti_mi">
 
 			<h1>이상 기기 관리</h1>
@@ -299,7 +302,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 	
 	<!-- My 기기 관리 페이지  / page5 -->
 
-	<section id="page5">
+	<section id="page5" class="page">
 		<div id="ti_mi">
 			<h1>MY 기기 순찰</h1>
 
@@ -321,45 +324,47 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
-						<td class="id">🟢</td>
+						<td class="id">			
+						&#128308;</td>
 					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
-						<td class="id">🔴</td>
+						<td class="id">	
+						&#128994;</td>
 					<%} %>
 				</tr>
 				<%} %>
 			</tbody>
 
 			</table>
-			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png">기기추가</button></div>
+			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png"></button></div>
 		</main>
 		<div class="add_bg"></div>
-		<div class="add_wrap">
-			<div class="add_close">
-				<a href="">close</a>
-			</div>
-			
-		<article id= "add_device">
-			<div>
-				<div class="pw_h">
-					<h3>새로운 기기 등록</h3>
-				</div>
-				<form action = "DeviceRegister" method = "post">
-				<div class="pw_d">
-					<h5>기기 번호</h5>
-					<br> <input type="text" placeholder="기기 번호를 입력해주세요" class="add_input" name = "device_no"><br>
-					<hr class="hr_one">
-					<br>
-					<h5>기기 위치</h5>
-					<br> <input type="text" placeholder="기기의 위치를 입력해주세요" class="add_input" name = "device_loc"><br>
-					<hr class="hr_one">
-					<br>
-					<br>
-					<input id="adding_btn" type = "submit" value = "등록하기 " >
-				</div>
-				</form>
-			</div>
-		</article>
-		</div>
+      <div class="add_wrap">
+         <div class="add_close">
+            <a>close</a>
+         </div>
+         
+	      <article id= "add_device">
+	         <div>
+	            <div class="pw_h">
+	               <h3>새로운 기기 등록</h3>
+	            </div>
+	            <form action = "DeviceRegister" method = "post">
+	            <div class="pw_d">
+	               <h4>기기 번호</h4>
+	               <br> <input type="text" placeholder="기기 번호를 입력해주세요" class="add_input" name = "device_no"><br>
+	               <hr class="hr_one">
+	               <br>
+	               <h4>기기 위치</h4>
+	               <br> <input type="text" placeholder="기기의 위치를 입력해주세요" class="add_input" name = "device_loc"><br>
+	               <hr class="hr_one">
+	               <br>
+	               <br>
+	               <input id="adding_btn" type = "submit" value = "등록하기 " >
+	            </div>
+	            </form>
+	         </div>
+	      </article>
+      </div>
 
 
 

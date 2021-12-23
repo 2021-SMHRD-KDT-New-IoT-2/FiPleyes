@@ -18,6 +18,16 @@ window.onload = function() {
 
 };
 
+/* 메뉴 상단바 색깔 변경*/
+
+$(function(){
+	
+	$('li').click(function(){
+		$('li').removeClass()
+			$(this).addClass('on')
+	})
+})
+
 /*page2 팝업  */
 $('.js-click-modal').click(function() {
 	$('.container').addClass('modal-open');
@@ -25,7 +35,7 @@ $('.js-click-modal').click(function() {
 	$('.black_bg').fadeTo("slow");
 });
 
-$('.js-close-modal').click(function() {
+$('.modal_close_div').click(function() {
 	$('.container').removeClass('modal-open');
 	$('.black_bg, .window').hide();
 });
@@ -37,7 +47,7 @@ $('.js-click-modal-1').click(function() {
 	$('.black_bg').fadeTo("slow");
 });
 
-$('.js-close-modal-1').click(function() {
+$('.modal_close_div_1').click(function() {
 	$('.container-1').removeClass('modal-open-1');
 	$('.black_bg, .window').hide();
 });
@@ -52,7 +62,7 @@ window.addEventListener('load',function() {
 		document.querySelector('.add_bg').style.display = 'block';
 	}
 	function offClick() {
-		document.quesrySelector('.add_wrap').style.display = 'none';
+		document.querySelector('.add_wrap').style.display = 'none';
 		document.querySelector('.add_bg').style.display = 'none';
 	}
 

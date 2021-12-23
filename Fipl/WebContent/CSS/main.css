@@ -5,12 +5,14 @@
 	padding: 0;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 .layout {
 	width: 80%;
 	margin: 0 auto;
-	-ms-overflow-style: none;
 }
-::-webkit-scrollbar { display: none; }
 
 header {
 	position: fixed;
@@ -25,47 +27,8 @@ header {
 	z-index: 2;
 	font-size: 2vh;
 }
-
 .name_s{
-	color : grey;
-	  animation: fadeout 5s;
-	  -moz-animation: fadeout 5s; 
-	  -webkit-animation: fadeout 5s; 
-	  -o-animation: fadeout 5s;
-	  animation-fill-mode: forwards;
-}
-
-@keyframes fadeout {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-@-moz-keyframes fadeout { /* Firefox */
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-@-webkit-keyframes fadeout { 
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-@-o-keyframes fadeout { /* Opera */
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+	color:grey;
 }
 
 .head {
@@ -86,8 +49,9 @@ header {
 a {
 	text-decoration: none;
 }
-nav{
-	margin-right : 4vw;
+
+nav {
+	margin-right: 4vw;
 }
 
 nav>ul>li {
@@ -104,6 +68,13 @@ nav>ul>li>a:hover {
 	color: #1726aa;
 }
 
+.clear{
+	clear:both;
+}
+.li.on{
+	color:#1726aa;
+}
+
 .fullD {
 	width: 100%;
 	height: auto;
@@ -117,126 +88,195 @@ nav>ul>li>a:hover {
 	height: 55vh;
 	background: black;
 	display: inline-block;
-    cursor: pointer;
+	cursor: pointer;
 	z-index: 1;
 	margin: 1%;
 }
-.d1_1{
-	
+
+.d1_1 {
 	background-color: black;
-    opacity: 0.7;
-    cursor: pointer;
+	opacity: 0.7;
+	cursor: pointer;
 	z-index: 1;
 }
 
-.fireplug_1{
+.fireplug_1 {
 	width: 13vw;
 	height: 55vh;
 	position: absolute;
 	left: 0;
 	top: 0vh;
-	opacity: 0.5; 
-	filter: alpha(opacity=50);
+	opacity: 0.5;
+	filter: alpha(opacity = 50);
 }
-.fireplug_1:hover{
-	opacity: 1; 
-	filter: alpha(opacity=100);
+
+.fireplug_1:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
 }
-.pages{
+
+.pages {
 	width: 13vw;
 	height: 55vh;
-	position : absolute;
-	left : 0;
-	top : 0;
-	opacity: 0.5; 
-	filter: alpha(opacity=50);
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0.5;
+	filter: alpha(opacity = 50);
 }
-.pages:hover{
-	opacity: 1; 
-	filter: alpha(opacity=100);
+
+.pages:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
 }
-.machine{
+
+.machine {
 	width: 13vw;
 	height: 55vh;
 	position: absolute;
 	left: 0;
 	top: 0vh;
-	opacity: 0.5; 
-	filter: alpha(opacity=50);
+	opacity: 0.5;
+	filter: alpha(opacity = 50);
 }
-.machine:hover{
-	opacity: 1; 
-	filter: alpha(opacity=100);
-} 
-.my_machine{
+
+.machine:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+.my_machine {
 	width: 13vw;
 	height: 55vh;
 	position: absolute;
 	left: 0;
 	top: 0vh;
-	opacity: 0.5; 
-	filter: alpha(opacity=50);
+	opacity: 0.5;
+	filter: alpha(opacity = 50);
 }
-.my_machine:hover{
-	opacity: 1; 
-	filter: alpha(opacity=100);
-} 
-.box_text{
-    position : absolute;
-    left : 1vw;
-    top : 2vh;
-    color: white;
+
+.my_machine:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+.box_text {
+	position: absolute;
+	left: 1vw;
+	top: 2vh;
+	color: white;
 	font-size: 25px;
 	font-weight: bold;
 	z-index: 15;
 	opacity: 1;
 }
 
-.d1, .d2, .d3, .d4{
-    transform: scale(1);
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    -o-transform: scale(1);
-    transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
-  }
-  .d1:hover{
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-  }
-   .d2:hover{
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-  }
-   .d3:hover{
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-  }
-   .d4:hover{
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-  }
+.d1, .d2, .d3, .d4 {
+	transform: scale(1);
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transition: all 0.3s ease-in-out; /* 부드러운 모션을 위해 추가*/
+}
 
+.d1:hover {
+	transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+}
 
-/* page1 */
-#page1 {
+.d2:hover {
+	transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+}
+
+.d3:hover {
+	transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+}
+
+.d4:hover {
+	transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+}
+
+.page {
 	float: left;
 	width: 100%;
-	height: 100vh;
+	min-height: 100vh;
+	height: 1000px;
 	text-align: center;
 	padding: 0.073% 0 0 0;
+	text-align: center;
+}
+
+/* page2 */
+
+.scrolltable {
+	table-layout: fixed;
+	border-collapse: collapse;
+	border: none;
+	font-size: 1vw;
+}
+
+.scrolltable thead {
+	display: block;
+	background: #041159;
+	color: #fff;
+}
+
+.scrolltable tbody {
+	display: block;
+	overflow: auto;
+	height: 550px;
+	scrollbar-width: thin;
+}
+
+tbody::-webkit-scrollbar {
+	width: 5px;
+}
+
+tbody::-webkit-scrollbar-track {
+	background-color: #e4e4e4;
+	border-radius: 100px;
+}
+
+tbody::-webkit-scrollbar-thumb {
+	background-color: #d4aa70;
+	border-radius: 100px;
+}
+
+tbody {
+	scrollbar-color: #D4AA70 #e4e4e4;
+}
+
+tbody::-webkit-scrollbar-thumb {
+	background-image: linear-gradient(180deg, #bdc3c7 0%, #041159 99%);
+	box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+	border-radius: 100px;
+}
+
+.scrolltable th, .scrolltable td {
+	padding: 10px;
+	text-align: left;
+	text-align: center;
+	font-size: 0.875em;
+}
+
+.scrolltable tbody tr:nth-child(2n+1) {
+	background-color: #f0f0f0;
 }
 
 .modal_wrap {
@@ -247,7 +287,7 @@ nav>ul>li>a:hover {
 	top: 50%;
 	left: 50%;
 	margin: -250px 0 0 -250px;
-	background: #eee;
+	background: #fff;
 	z-index: 3;
 }
 
@@ -277,6 +317,7 @@ nav>ul>li>a:hover {
 	height: 100%;
 	background: url(https://img.icons8.com/metro/26/000000/close-window.png);
 	text-indent: -9999px;
+	cursor : pointer;
 }
 
 .modal_btn {
@@ -296,8 +337,9 @@ nav>ul>li>a:hover {
 
 .pw_d {
 	position: relative;
-	top: 12vh;
+	top: 10vh;
 }
+
 
 input {
 	width: 13vw;
@@ -306,7 +348,7 @@ input {
 }
 
 .pw_d>button {
-	background: #1726aa;
+	background: #252D59;
 	cursor: pointer;
 	display: inline-block;
 	outline: none;
@@ -319,14 +361,6 @@ input {
 	border: 2px solid white;
 	margin: 3px 0;
 }
-/* page2 */
-#page2 {
-	float: left;
-	width: 100%;
-	height: 100vh;
-	text-align: center;
-	padding: 0.073% 0 0 0;
-}
 
 .container>.btn {
 	margin: 60px;
@@ -337,8 +371,8 @@ input {
 
 .modal {
 	background: #fff;
-	width: 70%;
-	height: 70%;
+	width: 60%;
+	height: 60%;
 	margin: 8% 0;
 	padding: 0;
 	transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
@@ -376,26 +410,19 @@ input {
 .btn_p {
 	position: relative;
 	top: 5vh;
-	left: 5vw;
+	left: 12vw;
 }
 
-.btn_p>button {
+.btn, #hold_rep, #fine_rep, #fine_hold_rep, #delet_rep{
 	background: #041159;
-	cursor: pointer;
-	outline: none;
-	color: mintcream;
-	border: 2px solid white;
-	border-radius: 5px;
-	font-size: 15px;
-	padding: 15px 20px;
-	font-weight: bold;
-	/* 모든 변화 작업을 0.5초 걸리게 */
-	transition: all .5s;
-}
-
-.btn_c_p {
+	padding: 10px 25px;
+	display: inline-block;
+	border-radius: 25px;
+	margin: 20px 0;
+	color: #fff;
 	position: relative;
-	top: 18vh;
+	transition: all .4s ease;
+	cursor: pointer;
 }
 
 .container.modal-open .modal {
@@ -416,12 +443,7 @@ tr {
 	width: 5vw;
 }
 
-.numberpad {
-	width: 25vw;
-	height: auto;
-	position: fixed;
-	left: 24vw;
-}
+
 .id {
 	width: 8vw;
 }
@@ -437,31 +459,33 @@ tr {
 .detail {
 	width: 10vw;
 }
-.scrolltable{
-    table-layout: fixed;
-    border-collapse: collapse;
-    border: none;
-    font-size: 1vw;
-}
-.scrolltable thead {
-    display:block;
-    background: #041159;
-    color : #fff;
-}
-.scrolltable tbody{
-    display:block;
-    overflow:auto;
-    height:550px;
 
+
+.modal_close_div {
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	top: -30px;
+	right: 0;
 }
-.scrolltable th, .scrolltable td {
-  padding: 10px;
-  text-align: left;
-  text-align: center;
-  font-size: 0.875em;
+
+.numberpad{
+	width: 25vw;
+   height: auto;
+   position: fixed;
+   left: 24vw;
+	
+	
 }
-.scrolltable tbody tr:nth-child(2n+1){
-    background-color: #f0f0f0;
+.modal_close_1 {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: url(https://img.icons8.com/metro/26/000000/close-window.png);
+	text-indent: -9999px;
+	position: relative;
+	transition: all .4s ease;
+	cursor: pointer;
 }
 
 #ti_mi {
@@ -479,15 +503,7 @@ tr {
 	height: 5vh;
 }
 
-
 /* page3 */
-#page3 {
-	float: left;
-	width: 100%;
-	height: 100vh;
-	text-align: center;
-	padding: 0.073% 0 0 0;
-}
 
 .container-1>.btn {
 	margin: 60px;
@@ -523,65 +539,63 @@ tr {
 	font: 300 16px Lato;
 }
 
-.btn, #hold_rep, #fine_rep {
-	background: #041159;
-	padding: 10px 25px;
-	display: inline-block;
-	border-radius: 25px;
-	margin: 20px 0;
-	color: #fff;
+.container-1.modal-open-1 .modal-1 {
+	top: 0;
+}
+
+.modal_close_div_1 {
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	top: -30px;
+	right: 0;
+}
+
+.modal_close_1_1 {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: url(https://img.icons8.com/metro/26/000000/close-window.png);
+	text-indent: -9999px;
 	position: relative;
 	transition: all .4s ease;
 	cursor: pointer;
 }
 
-.container-1.modal-open-1 .modal-1 {
-	top: 0;
-}
-
 /* page4 */
-#page4 {
-	float: left;
-	width: 100%;
-	height: 100vh;
-	text-align: center;
-	padding: 0.073% 0 0 0;
-}
+
 .scrolltable_1 {
 	position: relative;
 	top: 25vh;
-	left: 17.5vw;
+	left: 17.2vw;
 	font-size: 1vw;
 }
-.scrolltable_1 thead {
-    display:block;
-    background: #041159;
-    color : #fff;
-}
-.scrolltable_1 tbody{
-    display:block;
-    overflow:auto;
-    height:480px;
 
+.scrolltable_1 thead {
+	display: block;
+	background: #041159;
+	color: #fff;
 }
+
+.scrolltable_1 tbody {
+	display: block;
+	overflow: auto;
+	height: 480px;
+	scrollbar-width: thin;
+}
+
 .scrolltable_1 th, .scrolltable_1 td {
-  padding: 10px;
-  text-align: left;
-  text-align: center;
-  font-size: 0.875em;
+	padding: 10px;
+	text-align: left;
+	text-align: center;
+	font-size: 0.875em;
 }
-.scrolltable_1 tbody tr:nth-child(2n+1){
-    background-color: #f0f0f0;
+
+.scrolltable_1 tbody tr:nth-child(2n+1) {
+	background-color: #f0f0f0;
 }
 
 /* page5 */
-#page5 {
-	float: left;
-	width: 100%;
-	height: 90vh;
-	text-align: center;
-	padding: 0.073% 0 0 0;
-}
 
 .add_p {
 	position: relative;
@@ -592,41 +606,44 @@ tr {
 	width: 1.5vw;
 	height: auto;
 }
-#add_btn{
-	border : 0;
-	outline : none;
-	cursor : pointer;
+
+#add_btn {
+	border: 0;
+	outline: none;
+	cursor: pointer;
 	vertical-align: middle;
+	background-color: transparent;
 }
 
-.add_wrap{
-	display : none;
-	width : 500px;
-	height : 500px;
-	position : fixed;
-	top : 50%;
-	left : 50%;
-	margin : -250px 0 0 -250px;
-	background : #eee;
-	z-index : 3;
-	text-align : center;
+.add_wrap {
+	display: none;
+	width: 500px;
+	height: 500px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -250px 0 0 -250px;
+	background: #fff;
+	z-index: 3;
+	
 }
 
-
-.add_close{
-	width:26px;
-	height:26px;
+.add_close {
+	width: 26px;
+	height: 26px;
 	position: absolute;
-	top : -30px;
+	top: -30px;
 	right: 0;
 }
 
-.add_close > a{
+.add_close>a {
 	display: block;
 	width: 100%;
 	height: 100%;
 	background: url(https://img.icons8.com/metro/26/000000/close-window.png);
 	text-indent: -9999px;
+	cursor : pointer;
+	
 }
 
 .add_bg {
@@ -641,22 +658,35 @@ tr {
 	z-index: 2;
 }
 
-.add_input{
-	border : 0 solid;
-}
-.add_input:focus{
-	outline : none;
+.add_input {
+	border: 0 solid;
 }
 
-.hr_one{
-	width : 50%;
+.add_input:focus {
+	outline: none;
+}
+#adding_btn{
+	border: 2px solid #252D59;
+	background-color: #252D59;
+	color : #fff;
+	padding: 5px;
+    border-radius: 5px;
+    font-weight:500;
+    font-size: 18px;
+    cursor : pointer;
+    width: 13vw;
+    height: 4.5vh;
+}
+
+.hr_one {
+	width: 50%;
 	margin: 0 auto;
 }
 
 footer {
 	clear: both;
 	width: 100%;
-	height: 10vh;
+	height: 200px;
 	background-color: rgb(100, 100, 255);
 	text-align: center;
 }

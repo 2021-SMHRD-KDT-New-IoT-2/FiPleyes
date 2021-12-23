@@ -5,8 +5,7 @@
     left: 50%;
     top:50%;
     transform: translate(-15vw, -28vh);
-    margin: 0 auto;
-    
+    margin: 0 auto;  
     width: 30vw;
     height: 22vw;
     border: 1px black;
@@ -20,17 +19,40 @@
 	height: auto;
     animation-name: box_ani;
     animation-duration: 3s;
+    z-index : 1;
 }
+
+
 
 @keyframes box_ani {
     from{       
         opacity: 0;
+        transform: translate3d(0, 100%, 0);
     }
-    to{
-       
+    to{   
+        opacity: 1;
+         transform: translateZ(0);
+    }
+}
+.white{
+	background-color :white;
+	z-index : 2;
+	animation-name: white_ani;
+	animation-duration:0.5s;
+	animation-delay:1.5s;
+	animation-fill-mode : forwards;
+	opacity : 0;
+}
+
+@keyframes white_ani{
+	from{       
+        opacity: 0;
+    }
+    to{     
         opacity: 1;
     }
 }
+
 hr{
     width: 13vw;
 }
@@ -47,8 +69,8 @@ hr{
 .login_s{
     width: 13vw;
     height: 4.5vh;
-    border: 2px solid #041159;
-    background-color: #041159;
+    border: 2px solid #252D59;
+    background-color: #252D59;
     color: #fff;
     padding: 5px;
     border-radius: 5px;
@@ -131,8 +153,8 @@ a{
 .login_m{
 	width: 13vw;
     height: 4.5vh;
-    border: 2px solid #041159;
-    background-color: #041159;
+    border: 2px solid #252D59;
+    background-color: #252D59;
     color: #fff;
     padding: 5px;
     border-radius: 5px;
