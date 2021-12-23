@@ -1,4 +1,4 @@
-package controller;
+package android;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,28 +15,28 @@ import com.google.gson.Gson;
 import model.ReportDAO;
 import model.ReportVO;
 
-@WebServlet("/ReportGet")
-public class ReportGet extends HttpServlet {
+@WebServlet("/SearchReport_android")
+public class SearchReport_android extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("euc-kr");
 		
-		String rep_no =request.getParameter("rep_no");
+		request.setCharacterEncoding("utf-8");
+		
+		String status = request.getParameter("status");
+		String emp_dept = request.getParameter("emp_dept");
+		
+		System.out.println("받아온값 -------------- "+status+"/"+emp_dept);
 		
 		ReportDAO dao = new ReportDAO();
-		ReportVO vo = dao.getReport2(rep_no);
+		ArrayList<ReportVO> reports = dao.reportList(emp_dept, status);
 		
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
 		
-		if(vo != null) {
-			Gson gson = new Gson();
-			response.setCharacterEncoding("utf-8");
-			PrintWriter out = response.getWriter();
-			
-			String result = gson.toJson(vo);
-			
-			out.print(result);
-		}
+		System.out.println(reports.size());
+		out.print(reports.size());
 		
 		
 	}

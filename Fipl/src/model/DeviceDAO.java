@@ -77,6 +77,32 @@ public class DeviceDAO {
 		return cnt;
 	}
 
+	// 이상기기 장치목록
+	public boolean duplicateCheck(String device_no) {
+		boolean check = false;
+
+		try {
+			Connection();
+
+			String sql = "select * from DEVICES where DEVICE_NO=?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, device_no);
+
+			rs = psmt.executeQuery();
+
+			check = rs.next();
+
+		} catch (Exception e) {
+			System.out.println("장치목록 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return check;
+	}
+
 	// 전체 장치목록
 	public ArrayList<DeviceVO> allList(String device_dept) {
 		// 세션에서 가져온 사용자의 부서를 입력받아서 해당 부서의 기기만 보여주게 한다
@@ -179,8 +205,8 @@ public class DeviceDAO {
 
 	// 디바이스 위치 검색
 	public String deviceLocation(String device_no) {
-		
-		String get_device_loc="";
+
+		String get_device_loc = "";
 
 		try {
 			Connection();
@@ -203,9 +229,32 @@ public class DeviceDAO {
 		} finally {
 			close();
 		}
-		
+
 		return get_device_loc;
 	}
+	
+	// 장치삭제
+		public int deleteDevice(String device_no) {
+			try {
+
+				Connection();
+
+				String sql = "delete from DEVICES where device_no =?";
+				psmt = conn.prepareStatement(sql);
+
+				psmt.setString(1, device_no);
+
+				cnt = psmt.executeUpdate();
+
+			} catch (Exception e) {
+				System.out.println("장치등록 DAO 실패");
+				e.printStackTrace();
+
+			} finally {
+				close();
+			}
+			return cnt;
+		}
 
 	
 	// 장치 삭제
