@@ -33,8 +33,8 @@
 <script src="assets/js/jquery.scrollex.min.js"></script>
 
 </head>
-<body class = "layout">
-<%
+<body class="layout">
+	<%
 
 String emp_no = null;
 String emp_name =null; //가져올 값 지정하기 
@@ -77,12 +77,16 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 %>
 	<header>
 		<div class="head">
-			<h1>
-				<a href="#"><img class = "logo" src = "img/logo_1.png"> </a>
-			</h1>
+
+			<a href="#"><img class="logo" src="img/logo_1.png"> </a>
+
 		</div>
 
-		<div> <h3 class="name_s"> <%= emp_name %>님 환영합니다.</h3></div>
+		<div>
+			<h3 class="name_s">
+				<%= emp_name %>님 환영합니다.
+			</h3>
+		</div>
 
 		<div class="container_h">
 			<nav>
@@ -100,40 +104,47 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	<section id="page1" class="page">
 		<div class="fullD">
 			<div class=d1 onclick="window.location.href='#page2'">
-				<a class ="box_text">미처리신고</a>
-				<img src="img/fireplug.png" class = "fireplug_1">
+				<a class="box_text">미처리신고</a> <img src="img/fireplug.png"
+					class="fireplug_1">
 			</div>
-			<div class=d2 onclick="window.location.href='#page3'">				
-				<a class ="box_text">보류 신고</a>
-				<img src="img/pages_4.png" class = "pages">
+			<div class=d2 onclick="window.location.href='#page3'">
+				<a class="box_text">보류 신고</a> <img src="img/pages_4.png"
+					class="pages">
 			</div>
-			
+
 			<div class=d3 onclick="window.location.href='#page4'">
-				<a class ="box_text">이상 기기 관리</a>
-				<img src="img/machine.png" class = "machine">
+				<a class="box_text">이상 기기 관리</a> <img src="img/machine.png"
+					class="machine">
 			</div>
 			<div class=d4 onclick="window.location.href='#page5'">
-				<a class ="box_text">MY 기기 관리</a>
-				<img src="img/my_machine.png" class = "my_machine">
+				<a class="box_text">MY 기기 관리</a> <img src="img/my_machine.png"
+					class="my_machine">
 			</div>
 		</div>
 
 	</section>
-	
+
 	<!-- 비밀번호 수정 모달 -->
 	<div class="black_bg"></div>
 	<div class="modal_wrap">
-	<div class="pw_h"><h3>비밀번호 수정</h3></div>
-	<div class="pw_d">
-		<input type="text" name = "check_emp_pw" id = "check_emp_pw" class="pw_input" placeholder="기존 비밀번호를 입력해주세요" ><br>
-		<em id = "pw_check"></em> <hr class="hr_one">
-		<button onclick = "pwcheck()" class="login_m">확인하기</button><br><br>
-		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" class="pw_input" placeholder="변경할 비밀번호를 입력해주세요"><br>
-		 <hr class="hr_one">
-		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" class="pw_input" placeholder="비밀번호를 한번 더 입력해주세요"><br>
-		 <hr class="hr_one">
-		<button onclick = "pwchange()" >수정하기</button>
-	</div>
+		<div class="pw_h">
+			<h3>비밀번호 수정</h3>
+		</div>
+		<div class="pw_d">
+			<input type="text" name="check_emp_pw" id="check_emp_pw"
+				class="pw_input" placeholder="기존 비밀번호를 입력해주세요"><br> <em
+				id="pw_check"></em>
+			<hr class="hr_one">
+			<button onclick="pwcheck()" class="login_m">확인하기</button>
+			<br>
+			<br> <input type="text" name="new_emp_pw1" id="new_emp_pw1"
+				class="pw_input" placeholder="변경할 비밀번호를 입력해주세요"><br>
+			<hr class="hr_one">
+			<input type="text" name="new_emp_pw2" id="new_emp_pw2"
+				class="pw_input" placeholder="비밀번호를 한번 더 입력해주세요"><br>
+			<hr class="hr_one">
+			<button onclick="pwchange()">수정하기</button>
+		</div>
 		<div class="modal_close">
 			<a>close</a>
 		</div>
@@ -177,7 +188,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<div class="black_bg"></div>
 				<div class="modal">
 
-					<div class="modal_header">미처리 신고</div>
+					<div class="modal_header">
+						<h1>미처리 신고</h1>
+					</div>
 					<div class="modal_main">
 						<img id="detail_rep_img" src="" class="numberpad">
 						<table class="detail_t">
@@ -207,7 +220,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						<div class="btn_p">
 							<a id="hold_rep" href="">보류</a> <a id="fine_rep" href="">신고</a>
 						</div>
-						<div class = "modal_close_div">
+						<div class="modal_close_div">
 							<a class="modal_close_1_1">close</a>
 						</div>
 
@@ -224,9 +237,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			<h1>보류 신고</h1>
 
 		</div>
-		<main>
 
-			<table class="scrolltable">
+
+		<table class="scrolltable">
 			<thead>
 				<tr>
 					<td class="id"><h3>ID</h3></td>
@@ -236,41 +249,42 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				</tr>
 			</thead>
 			<tbody>
-			<%
+				<%
 				for(int i = 0; i< report_hold.size(); i++){ %>
 				<tr>
 
 					<td class="id"><%=report_hold.get(i).getRep_no()%></td>
 					<td class="loca"><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
 					<td class="date"><%=report_hold.get(i).getRep_time() %></td>
-					<td class="detail"><a class="btn js-click-modal-1" onclick="holdDetail(<%= report_hold.get(i).getRep_no()%>)">상세보기</a></td>
+					<td class="detail"><a class="btn js-click-modal-1"
+						onclick="holdDetail(<%= report_hold.get(i).getRep_no()%>)">상세보기</a></td>
 				</tr>
 				<%} %>
 			</tbody>
 
-			</table>
-		</main>
+		</table>
+
 		<div class="container-1">
 			<div class="modal-1">
 				<div class="modal_header">보류 신고</div>
 				<div class="modal_main">
-					<img id = "hold_rep_img" src="" class="numberpad">
+					<img id="hold_rep_img" src="" class="numberpad">
 					<table class="detail_t">
 						<tr>
 							<td class="id_d"><h3>ID</h3></td>
-							<td id = "detail_hold_no"></td>
+							<td id="detail_hold_no"></td>
 						</tr>
 						<tr>
 							<td class="loca_d"><h3>주소</h3></td>
-							<td id = "detail_hold_loc"></td>
+							<td id="detail_hold_loc"></td>
 						</tr>
 						<tr>
 							<td class="date_d"><h3>날짜</h3></td>
-							<td  id = "detail_hold_date"></td>
+							<td id="detail_hold_date"></td>
 						</tr>
 						<tr>
 							<td class="number"><h3>번호</h3></td>
-							<td  id = "detail_hold_car_no"></td>
+							<td id="detail_hold_car_no"></td>
 						</tr>
 						<tr>
 							<td class="accu"><h3>누적</h3></td>
@@ -279,18 +293,17 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					</table>
 
 					<div class="btn_p">
-						<a id = "fine_hold_rep" href="">신고</a>
-						<a id = "delet_rep" href="">삭제</a>
+						<a id="fine_hold_rep" href="">신고</a> <a id="delet_rep" href="">삭제</a>
 					</div>
-					<div class = "modal_close_div_1">
-							<a class="modal_close_1">close</a>
+					<div class="modal_close_div_1">
+						<a class="modal_close_1">close</a>
 					</div>
 				</div>
 			</div>
 		</div>
 
 	</section>
-	
+
 	<!-- 이상 기기 관리 페이지  / page4 -->
 
 	<section id="page4" class="page">
@@ -302,16 +315,17 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		<main>
 
 			<table class="scrolltable_1">
-			<thead>
-				<tr>
-					<td class="id"><h3>ID</h3></td>
-					<td class="loca"><h3>위치</h3></td>
-					<td class="id"><h3>현재 상태</h3></td>
-				</tr>
-			</thead>
-			<tbody>
-				<%
+				<thead>
+					<tr>
+						<td class="id"><h3>ID</h3></td>
+						<td class="loca"><h3>위치</h3></td>
+						<td class="id"><h3>현재 상태</h3></td>
+					</tr>
+				</thead>
+				<tbody>
+					<%
 				for(int i = 0; i< errorDevice.size(); i++){ %>
+
 				<tr>
 					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
 					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
@@ -320,12 +334,13 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<%} %>
 			</tbody>
 
+
 			</table>
 		</main>
-		
+
 
 	</section>
-	
+
 	<!-- My 기기 관리 페이지  / page5 -->
 
 	<section id="page5" class="page">
@@ -335,20 +350,20 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		</div>
 		<main>
 			<table class="scrolltable_1">
-			<thead>
-				<tr>
-					<td class="id"><h3>ID</h3></td>
-					<td class="loca"><h3>위치</h3></td>
-					<td class="id"><h3>현재 상태</h3></td>
-				</tr>
-			</thead>
-			<tbody>
-				<%
+				<thead>
+					<tr>
+						<td class="id"><h3>ID</h3></td>
+						<td class="loca"><h3>위치</h3></td>
+						<td class="id"><h3>현재 상태</h3></td>
+					</tr>
+				</thead>
+				<tbody>
+					<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
+
 				<tr>
 					<td class="id"><a href = "DeviceDelete?device_no=<%=allDevice.get(i).getDevice_no() %>" 
 					onclick = "if(!confirm('삭제 하시겠습니까?')){return false;}" class = "delete_id"><%=allDevice.get(i).getDevice_no()%></a></td>
-					
 					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
@@ -362,51 +377,74 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<%} %>
 			</tbody>
 
+
 			</table>
-			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png"></button></div>
+			<div class="add_p">
+				<button type="button" id="add_btn">
+					<img class="add_d" src="img/add.png">
+				</button>
+			</div>
 		</main>
 		<div class="add_bg"></div>
-      <div class="add_wrap">
-         <div class="add_close">
-            <a>close</a>
-         </div>
-         
-	      <article id= "add_device">
-	         <div>
-	            <div class="pw_h">
-	               <h3>새로운 기기 등록</h3>
-	            </div>
-	            <div class="pw_d">
-	               <h4 class="add_t">기기 번호</h4>
-	               <br> <input id = "input_device_no" type="text" placeholder="기기 번호를 입력해주세요" class="add_input" id = "device_no"><br>
-	               <em id = "device_check"></em><hr class="hr_one">
-				   <button onclick = "deviceCheck()">확인하기</button><br><br>
-	               <br>
-	               <h4 class="add_t">기기 위치</h4>
-	               <br> <input type="text" placeholder="기기의 위치를 입력해주세요" class="add_input" id = "device_loc"><br>
-	               <hr class="hr_one">
-	               <br>
-	               <button onclick = "deviceRegi()">등록하기</button>
-	            </div>
-	         </div>
-	      </article>
-      </div>
-    
-    <footer></footer>
+
+		<div class="add_wrap">
+			<div class="add_close">
+				<a>close</a>
+			</div>
+
+			<article id="add_device">
+				<div>
+					<div class="pw_h">
+						<h3>새로운 기기 등록</h3>
+					</div>
+					<form action="DeviceRegister" method="post">
+						<div class="pw_d">
+							<h4 class="add_t">기기 번호</h4>
+							<br> <input type="text" placeholder="기기 번호를 입력해주세요"
+								class="add_input" name="device_no"><br>
+							<hr class="hr_one">
+							<br>
+							<br>
+							<h4 class="add_t">기기 위치</h4>
+							<br> <input type="text" placeholder="기기의 위치를 입력해주세요"
+								class="add_input" name="device_loc"><br>
+							<hr class="hr_one">
+							<br> <br> <input id="adding_btn" type="submit"
+								value="등록하기 ">
+						</div>
+					</form>
+				</div>
+			</article>
+		</div>
+
+		<footer>
+			<div class="fl_p">
+				<br>
+				<br>
+				<p>(주)FiPl ㅣ 대표 : 조우경 ㅣ fipl.net@gmail.com</p>
+				<p>주소 : 광주광역시 동구 예술길 21-15 3층</p>
+				<br>
+				<p>@2021 FiPl Corp, Inc All Rights Reserved</p>
+
+
+			</div>
+
+		</footer>
+
 
 	</section>
-	
 
 
-   <script src="js/jquery-3.6.0.min.js"></script>
-   <script src="js/jquery.min.js"></script>
-   <script src="js/browser.min.js"></script>
-   <script src="js/breakpoints.min.js"></script>
-   <script src="js/util.js"></script>
-   <script src="js/main.js"></script>
-   
-<!-- 비밀번호 중복체크 -->
-     <script>
+
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/browser.min.js"></script>
+	<script src="js/breakpoints.min.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/main.js"></script>
+
+	<!-- 비밀번호 중복체크 -->
+	<script>
 		function pwcheck() {
 			var input = $('#check_emp_pw').val();
 			
@@ -431,8 +469,10 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			
 		}
 	  </script>
-	
-<!-- 입력한 두 비밀번호가 일치하는지 확인하고 같다면 변경-->
+
+
+	<!-- 입력한 두 비밀번호가 일치하는지 확인하고 같다면 변경-->
+
 	<script>
 		function pwchange() {
 			var input1 = $('#new_emp_pw1').val();
@@ -462,7 +502,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	</script>
 
 
-<!-- 선택한 미처리 신고 상세보기  -->
+
+	<!-- 선택한 미처리 신고 상세보기  -->
+
 	<script>
 		function repDetail(rep_no) {
 			$.ajax({
@@ -485,10 +527,12 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
+
 	</script>
 
 
 <!-- 선택한 보류 신고 상세보기  -->
+
 	<script>
 		function holdDetail(rep_no) {
 			$.ajax({
@@ -511,6 +555,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
+
 	</script>
 
 <!-- 장치 삭제 -->
@@ -594,3 +639,4 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			})
 			}
 	</script>
+

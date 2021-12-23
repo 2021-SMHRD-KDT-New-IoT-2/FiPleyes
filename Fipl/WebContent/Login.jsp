@@ -87,7 +87,7 @@ if(cookies != null){
 				<input type="text" name="emp_name" placeholder="이름" class="log_t"><br>
 				<hr class="modal_hr">
 				<br> 
-				<input type="text" name="emp_phone" placeholder="전화번호" class="log_t"><br>
+				<input type="text" name="emp_phone" placeholder="전화번호" class="log_t" required="required" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" title="###-####-#### 형식으로 입력"><br>
 				<hr class="modal_hr">
 				<br> 
 				<input type="text" name="emp_email" placeholder="이메일" class="log_t"><br>
