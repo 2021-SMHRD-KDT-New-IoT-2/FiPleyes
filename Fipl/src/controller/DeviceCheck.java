@@ -1,11 +1,15 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.DeviceDAO;
 
 @WebServlet("/DeviceCheck")
 public class DeviceCheck extends HttpServlet {
@@ -15,8 +19,13 @@ public class DeviceCheck extends HttpServlet {
 
 		request.setCharacterEncoding("euc-kr");
 		
-		boolean check = false;
-		String input_device_no =request.getParameter("input_device_no");
+		String device_no =request.getParameter("input_device_no");
+		
+		DeviceDAO dao = new DeviceDAO();
+		boolean check = dao.deviceCheck(device_no);
+		
+		PrintWriter out = response.getWriter();
+		out.print(check);
 		
 		
 	}

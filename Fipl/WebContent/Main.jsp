@@ -374,21 +374,18 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	            <div class="pw_h">
 	               <h3>새로운 기기 등록</h3>
 	            </div>
-	            <form action = "DeviceRegister" method = "post">
 	            <div class="pw_d">
 	               <h4 class="add_t">기기 번호</h4>
-	               <br> <input id = "input_device_no" type="text" placeholder="기기 번호를 입력해주세요" class="add_input" name = "device_no"><br>
-	               <em id = "pw_check"></em> <hr class="hr_one">
-				   <button onclick = "deviceCheck()" class="login_m">확인하기</button><br><br>
-	               <br><br>
+	               <br> <input id = "input_device_no" type="text" placeholder="기기 번호를 입력해주세요" class="add_input" id = "device_no"><br>
+	               <em id = "device_check"></em><hr class="hr_one">
+				   <button onclick = "deviceCheck()">확인하기</button><br><br>
+	               <br>
 	               <h4 class="add_t">기기 위치</h4>
-	               <br> <input type="text" placeholder="기기의 위치를 입력해주세요" class="add_input" name = "device_loc"><br>
+	               <br> <input type="text" placeholder="기기의 위치를 입력해주세요" class="add_input" id = "device_loc"><br>
 	               <hr class="hr_one">
 	               <br>
-	               <br>
-	               <input id="adding_btn" type = "submit" value = "등록하기 " >
+	               <button onclick = "deviceRegi()">등록하기</button>
 	            </div>
-	            </form>
 	         </div>
 	      </article>
       </div>
@@ -514,6 +511,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			}
 	</script>
 
+<!-- 장치 삭제 -->
 	<script>
 		function deviceDelete(device_no) {
 			alert("함수 호출 가능");
@@ -537,22 +535,22 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			}
 	</script>
 	
+<!-- 장치 중복 확인  -->
 	<script>
 		function deviceCheck() {
 			var input = $('#input_device_no').val();
-			
 			$.ajax({
 				type : "post", // 데이터 전송 방식
 				data : {
 					"input_device_no" : input
 				}, // 전송하는 데이터
 				url :  "DeviceCheck", // 데이터를 전송하는 페이지
-				dataType : "json", // 응답데이터의 형식
+				dataType : "text", // 응답데이터의 형식
 				success : function(data) {
-					if (data == true) {
-						$("#pw_check").html("비밀번호가 일치합니다.");
+					if (data == "true") {
+						$("#device_check").html("중복된 장치입니다.<br>다시 입력해주세요.");
 		               } else {
-		            	$("#pw_check").html("비밀번호가 일치하지 않습니다.");
+		            	$("#device_check").html("등록 가능한 장치입니다.");
 		               }
 				},
 				 error : function() { // 실패
@@ -563,3 +561,31 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		}
 	  </script>
 	
+<!-- 장치 등록 -->
+	<script>
+		function deviceRegi() {
+			var input1 = $('#device_no').val();
+			var input2 = $('#device_loc').val();
+			
+			$.ajax({
+				type : "post", // 데이터 전송 방식
+				data : {
+					"device_no" : input1,
+					"device_loc" : input2
+				}, // 전송하는 데이터
+				url :  "DeviceRegister", // 데이터를 전송하는 페이지
+				dataType : "json", // 응답데이터의 형식
+				success : function(data) {
+					if (data == true) {
+						alert("장치를 정상적으로 등록하였습니다.");
+						location.href = "Login.jsp#page5";
+					}else {
+				 		alert("장치 등록에 실패하였습니다.");
+					}
+				},
+				 error : function() { // 실패
+		               alert("잠시후 다시 시도해주세요");
+		            }
+			})
+			}
+	</script>
