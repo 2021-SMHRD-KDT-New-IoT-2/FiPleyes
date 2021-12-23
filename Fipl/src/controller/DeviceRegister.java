@@ -22,7 +22,7 @@ public class DeviceRegister extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setCharacterEncoding("euc-kr");
+		request.setCharacterEncoding("utf-8");
 		
 		// 기기 등록을 위해 입력안 값 가져오기 
 		String device_no = request.getParameter("device_no");
@@ -30,6 +30,8 @@ public class DeviceRegister extends HttpServlet {
 		
 		// 세션 가져오기
 		HttpSession session = request.getSession();
+		
+		System.out.println(device_no);
 
 		// 현재 로그인한 사용자의 정보
 		EmployeeVO Evo = (EmployeeVO) session.getAttribute("employee");
