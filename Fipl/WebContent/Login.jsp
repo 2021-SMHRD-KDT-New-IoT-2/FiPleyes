@@ -24,6 +24,7 @@ public String getCookieValue(Cookie[] cookies, String cookieName){
 <link rel="stylesheet" href="CSS/Login.css">
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/script.js" defer></script>
+<link rel="stylesheet" href="CSS/Font_l.css">
 </head>
 <body class="layout">
 
@@ -71,7 +72,7 @@ if(cookies != null){
 				<hr>
 				<br> <input name="emp_pw" class="log_t" type="password" placeholder="  PW"><br>
 				<hr>
-				<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	             <a id = "modal_btn">비밀번호 찾기</a>
 				<br> <br> <input type="submit" value="로그인" class="login_s">
 			</div>
