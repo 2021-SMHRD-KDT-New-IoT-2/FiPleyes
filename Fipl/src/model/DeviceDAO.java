@@ -15,7 +15,8 @@ public class DeviceDAO {
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	ArrayList<DeviceVO> al = null;
-
+	
+	
 	// 디비 연결
 	private void Connection() {
 		try {
@@ -74,6 +75,32 @@ public class DeviceDAO {
 			close();
 		}
 		return cnt;
+	}
+
+	// 이상기기 장치목록
+	public boolean duplicateCheck(String device_no) {
+		boolean check = false;
+
+		try {
+			Connection();
+
+			String sql = "select * from DEVICES where DEVICE_NO=?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, device_no);
+
+			rs = psmt.executeQuery();
+
+			check = rs.next();
+
+		} catch (Exception e) {
+			System.out.println("장치목록 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return check;
 	}
 
 	// 전체 장치목록
@@ -178,8 +205,8 @@ public class DeviceDAO {
 
 	// 디바이스 위치 검색
 	public String deviceLocation(String device_no) {
-		
-		String get_device_loc="";
+
+		String get_device_loc = "";
 
 		try {
 			Connection();
@@ -202,8 +229,84 @@ public class DeviceDAO {
 		} finally {
 			close();
 		}
-		
+
 		return get_device_loc;
 	}
+	
+	// 장치삭제
+		public int deleteDevice(String device_no) {
+			try {
 
+				Connection();
+
+				String sql = "delete from DEVICES where device_no =?";
+				psmt = conn.prepareStatement(sql);
+
+				psmt.setString(1, device_no);
+
+				cnt = psmt.executeUpdate();
+
+			} catch (Exception e) {
+				System.out.println("장치등록 DAO 실패");
+				e.printStackTrace();
+
+			} finally {
+				close();
+			}
+			return cnt;
+		}
+
+	
+	// 장치 삭제
+	public int deviceDelete(String device_no) {
+		
+		try {
+			Connection();
+			
+			String sql = "delete from devices where device_no = ?";
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, device_no);
+			cnt = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("장치 삭제   DAO 실패");
+			
+		}finally {
+			close();
+		}
+		
+		return cnt;
+	}
+	
+	// 장치 중복 확인 
+	public boolean deviceCheck(String device_no) {
+		boolean check = false;
+		try {
+			Connection();
+			
+			String sql = "select device_no from devices where device_no=?";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, device_no);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				check=true;
+			}else {
+				check=false;
+			}	
+		} catch (Exception e) {
+			System.out.println("중복확인 실패");
+			e.printStackTrace();
+			
+		}finally {
+			close();
+		}
+		return check;
+	}
+	
+	
 }

@@ -45,7 +45,7 @@ String emp_email = null;
 
 
 // 자동로그인을 위한 쿠키 가져오기
-Cookie[] cookies = request.getCookies();
+/* Cookie[] cookies = request.getCookies();
 if(cookies != null){
 	for(Cookie tempCookie : cookies){
 			emp_no = getCookieValue(cookies, "emp_no");
@@ -55,7 +55,8 @@ if(cookies != null){
 			emp_name = getCookieValue(cookies, "emp_name");
 			dept_no = getCookieValue(cookies, "dept_no");
 	}
-}else { // 쿠키가 없으면 세션에서 값 가져오기
+} */
+
 	EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
 	emp_name = vo.getEmp_name(); //가져올 값 지정하기 
 	dept_no = vo.getDept_no();
@@ -63,7 +64,6 @@ if(cookies != null){
 	emp_pw = vo.getEmp_pw();
 	emp_phone = vo.getEmp_phone();
 	emp_email = vo.getEmp_phone();
-}
 
 //신고 리스트
 ReportDAO reportDao = new ReportDAO();
@@ -212,7 +212,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 							</tr>
 							<tr>
 								<td class="accu"><h3>누적</h3></td>
-								<td id="detail_rep_add"></td>
+								<td id="detail_total_report"></td>
 
 							</tr>
 						</table>
@@ -288,7 +288,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						</tr>
 						<tr>
 							<td class="accu"><h3>누적</h3></td>
-							<td>0</td>
+							<td id = "detail_hold_total_report"></td>
 						</tr>
 					</table>
 
@@ -325,13 +325,15 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<tbody>
 					<%
 				for(int i = 0; i< errorDevice.size(); i++){ %>
-					<tr>
-						<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
-						<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
-						<td class="id">🔴</td>
-					</tr>
-					<%} %>
-				</tbody>
+
+				<tr>
+					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
+					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
+					<td class="id">&#128308;</td>
+				</tr>
+				<%} %>
+			</tbody>
+
 
 			</table>
 		</main>
@@ -358,18 +360,22 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<tbody>
 					<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
-					<tr>
-						<td class="id"><button class="delete_id"><%=allDevice.get(i).getDevice_no()%></button></td>
-						<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
 
-						<% if(allDevice.get(i).getDevice_status().equals("0")){%>
-						<td class="id">&#128994;</td>
-						<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
-						<td class="id">&#128308;</td>
-						<%} %>
-					</tr>
+				<tr>
+					<td class="id"><a class = "delete_id" onclick = "deviceDelete(<%=allDevice.get(i).getDevice_no()%>)"><%=allDevice.get(i).getDevice_no()%></a></td>
+					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
+					
+					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
+						<td class="id">			
+						&#128994;</td>
+					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
+						<td class="id">	
+						&#128308;</td>
 					<%} %>
-				</tbody>
+				</tr>
+				<%} %>
+			</tbody>
+
 
 			</table>
 			<div class="add_p">
@@ -379,6 +385,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			</div>
 		</main>
 		<div class="add_bg"></div>
+
 		<div class="add_wrap">
 			<div class="add_close">
 				<a>close</a>
@@ -423,6 +430,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 
 		</footer>
 
+
 	</section>
 
 
@@ -461,7 +469,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		}
 	  </script>
 
+
 	<!-- 입력한 두 비밀번호가 일치하는지 확인하고 같다면 변경-->
+
 	<script>
 		function pwchange() {
 			var input1 = $('#new_emp_pw1').val();
@@ -488,10 +498,12 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
-		</script>
+	</script>
+
 
 
 	<!-- 선택한 미처리 신고 상세보기  -->
+
 	<script>
 		function repDetail(rep_no) {
 			$.ajax({
@@ -504,6 +516,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					$("#detail_rep_loc").html(res.device_loc);
 					$("#detail_rep_data").html(res.rep_time);
 					$("#detail_car_no").html(res.car_no);
+					$("#detail_total_report").html(res.total_report);
 					$("#hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=1");
 					$("#fine_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
 					$("#detail_rep_img").attr("src", res.rep_file);
@@ -513,10 +526,12 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
-		</script>
+
+	</script>
 
 
-	<!-- 선택한 보류 신고 상세보기  -->
+<!-- 선택한 보류 신고 상세보기  -->
+
 	<script>
 		function holdDetail(rep_no) {
 			$.ajax({
@@ -529,6 +544,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					$("#detail_hold_loc").html(res.device_loc);
 					$("#detail_hold_date").html(res.rep_time);
 					$("#detail_hold_car_no").html(res.car_no);
+					$("#detail_hold_total_report").html(res.total_report);
 					$("#fine_hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
 					$("#delet_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=3");
 					$("#hold_rep_img").attr("src", res.rep_file);
@@ -538,4 +554,85 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		            }
 			})
 			}
-		</script>
+
+	</script>
+
+<!-- 장치 삭제 -->
+	<script>
+		function deviceDelete(device_no) {
+			alert("함수 호출 가능");
+				$.ajax({
+					type : "post", // 데이터 전송 방식
+					data : {"device_no" : device_no }, // 전송하는 데이터
+					url :  "DeviceDelete", // 데이터를 전송하는 페이지
+					dataType : "json", // 응답데이터의 형식
+					success : function(res) {
+						if (data == true) {
+							alert("장치를 삭제하였습니다.");
+							location.href = "Main.jsp#page5";
+						}else {
+					 		alert("장치 삭제에 실패하였습니다.");
+						}
+					},
+					 error : function() { // 실패
+			               alert("잠시후 다시 시도해주세요");
+			            }
+				})
+			}
+	</script>
+	
+<!-- 장치 중복 확인  -->
+	<script>
+		function deviceCheck() {
+			var input = $('#input_device_no').val();
+			$.ajax({
+				type : "post", // 데이터 전송 방식
+				data : {
+					"input_device_no" : input
+				}, // 전송하는 데이터
+				url :  "DeviceCheck", // 데이터를 전송하는 페이지
+				dataType : "text", // 응답데이터의 형식
+				success : function(data) {
+					if (data == "true") {
+						$("#device_check").html("중복된 장치입니다.<br>다시 입력해주세요.");
+		               } else {
+		            	$("#device_check").html("등록 가능한 장치입니다.");
+		               }
+				},
+				 error : function() { // 실패
+		               alert("잠시후 다시 시도해주세요");
+		            }
+			})
+			
+		}
+	  </script>
+	
+<!-- 장치 등록 -->
+	<script>
+		function deviceRegi() {
+			var input1 = $('#device_no').val();
+			var input2 = $('#device_loc').val();
+			
+			$.ajax({
+				type : "post", // 데이터 전송 방식
+				data : {
+					"device_no" : input1,
+					"device_loc" : input2
+				}, // 전송하는 데이터
+				url :  "DeviceRegister", // 데이터를 전송하는 페이지
+				dataType : "json", // 응답데이터의 형식
+				success : function(data) {
+					if (data == true) {
+						alert("장치를 정상적으로 등록하였습니다.");
+						location.href = "Login.jsp#page5";
+					}else {
+				 		alert("장치 등록에 실패하였습니다.");
+					}
+				},
+				 error : function() { // 실패
+		               alert("잠시후 다시 시도해주세요");
+		            }
+			})
+			}
+	</script>
+

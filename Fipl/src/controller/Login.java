@@ -34,8 +34,7 @@ public class Login extends HttpServlet {
 		EmployeeDAO dao = new EmployeeDAO();
 		EmployeeVO vo = dao.login(emp_no, emp_pw);
 
-		response.setCharacterEncoding("euc-kr");
-		PrintWriter out = response.getWriter();
+		response.setCharacterEncoding("euc-kr");	
 
 		if (vo != null) {
 			System.out.println("로그인 성공");
@@ -52,7 +51,6 @@ public class Login extends HttpServlet {
 				response.addCookie(new Cookie("emp_email", vo.getEmp_email()));
 				response.addCookie(new Cookie("emp_name", vo.getEmp_name()));
 				response.addCookie(new Cookie("dept_no", vo.getDept_no()));
-				
 				System.out.println(cookie);
 				cookie.setMaxAge(60); // 유지되는 시간
 				cookie.setPath("/");

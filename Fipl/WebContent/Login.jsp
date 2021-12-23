@@ -1,6 +1,20 @@
+<%@page import="model.EmployeeVO"%>
+<%@page import="model.EmployeeDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
+<%!
+public String getCookieValue(Cookie[] cookies, String cookieName){
+	for (Cookie cookie : cookies) {
+		if(cookie.getName().equals(cookieName)){
+			return cookie.getValue();
+		}
+	}
+	return "";
+}
+%>
+
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -23,8 +37,25 @@ Cookie[] cookies = request.getCookies();
 if(cookies != null){
 	for(Cookie tempCookie : cookies){
 		if(tempCookie.getName().equals("emp_no")){
-			// 쿠기에 emp_no가 있으면 특정 페이지로 이동
-			response.sendRedirect("Main.jsp");
+			// 쿠기에 emp_no가 있으면 세션을 생성하기
+			
+			String emp_no = getCookieValue(cookies, "emp_no");
+			String emp_pw = getCookieValue(cookies, "emp_pw");
+			EmployeeDAO dao = new EmployeeDAO();
+			EmployeeVO vo = dao.login(emp_no, emp_pw);
+
+			response.setCharacterEncoding("euc-kr");	
+
+			if (vo != null) {
+				System.out.println("쿠키로 로그인 성공");
+				session.setAttribute("employee", vo);
+				System.out.println(vo);
+				response.sendRedirect("Main.jsp");
+
+			} else {
+				System.out.println("쿠키로 로그인 실패");
+				response.sendRedirect("Login.jsp");
+			}
 		}
 	}
 }

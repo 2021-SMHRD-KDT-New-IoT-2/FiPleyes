@@ -1,4 +1,4 @@
-package controller;
+package android;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,30 +13,38 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.DeviceDAO;
-import model.ReportDAO;
-import model.ReportVO;
+import model.DeviceVO;
 
-@WebServlet("/SearchReportLocation_android")
-public class SearchReportLocation_android extends HttpServlet {
+@WebServlet("/SearchDeviceStatus_android")
+public class SearchDeviceStatus_android extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		request.setCharacterEncoding("utf-8");
 
-		String device_no = request.getParameter("device_no");
+		String dept_no = request.getParameter("dept_no");
+		String status = request.getParameter("status");
 
-		System.out.println("SearchReportLocation 받아온값 -------------- " + device_no);
+		System.out.println("SearchDeviceStatus 받아온 dept_no/status 값 -------------- " + dept_no+"/"+status);
 
 		DeviceDAO dao = new DeviceDAO();
-		String device_loc = dao.deviceLocation(device_no);
+		
+		ArrayList<DeviceVO> list ;
+		
+		if(status.equals("")) {//모든기기 검색
+			list = dao.allList(dept_no);
+		}else {//이상기기 검색
+			list = dao.errorDevice(dept_no);
+		}
 
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-
-		System.out.println(device_loc);
 		
-		out.print(device_loc);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		out.print(result);
+	
 	}
-
 
 }
