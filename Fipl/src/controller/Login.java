@@ -39,7 +39,6 @@ public class Login extends HttpServlet {
 
 		if (vo != null) {
 			System.out.println("로그인 성공");
-
 			// 세션 객체 생성
 			HttpSession session = request.getSession();
 			// 세션 값 설정
@@ -48,27 +47,23 @@ public class Login extends HttpServlet {
 			if (logincheck != null) {
 				// 로그인 유지 체크가 되어 있다면 -> 로그인 유지하기
 				Cookie cookie = new Cookie("emp_no", emp_no);
+				response.addCookie(new Cookie("emp_pw", vo.getEmp_pw()));
+				response.addCookie(new Cookie("emp_phone", vo.getEmp_phone()));
+				response.addCookie(new Cookie("emp_email", vo.getEmp_email()));
+				response.addCookie(new Cookie("emp_name", vo.getEmp_name()));
+				response.addCookie(new Cookie("dept_no", vo.getDept_no()));
+				
+				System.out.println(cookie);
 				cookie.setMaxAge(60); // 유지되는 시간
 				cookie.setPath("/");
 				response.addCookie(cookie);
 			}
 
-			// 안드로이드 로그인
-			Gson gson = new Gson();
-			String result = gson.toJson(vo);
-			out.print(result);
-
-			
-			// 로그인 성공시 이동할 페이지
 			response.sendRedirect("Main.jsp");
+
 		} else {
 			System.out.println("로그인 실패");
-
-			// 로그인 실패시 이동할 페이지
 			response.sendRedirect("Login.jsp");
-
-			// 안드로이드 로그인 실패때 뜨는 문구
-			out.print("fail");
 		}
 	}
 

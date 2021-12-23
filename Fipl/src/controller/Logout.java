@@ -15,7 +15,6 @@ public class Logout extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		System.out.println("로그아웃 진입");
 		// 세션을 불러오고
 		HttpSession session = request.getSession();
 		

@@ -10,7 +10,6 @@ public class ReportVO {
 	private String rep_status;
 	private String rep_dept;
 	private String emp_no;
-	
 	private String device_loc;
 	
 	public ReportVO(String rep_no, String device_no, String rep_time, String rep_file, String car_no, String rep_status,
@@ -39,7 +38,7 @@ public class ReportVO {
 		this.rep_dept = rep_dept;
 		this.emp_no = emp_no;
 	}
-
+	
 	public ReportVO() {
 
 	}
@@ -120,7 +119,8 @@ public class ReportVO {
 	public String toString() {
 		return "ReportVO [rep_no=" + rep_no + ", device_no=" + device_no + ", rep_time=" + rep_time + ", rep_file="
 				+ rep_file + ", car_no=" + car_no + ", rep_status=" + rep_status + ", rep_dept=" + rep_dept
-				+ ", emp_no=" + emp_no + "]";
+				+ ", emp_no=" + emp_no + ", device_loc=" + device_loc + "]";
 	}
 
+	
 }

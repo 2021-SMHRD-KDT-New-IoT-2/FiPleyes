@@ -158,7 +158,7 @@ public class ReportDAO {
 
 	// 디바이스 번호를 통해 신고 위치 파악
 	public String reportLoc(String device_no) {
-		String get_device_no = null;
+		String get_device_loc = null;
 		try {
 			Connection();
 			String sql = "select device_loc from devices where device_no= ?";
@@ -170,7 +170,7 @@ public class ReportDAO {
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
-				get_device_no = rs.getString(1);
+				get_device_loc = rs.getString(1);
 			}
 		} catch (Exception e) {
 			System.out.println("신고 상태 변경 DAO 실패");
@@ -179,17 +179,21 @@ public class ReportDAO {
 		} finally {
 			close();
 		}
-		return get_device_no;
+		return get_device_loc;
 	}
 
+<<<<<<< HEAD
 	// 신고 번호 돌려주기
 	public String rep_no(String rep_no) {
 		return rep_no;
 	}
 
-	// 신고 상세내역 보기
-	public ReportVO getReport(String rep_no) {
+=======
+	
 		System.out.println(rep_no);
+=======
+	public ReportVO getReport (String rep_no) {
+>>>>>>> branch 'master' of https://github.com/2021-SMHRD-KDT-New-IoT-2/FiPleyes.git
 		try {
 			Connection();
 
@@ -209,9 +213,10 @@ public class ReportDAO {
 				String get_rep_status = rs.getString(6);
 				String get_rep_dept = rs.getString(7);
 				String get_emp_no = rs.getString(8);
-
+				String device_loc = reportLoc(get_device_no);
+				
 				vo = new ReportVO(get_rep_no, get_device_no, get_rep_time, get_rep_file, get_car_no, get_rep_status,
-						get_rep_dept, get_emp_no);
+						get_rep_dept, get_emp_no, device_loc);
 
 			}
 

@@ -4,12 +4,24 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.ReportDAO"%>
 <%@page import="model.EmployeeVO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
+
+<%!
+	public String getCookieValue(Cookie[] cookies, String cookieName){
+		for (Cookie cookie : cookies) {
+			if(cookie.getName().equals(cookieName)){
+				return cookie.getValue();
+			}
+		}
+		return "";
+}
+%>
+
 <html lang="en">
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
@@ -17,35 +29,51 @@
 <link rel="stylesheet" href="CSS/Font.css">
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/script.js" defer></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
 
 </head>
 <body class = "layout">
 <%
-// ÀÚµ¿·Î±×ÀÎÀ» À§ÇÑ ÄíÅ° °¡Á®¿À±â
+
+String emp_no = null;
+String emp_name =null; //ê°€ì ¸ì˜¬ ê°’ ì§€ì •í•˜ê¸° 
+String dept_no =null;
+String emp_pw = null;
+String emp_phone = null;
+String emp_email = null;
+
+
+// ìë™ë¡œê·¸ì¸ì„ ìœ„í•œ ì¿ í‚¤ ê°€ì ¸ì˜¤ê¸°
 Cookie[] cookies = request.getCookies();
 if(cookies != null){
 	for(Cookie tempCookie : cookies){
-		if(tempCookie.getName().equals("emp_no")){
-			// Äí±â¿¡ emp_no°¡ ÀÖÀ¸¸é Æ¯Á¤ ÆäÀÌÁö·Î ÀÌµ¿
-			session.setAttribute("emp_no", tempCookie.getValue());
-		}
+			emp_no = getCookieValue(cookies, "emp_no");
+			emp_pw = getCookieValue(cookies, "emp_pw");
+			emp_phone = getCookieValue(cookies, "emp_phone");
+			emp_email = getCookieValue(cookies, "emp_email");
+			emp_name = getCookieValue(cookies, "emp_name");
+			dept_no = getCookieValue(cookies, "dept_no");
 	}
+}else { // ì¿ í‚¤ê°€ ì—†ìœ¼ë©´ ì„¸ì…˜ì—ì„œ ê°’ ê°€ì ¸ì˜¤ê¸°
+	EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
+	emp_name = vo.getEmp_name(); //ê°€ì ¸ì˜¬ ê°’ ì§€ì •í•˜ê¸° 
+	dept_no = vo.getDept_no();
+	emp_no = vo.getEmp_no();
+	emp_pw = vo.getEmp_pw();
+	emp_phone = vo.getEmp_phone();
+	emp_email = vo.getEmp_phone();
 }
- 
-// ±×³É ·Î±×ÀÎ ÇßÀ»¶§ ¼¼¼Ç °¡Á®¿À±â
-EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
-String name = vo.getEmp_name(); //°¡Á®¿Ã °ª ÁöÁ¤ÇÏ±â 
-String dept = vo.getDept_no();
 
-//½Å°í ¸®½ºÆ®
+//ì‹ ê³  ë¦¬ìŠ¤íŠ¸
 ReportDAO reportDao = new ReportDAO();
-ArrayList<ReportVO> report_yet = reportDao.reportList(dept, "0");
-ArrayList<ReportVO> report_hold = reportDao.reportList(dept, "1");
-ArrayList<ReportVO> report_delete = reportDao.reportList(dept, "2");
+ArrayList<ReportVO> report_yet = reportDao.reportList(dept_no, "0");
+ArrayList<ReportVO> report_hold = reportDao.reportList(dept_no, "1");
+ArrayList<ReportVO> report_delete = reportDao.reportList(dept_no, "2");
 
 DeviceDAO deviceDao = new DeviceDAO();
-ArrayList<DeviceVO> allDevice = deviceDao.allList(dept);
-ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
+ArrayList<DeviceVO> allDevice = deviceDao.allList(dept_no);
+ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 %>
 	<header>
 		<div class="head">
@@ -53,195 +81,209 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 				<a href="#"><img class = "logo" src = "img/logo_1.png"> </a>
 			</h1>
 		</div>
-		<div> <h1> <%= name %>´Ô È¯¿µÇÕ´Ï´Ù.</h1></div>
+
+		<div> <h3 class="name_s"> <%= emp_name %>ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤.</h3></div>
+
 		<div class="container_h">
 			<nav>
 				<ul>
-					<li><a href="#page2">¹ÌÃ³¸®½Å°í</a></li>
-					<li><a href="#page3">º¸·ù½Å°í</a></li>
-					<li><a href="#page4">ÀÌ»ó±â±â</a></li>
-					<li><a href="#page5">MY±â±â¼øÂû</a></li>
-					<li><a id="modal_btn">ºñ¹Ğ¹øÈ£¼öÁ¤</a></li>
+					<li><a href="#page2">ë¯¸ì²˜ë¦¬ì‹ ê³ </a></li>
+					<li><a href="#page3">ë³´ë¥˜ì‹ ê³ </a></li>
+					<li><a href="#page4">ì´ìƒê¸°ê¸°ê´€ë¦¬</a></li>
+					<li><a href="#page5">MYê¸°ê¸°ìˆœì°°</a></li>
+					<li><a id="modal_btn">ë¹„ë°€ë²ˆí˜¸ìˆ˜ì •</a></li>
 				</ul>
 			</nav>
 		</div>
 	</header>
-	<!-- ¸ŞÀÎ È­¸é -->
-	<section id="page1">
+	<!-- ë©”ì¸ í™”ë©´ -->
+	<section id="page1" class="page">
 		<div class="fullD">
 			<div class=d1 onclick="window.location.href='#page2'">
-				<a class ="box_text">¹ÌÃ³¸®½Å°í</a>
+				<a class ="box_text">ë¯¸ì²˜ë¦¬ì‹ ê³ </a>
+				<img src="img/fireplug.png" class = "fireplug_1">
 			</div>
-			<div class=d2 onclick="window.location.href='#page3'">
-				<a class ="box_text">º¸·ù ½Å°í</a>
+			<div class=d2 onclick="window.location.href='#page3'">				
+				<a class ="box_text">ë³´ë¥˜ ì‹ ê³ </a>
+				<img src="img/pages_4.png" class = "pages">
 			</div>
+			
 			<div class=d3 onclick="window.location.href='#page4'">
-				<a class ="box_text">ÀÌ»ó ±â±â °ü¸®</a>
+				<a class ="box_text">ì´ìƒ ê¸°ê¸° ê´€ë¦¬</a>
+				<img src="img/machine.png" class = "machine">
 			</div>
 			<div class=d4 onclick="window.location.href='#page5'">
-				<a class ="box_text">MY ±â±â °ü¸®</a>
+				<a class ="box_text">MY ê¸°ê¸° ê´€ë¦¬</a>
+				<img src="img/my_machine.png" class = "my_machine">
 			</div>
 		</div>
 
 	</section>
 	
-	<!-- ºñ¹Ğ¹øÈ£ ¼öÁ¤ ¸ğ´Ş -->
+	<!-- ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì • ëª¨ë‹¬ -->
 	<div class="black_bg"></div>
 	<div class="modal_wrap">
-	<div class="pw_h"><h3>ºñ¹Ğ¹øÈ£ ¼öÁ¤</h3></div>
+	<div class="pw_h"><h3>ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •</h3></div>
 	<div class="pw_d">
-		<input type="text" name = "check_emp_pw" id = "check_emp_pw" placeholder="±âÁ¸ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä"><br>
-		<button onclick = "pwcheck()">È®ÀÎÇÏ±â</button><br>
-		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" placeholder="º¯°æÇÒ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä"><br>
-		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" placeholder="ºñ¹Ğ¹øÈ£¸¦ ÇÑ¹ø ´õ ÀÔ·ÂÇØÁÖ¼¼¿ä"><br>
-		<button onclick = "pwchange()">¼öÁ¤ÇÏ±â</button>
+		<input type="text" name = "check_emp_pw" id = "check_emp_pw" class="pw_input" placeholder="ê¸°ì¡´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" ><br>
+		<em id = "pw_check"></em> <hr class="hr_one">
+		<button onclick = "pwcheck()" class="login_m">í™•ì¸í•˜ê¸°</button><br><br>
+		<input type="text" name ="new_emp_pw1" id = "new_emp_pw1" class="pw_input" placeholder="ë³€ê²½í•  ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”"><br>
+		 <hr class="hr_one">
+		<input type="text" name ="new_emp_pw2" id = "new_emp_pw2" class="pw_input" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ í•œë²ˆ ë” ì…ë ¥í•´ì£¼ì„¸ìš”"><br>
+		 <hr class="hr_one">
+		<button onclick = "pwchange()" >ìˆ˜ì •í•˜ê¸°</button>
 	</div>
 		<div class="modal_close">
-			<a href="#">close</a>
+			<a>close</a>
 		</div>
-		<div></div>
 	</div>
-	
-	<!-- ¹ÌÃ³¸® ½Å°í °ü¸® ÆäÀÌÁö / page2  -->
 
-	<section id="page2">
+	<!-- ë¯¸ì²˜ë¦¬ ì‹ ê³  ê´€ë¦¬ í˜ì´ì§€ / page2  -->
+
+	<section id="page2" class="page">
 		<div id="ti_mi">
-			<h3>¹ÌÃ³¸® ½Å°í</h3>
+
+			<h1>ë¯¸ì²˜ë¦¬ ì‹ ê³ </h1>
+
 		</div>
 		<main>
 			<table class="scrolltable">
-					<thead>
-						<tr>
-							<th class="id"><h3>ID</h3></th>
-							<th class="loca"><h3>À§Ä¡</h3></th>
-							<th class="date"><h3>³¯Â¥/½Ã°£</h3></th>
-							<th class="detail"><h3>»ó¼¼º¸±â</h3></th>
-						</tr>
-					</thead>
+				<thead>
+					<tr>
+						<th class="id"><h3>ID</h3></th>
+						<th class="loca"><h3>ìœ„ì¹˜</h3></th>
+						<th class="date"><h3>ë‚ ì§œ/ì‹œê°„</h3></th>
+						<th class="detail"><h3>ìƒì„¸ë³´ê¸°</h3></th>
+					</tr>
+				</thead>
 				<tbody>
-					
+
 					<%for (int i = 0; i < report_yet.size(); i++) {%>
 					<tr>
 						<td id="rep_no" class="id"><%=report_yet.get(i).getRep_no()%></td>
 						<td class="loca"><%=reportDao.reportLoc(report_yet.get(i).getDevice_no())%></td>
 						<td class="date"><%=report_yet.get(i).getRep_time()%></td>
-						<td class="detail"><a class="btn js-click-modal" onclick="repDetail()">»ó¼¼º¸±â</a></td>
+						<td class="detail"><a class="btn js-click-modal"
+							onclick="repDetail(<%=report_yet.get(i).getRep_no()%>)">ìƒì„¸ë³´ê¸°</a></td>
 					</tr>
 					<%}%>
 				</tbody>
 
 			</table>
-			
-			<!--»ó¼¼º¸±â ÆäÀÌÁö -->
-			<div class="container">
+
+			<!--ìƒì„¸ë³´ê¸° í˜ì´ì§€ -->
+			<div class="container" id="detail_rep">
 				<div class="black_bg"></div>
 				<div class="modal">
-				
-					<div class="modal_header">¹ÌÃ³¸® ½Å°í</div>
+
+					<div class="modal_header">ë¯¸ì²˜ë¦¬ ì‹ ê³ </div>
 					<div class="modal_main">
-						<img src="img/number.png" class="numberpad">
-						<table border="1px" class="detail_t">
+						<img id="detail_rep_img" src="" class="numberpad">
+						<table class="detail_t">
 							<tr>
 								<td class="id_d"><h3>ID</h3></td>
-								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td id="detail_rep_no"></td>
 							</tr>
 							<tr>
-								<td class="loca_d"><h3>ÁÖ¼Ò</h3></td>
-								<td></td>
+								<td class="loca_d"><h3>ì£¼ì†Œ</h3></td>
+								<td id="detail_rep_loc"></td>
 							</tr>
 							<tr>
-								<td class="date_d"><h3>³¯Â¥</h3></td>
-								<td></td>
+								<td class="date_d"><h3>ë‚ ì§œ</h3></td>
+								<td id="detail_rep_data"></td>
 							</tr>
 							<tr>
-								<td class="number"><h3>¹øÈ£</h3></td>
-								<td></td>
+								<td class="number"><h3>ë²ˆí˜¸</h3></td>
+								<td id="detail_car_no"></td>
 							</tr>
 							<tr>
-								<td class="accu"><h3>´©Àû</h3></td>
-								<td></td>
+								<td class="accu"><h3>ëˆ„ì </h3></td>
+								<td id="detail_rep_add"></td>
 
 							</tr>
 						</table>
 
 						<div class="btn_p">
-							<a href="ReportStatusUp?rep_no=2&status=1">º¸·ù</a>
-							<a href="ReportStatusUp?rep_no=2&status=2">½Å°í</a>
+							<a id="hold_rep" href="">ë³´ë¥˜</a> <a id="fine_rep" href="">ì‹ ê³ </a>
 						</div>
-						<div class="btn_c_p">
-							<a class="btn js-close-modal">Close</a>
+						<div class = "modal_close_div">
+							<a class="modal_close_1_1">close</a>
 						</div>
+
 					</div>
 				</div>
 			</div>
 		</main>
 	</section>
-	
-	<!-- º¸·ù½Å°í °ü¸® ÆäÀÌÁö / page3-->
 
-	<section id="page3">
+	<!-- ë³´ë¥˜ì‹ ê³  ê´€ë¦¬ í˜ì´ì§€ / page3-->
+
+	<section id="page3" class="page">
 		<div id="ti_mi">
-			<h3>º¸·ù ½Å°í</h3>
+			<h1>ë³´ë¥˜ ì‹ ê³ </h1>
+
 		</div>
 		<main>
+
 			<table class="scrolltable">
-					<thead>
-						<tr>
-							<th class="id"><h3>ID</h3></th>
-							<th class="loca"><h3>À§Ä¡</h3></th>
-							<th class="date"><h3>³¯Â¥/½Ã°£</h3></th>
-							<th class="detail"><h3>»ó¼¼º¸±â</h3></th>
-						</tr>
-					</thead>
-				<tbody>
+			<thead>
+				<tr>
+					<td class="id"><h3>ID</h3></td>
+					<td class="loca"><h3>ìœ„ì¹˜</h3></td>
+					<td class="date"><h3>ë‚ ì§œ/ì‹œê°„</h3></td>
+					<td class="detail"><h3>ìƒì„¸ë³´ê¸°</h3></td>
+				</tr>
+			</thead>
+			<tbody>
 			<%
 				for(int i = 0; i< report_hold.size(); i++){ %>
 				<tr>
+
 					<td class="id"><%=report_hold.get(i).getRep_no()%></td>
 					<td class="loca"><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
 					<td class="date"><%=report_hold.get(i).getRep_time() %></td>
-					<td class="detail"><a class="btn js-click-modal-1">»ó¼¼º¸±â</a></td>
+					<td class="detail"><a class="btn js-click-modal-1" onclick="holdDetail(<%= report_hold.get(i).getRep_no()%>)">ìƒì„¸ë³´ê¸°</a></td>
 				</tr>
 				<%} %>
-				</tbody>
+			</tbody>
 
 			</table>
 		</main>
 		<div class="container-1">
-
 			<div class="modal-1">
-				<div class="modal_header">º¸·ù ½Å°í</div>
+				<div class="modal_header">ë³´ë¥˜ ì‹ ê³ </div>
 				<div class="modal_main">
-					<img src="img/number.png" class="numberpad">
-					<table border="1px" class="detail_t">
+					<img id = "hold_rep_img" src="" class="numberpad">
+					<table class="detail_t">
 						<tr>
 							<td class="id_d"><h3>ID</h3></td>
-							<td></td>
+							<td id = "detail_hold_no"></td>
 						</tr>
 						<tr>
-							<td class="loca_d"><h3>ÁÖ¼Ò</h3></td>
-							<td></td>
+							<td class="loca_d"><h3>ì£¼ì†Œ</h3></td>
+							<td id = "detail_hold_loc"></td>
 						</tr>
 						<tr>
-							<td class="date_d"><h3>³¯Â¥</h3></td>
-							<td></td>
+							<td class="date_d"><h3>ë‚ ì§œ</h3></td>
+							<td  id = "detail_hold_date"></td>
 						</tr>
 						<tr>
-							<td class="number"><h3>¹øÈ£</h3></td>
-							<td></td>
+							<td class="number"><h3>ë²ˆí˜¸</h3></td>
+							<td  id = "detail_hold_car_no"></td>
 						</tr>
 						<tr>
-							<td class="accu"><h3>´©Àû</h3></td>
-							<td></td>
+							<td class="accu"><h3>ëˆ„ì </h3></td>
+							<td>0</td>
 						</tr>
 					</table>
 
 					<div class="btn_p">
-						<button>º¸·ù</button>
-						<button>»èÁ¦</button>
+						<a id = "fine_hold_rep" href="">ì‹ ê³ </a>
+						<a id = "delet_rep" href="">ì‚­ì œ</a>
 					</div>
-					<div class="btn_c_p">
-						<a class="btn js-close-modal-1">Close</a>
+					<div class = "modal_close_div_1">
+							<a class="modal_close_1">close</a>
 					</div>
 				</div>
 			</div>
@@ -249,31 +291,34 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 	</section>
 	
-	<!-- ÀÌ»ó ±â±â °ü¸® ÆäÀÌÁö  / page4 -->
+	<!-- ì´ìƒ ê¸°ê¸° ê´€ë¦¬ í˜ì´ì§€  / page4 -->
 
-	<section id="page4">
+	<section id="page4" class="page">
 		<div id="ti_mi">
-			<h3>ÀÌ»ó ±â±â °ü¸®</h3>
+
+			<h1>ì´ìƒ ê¸°ê¸° ê´€ë¦¬</h1>
+
 		</div>
 		<main>
+
 			<table class="scrolltable_1">
-					<thead>
-						<tr>
-							<th class="id"><h3>ID</h3></th>
-							<th class="loca"><h3>À§Ä¡</h3></th>
-							<th class="id"><h3>±â±â »óÅÂ</h3></th>
-						</tr>
-					</thead>
-				<tbody>
+			<thead>
+				<tr>
+					<td class="id"><h3>ID</h3></td>
+					<td class="loca"><h3>ìœ„ì¹˜</h3></td>
+					<td class="id"><h3>í˜„ì¬ ìƒíƒœ</h3></td>
+				</tr>
+			</thead>
+			<tbody>
 				<%
 				for(int i = 0; i< errorDevice.size(); i++){ %>
 				<tr>
 					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
 					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
-					<td class="id"><%=errorDevice.get(i).getDevice_status()%></td>
+					<td class="id">ğŸ”´</td>
 				</tr>
 				<%} %>
-				</tbody>
+			</tbody>
 
 			</table>
 		</main>
@@ -281,151 +326,188 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept);
 
 	</section>
 	
-	<!-- My ±â±â °ü¸® ÆäÀÌÁö  / page5 -->
+	<!-- My ê¸°ê¸° ê´€ë¦¬ í˜ì´ì§€  / page5 -->
 
-	<section id="page5">
+	<section id="page5" class="page">
 		<div id="ti_mi">
-			<h3>MY ±â±â ¼øÂû</h3>
+			<h1>MY ê¸°ê¸° ìˆœì°°</h1>
+
 		</div>
 		<main>
 			<table class="scrolltable_1">
-					<thead>
-						<tr>
-							<th class="id"><h3>ID</h3></th>
-							<th class="loca"><h3>À§Ä¡</h3></th>
-							<th class="id"><h3>±â±â »óÅÂ</h3></th>
-						</tr>
-					</thead>
-				<tbody>
+			<thead>
+				<tr>
+					<td class="id"><h3>ID</h3></td>
+					<td class="loca"><h3>ìœ„ì¹˜</h3></td>
+					<td class="id"><h3>í˜„ì¬ ìƒíƒœ</h3></td>
+				</tr>
+			</thead>
+			<tbody>
 				<%
 				for(int i = 0; i< allDevice.size(); i++){ %>
 				<tr>
-					<td class="id"><%=allDevice.get(i).getDevice_no()%></td>
+					<td class="id"><button class="delete_id"><%=allDevice.get(i).getDevice_no()%></button></td>
 					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
-					<td class="id"><%=allDevice.get(i).getDevice_status()%></td>
+					
+					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
+						<td class="id">			
+						&#128994;</td>
+					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
+						<td class="id">	
+						&#128308;</td>
+					<%} %>
 				</tr>
 				<%} %>
-				</tbody>
+			</tbody>
 
 			</table>
-			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png">±â±âÃß°¡</button></div>
+			<div class="add_p"><button type="button" id="add_btn"><img class = "add_d" src = "img/add.png"></button></div>
 		</main>
 		<div class="add_bg"></div>
-		<div class = "add_wrap">
-		<div class="add_close">
-			<a href="">close</a>		
-			
-				</div>
-				<div><div class="pw_h"><h3>»õ·Î¿î ±â±â µî·Ï</h3></div>
-			<div class="pw_d">
-				<h5>±â±â ¹øÈ£</h5><br>
-				<input type="text" placeholder="±â±â ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" class="add_input"><br>
-				<hr class = "hr_one">
-				<br><h5>±â±â À§Ä¡</h5><br>
-				<input type="text" placeholder="±â±âÀÇ À§Ä¡¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" class="add_input"><br>
-				<hr class = "hr_one"><br><br>
-				
-				<button id="adding_btn">µî·ÏÇÏ±â</button></div>
-			</div>
-		</div>
-		
-		
+      <div class="add_wrap">
+         <div class="add_close">
+            <a>close</a>
+         </div>
+         
+	      <article id= "add_device">
+	         <div>
+	            <div class="pw_h">
+	               <h3>ìƒˆë¡œìš´ ê¸°ê¸° ë“±ë¡</h3>
+	            </div>
+	            <form action = "DeviceRegister" method = "post">
+	            <div class="pw_d">
+	               <h4 class="add_t">ê¸°ê¸° ë²ˆí˜¸</h4>
+	               <br> <input type="text" placeholder="ê¸°ê¸° ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" class="add_input" name = "device_no"><br>
+	               <hr class="hr_one">
+	               <br><br>
+	               <h4 class="add_t">ê¸°ê¸° ìœ„ì¹˜</h4>
+	               <br> <input type="text" placeholder="ê¸°ê¸°ì˜ ìœ„ì¹˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" class="add_input" name = "device_loc"><br>
+	               <hr class="hr_one">
+	               <br>
+	               <br>
+	               <input id="adding_btn" type = "submit" value = "ë“±ë¡í•˜ê¸° " >
+	            </div>
+	            </form>
+	         </div>
+	      </article>
+      </div>
+    
+    <footer></footer>
 
 	</section>
+	
 
 
- <script src="js/jquery-3.6.0.min.js"></script>
+   <script src="js/jquery-3.6.0.min.js"></script>
    <script src="js/jquery.min.js"></script>
    <script src="js/browser.min.js"></script>
    <script src="js/breakpoints.min.js"></script>
    <script src="js/util.js"></script>
    <script src="js/main.js"></script>
-<!-- ºñ¹Ğ¹øÈ£ Áßº¹Ã¼Å© -->
+   
+<!-- ë¹„ë°€ë²ˆí˜¸ ì¤‘ë³µì²´í¬ -->
      <script>
 		function pwcheck() {
 			var input = $('#check_emp_pw').val();
-			console.log("pwcheck() : " + input);
 			
 			$.ajax({
-				type : "post", // µ¥ÀÌÅÍ Àü¼Û ¹æ½Ä
+				type : "post", // ë°ì´í„° ì „ì†¡ ë°©ì‹
 				data : {
 					"check_emp_pw" : input
-				}, // Àü¼ÛÇÏ´Â µ¥ÀÌÅÍ
-				url :  "PwCheck", // µ¥ÀÌÅÍ¸¦ Àü¼ÛÇÏ´Â ÆäÀÌÁö
-				dataType : "json", // ÀÀ´äµ¥ÀÌÅÍÀÇ Çü½Ä
+				}, // ì „ì†¡í•˜ëŠ” ë°ì´í„°
+				url :  "PwCheck", // ë°ì´í„°ë¥¼ ì „ì†¡í•˜ëŠ” í˜ì´ì§€
+				dataType : "json", // ì‘ë‹µë°ì´í„°ì˜ í˜•ì‹
 				success : function(data) {
 					if (data == true) {
-		                  alert("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÕ´Ï´Ù.")
+						$("#pw_check").html("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤.");
 		               } else {
-		                  alert("ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.")
+		            	$("#pw_check").html("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		               }
 				},
-				 error : function() { // ½ÇÆĞ
-		               alert("Àá½ÃÈÄ ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä")
+				 error : function() { // ì‹¤íŒ¨
+		               alert("ì ì‹œí›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”");
 		            }
 			})
 			
 		}
 	  </script>
 	
-	<!-- ÀÔ·ÂÇÑ µÎ ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎÇÏ°í °°´Ù¸é º¯°æ-->
+	<!-- ì…ë ¥í•œ ë‘ ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸í•˜ê³  ê°™ë‹¤ë©´ ë³€ê²½-->
 	  <script>
 		function pwchange() {
 			var input1 = $('#new_emp_pw1').val();
 			var input2 = $('#new_emp_pw2').val();
-	
+			
 			$.ajax({
-				type : "post", // µ¥ÀÌÅÍ Àü¼Û ¹æ½Ä
+				type : "post", // ë°ì´í„° ì „ì†¡ ë°©ì‹
 				data : {
 					"new_emp_pw1" : input1,
 					"new_emp_pw2" : input2
-				}, // Àü¼ÛÇÏ´Â µ¥ÀÌÅÍ
-				url :  "Update", // µ¥ÀÌÅÍ¸¦ Àü¼ÛÇÏ´Â ÆäÀÌÁö
-				dataType : "json", // ÀÀ´äµ¥ÀÌÅÍÀÇ Çü½Ä
+				}, // ì „ì†¡í•˜ëŠ” ë°ì´í„°
+				url :  "Update", // ë°ì´í„°ë¥¼ ì „ì†¡í•˜ëŠ” í˜ì´ì§€
+				dataType : "json", // ì‘ë‹µë°ì´í„°ì˜ í˜•ì‹
 				success : function(data) {
-					
-					console.log(data);
 					if (data == true) {
-						alert("ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ¿´½À´Ï´Ù.")
+						alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì˜€ìŠµë‹ˆë‹¤.");
+						location.href = "Login.jsp";
 					}else {
-				 		alert("ºñ¹Ğ¹øÈ£ º¯°æ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.")
+				 		alert("ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
 					}
 				},
-				 error : function() { // ½ÇÆĞ
-		               alert("Àá½ÃÈÄ ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä")
+				 error : function() { // ì‹¤íŒ¨
+		               alert("ì ì‹œí›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”");
 		            }
 			})
 			}
 		</script>
 
-		<!-- ¼±ÅÃÇÑ ½Å°í ¾ÆÀÌµğ°¡ ³Ñ¾î¿É´Ï´Ù. -->
+
+		<!-- ì„ íƒí•œ ë¯¸ì²˜ë¦¬ ì‹ ê³  ìƒì„¸ë³´ê¸°  -->
 		 <script>
-		function pwchange() {
-			var input1 = $('#new_emp_pw1').val();
-			var input2 = $('#new_emp_pw2').val();
-	
+		function repDetail(rep_no) {
 			$.ajax({
-				type : "post", // µ¥ÀÌÅÍ Àü¼Û ¹æ½Ä
-				data : {
-					"new_emp_pw1" : input1,
-					"new_emp_pw2" : input2
-				}, // Àü¼ÛÇÏ´Â µ¥ÀÌÅÍ
-				url :  "Update", // µ¥ÀÌÅÍ¸¦ Àü¼ÛÇÏ´Â ÆäÀÌÁö
-				dataType : "json", // ÀÀ´äµ¥ÀÌÅÍÀÇ Çü½Ä
-				success : function(data) {
-					
-					console.log(data);
-					if (data == true) {
-						alert("ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ¿´½À´Ï´Ù.")
-					}else {
-				 		alert("ºñ¹Ğ¹øÈ£ º¯°æ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.")
-					}
+				type : "post", // ë°ì´í„° ì „ì†¡ ë°©ì‹
+				data : {"rep_no" : rep_no }, // ì „ì†¡í•˜ëŠ” ë°ì´í„°
+				url :  "ReportGet", // ë°ì´í„°ë¥¼ ì „ì†¡í•˜ëŠ” í˜ì´ì§€
+				dataType : "json", // ì‘ë‹µë°ì´í„°ì˜ í˜•ì‹
+				success : function(res) {
+					$("#detail_rep_no").html(res.rep_no);
+					$("#detail_rep_loc").html(res.device_loc);
+					$("#detail_rep_data").html(res.rep_time);
+					$("#detail_car_no").html(res.car_no);
+					$("#hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=1");
+					$("#fine_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
+					$("#detail_rep_img").attr("src", res.rep_file);
 				},
-				 error : function() { // ½ÇÆĞ
-		               alert("Àá½ÃÈÄ ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä")
+				 error : function() { // ì‹¤íŒ¨
+		               alert("ì ì‹œí›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”");
 		            }
 			})
 			}
 		</script>
-	<footer> </footer>
+		
+		
+		<!-- ì„ íƒí•œ ë³´ë¥˜ ì‹ ê³  ìƒì„¸ë³´ê¸°  -->
+		 <script>
+		function holdDetail(rep_no) {
+			$.ajax({
+				type : "post", // ë°ì´í„° ì „ì†¡ ë°©ì‹
+				data : {"rep_no" : rep_no }, // ì „ì†¡í•˜ëŠ” ë°ì´í„°
+				url :  "ReportGet", // ë°ì´í„°ë¥¼ ì „ì†¡í•˜ëŠ” í˜ì´ì§€
+				dataType : "json", // ì‘ë‹µë°ì´í„°ì˜ í˜•ì‹
+				success : function(res) {
+					$("#detail_hold_no").html(res.rep_no);
+					$("#detail_hold_loc").html(res.device_loc);
+					$("#detail_hold_date").html(res.rep_time);
+					$("#detail_hold_car_no").html(res.car_no);
+					$("#fine_hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
+					$("#delet_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=3");
+					$("#hold_rep_img").attr("src", res.rep_file);
+				},
+				 error : function() { // ì‹¤íŒ¨
+		               alert("ì ì‹œí›„ ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”");
+		            }
+			})
+			}
+		</script>
 	
