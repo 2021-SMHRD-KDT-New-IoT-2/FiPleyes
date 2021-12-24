@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,11 +22,13 @@ public class DeviceRegister extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setCharacterEncoding("euc-kr");
+		request.setCharacterEncoding("utf-8");
 		
 		// 기기 등록을 위해 입력안 값 가져오기 
 		String device_no = request.getParameter("device_no");
 		String device_loc = request.getParameter("device_loc");
+		
+		System.out.println(device_no + ", " + device_loc);
 		
 		// 세션 가져오기
 		HttpSession session = request.getSession();
@@ -34,16 +38,18 @@ public class DeviceRegister extends HttpServlet {
 		String device_dept = Evo.getDept_no(); // 사용자 세션에 등록된 부서 번호
 		
 		DeviceDAO dao = new DeviceDAO();
-		int cnt = dao.register(device_no, device_loc, device_dept);
-		
-		if (cnt > 0) {
-			System.out.println("장치 등록 성공!");
-			response.sendRedirect("Main.jsp#add_device");
-		} else {
-			System.out.println("장치 등록 실패!");
-			response.sendRedirect("Main.jsp#add_device");
+		boolean check = dao.duplicateCheck(device_no);
+		int cnt =0;
+		if(!check) {
+			cnt = dao.register(device_no, device_loc, device_dept);
 		}
+		
+		System.out.println("cnt/ check 값 : "+cnt + "/ "+check);
+		
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
 
+		out.print(check);
 	}
 
 }

@@ -206,7 +206,6 @@ public class ReportDAO {
 
 				vo = new ReportVO(get_rep_no, get_device_no, get_rep_time, get_rep_file, get_car_no, get_rep_status,
 						get_rep_dept, get_emp_no, device_loc);
-
 			}
 
 		} catch (Exception e) {
@@ -219,6 +218,74 @@ public class ReportDAO {
 		return vo;
 	}
 
+
+public ReportVO getReport2(String rep_no) {
+	try {
+		Connection();
+
+		String sql = "select * from REPORTS where REP_NO= ?";
+		psmt = conn.prepareStatement(sql);
+
+		psmt.setString(1, rep_no);
+		rs = psmt.executeQuery();
+
+		if (rs.next()) {
+
+			String get_rep_no = rs.getString(1);
+			String get_device_no = rs.getString(2);
+			String get_rep_time = rs.getString(3);
+			String get_rep_file = rs.getString(4);
+			String get_car_no = rs.getString(5);
+			String get_rep_status = rs.getString(6);
+			String get_rep_dept = rs.getString(7);
+			String get_emp_no = rs.getString(8);
+			String device_loc = reportLoc(get_device_no);
+			int total_report = totalReport(get_car_no);
+			
+			vo = new ReportVO(get_rep_no, get_device_no, get_rep_time, get_rep_file, get_car_no, 
+					get_rep_status, get_rep_dept, get_emp_no, device_loc, total_report);
+		}
+
+	} catch (Exception e) {
+		System.out.println("신고 상세내역 DAO 실패");
+		e.printStackTrace();
+
+	} finally {
+		close();
+	}
+	return vo;
+}
+
+	
+	// 누적 건수 계산
+	public int totalReport(String car_no) {
+		
+		try {
+			Connection();
+
+			String sql = "SELECT COUNT(car_no) FROM reports where car_no=?";
+
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, car_no);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			System.out.println("누적건수 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return cnt;
+		
+	}
+
+	
 	// 차량 번호당 이전까지 누적 신고 횟수 조회
 	public int accumulateCounter(String car_no) {
 		al = new ArrayList<ReportVO>();

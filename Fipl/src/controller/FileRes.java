@@ -71,5 +71,9 @@ public class FileRes extends HttpServlet {
          String carPath = Carfile.toString();
          System.out.println(carPath);        		 
       }
+      String time = multi.getParameter("time");
+      String device = multi.getParameter("device");
+      System.out.println(time);
+      System.out.println(device);
    }
 }

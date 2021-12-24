@@ -18,20 +18,9 @@
     font-weight: 400;
     font-style: normal;
 }
-
-header, #page1, thead, h1, .modal_header, h3, h4{
-	font-family: 'Pretendard-Bold';
-}
-
-.name_s, footer{
-	font-family: 'paybooc-Medium';
-}
-
-button, tbody, placeholder{
+body{
 	font-family: 'Pretendard-Regular';
-	font-size: 0.875em;
+	font-size : 15px;
 }
-.detail_t{
-	font-family: 'Pretendard-Regular';
-	font-size: 20px;
-}
+
+

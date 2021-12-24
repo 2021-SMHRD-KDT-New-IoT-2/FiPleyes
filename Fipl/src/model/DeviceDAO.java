@@ -15,7 +15,8 @@ public class DeviceDAO {
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	ArrayList<DeviceVO> al = null;
-
+	
+	
 	// 디비 연결
 	private void Connection() {
 		try {
@@ -76,7 +77,7 @@ public class DeviceDAO {
 		return cnt;
 	}
 
-	// 이상기기 장치목록
+	// 장치 중복
 	public boolean duplicateCheck(String device_no) {
 		boolean check = false;
 
@@ -255,4 +256,35 @@ public class DeviceDAO {
 			return cnt;
 		}
 
+	
+	// 장치 중복 확인 
+	public boolean deviceCheck(String device_no) {
+		boolean check = false;
+		try {
+			Connection();
+			
+			String sql = "select device_no from devices where device_no=?";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, device_no);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				check=true;
+			}else {
+				check=false;
+			}	
+		} catch (Exception e) {
+			System.out.println("중복확인 실패");
+			e.printStackTrace();
+			
+		}finally {
+			close();
+		}
+		return check;
+	}
+	
+	
 }
