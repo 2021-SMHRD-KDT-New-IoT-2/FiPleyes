@@ -29,9 +29,9 @@ public class ChangeStatus_android extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if(cnt>0) {
-			
+			out.print("성공");
 		}else {
-			
+			out.print("실패");
 		}
 		
 		
