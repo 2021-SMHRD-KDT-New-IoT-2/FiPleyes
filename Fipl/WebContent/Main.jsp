@@ -31,6 +31,7 @@
 <script src="js/script.js" defer></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
+<link rel="shortcut icon" href="img/favicon.png">
 
 </head>
 <body class="layout">
@@ -329,7 +330,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<tr>
 					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
 					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
-					<td class="id"><img src="img/red.png" class="icon"></td>
+					<td><img src="img/red.png" class="icon"></td>
 				</tr>
 				<%} %>
 			</tbody>

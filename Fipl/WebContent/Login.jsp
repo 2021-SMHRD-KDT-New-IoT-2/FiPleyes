@@ -25,6 +25,7 @@ public String getCookieValue(Cookie[] cookies, String cookieName){
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/script.js" defer></script>
 <link rel="stylesheet" href="CSS/Font_l.css">
+<link rel="shortcut icon" href="img/favicon.png">
 </head>
 <body class="layout">
 
