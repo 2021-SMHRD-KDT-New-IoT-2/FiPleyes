@@ -137,7 +137,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			<hr class="hr_one">
 			<button onclick="pwcheck()" class="login_m">확인하기</button>
 			<br>
-			<br> <input type="text" name="new_emp_pw1" id="new_emp_pw1"
+			<input type="text" name="new_emp_pw1" id="new_emp_pw1"
 				class="pw_input" placeholder="변경할 비밀번호를 입력해주세요"><br>
 			<hr class="hr_one">
 			<input type="text" name="new_emp_pw2" id="new_emp_pw2"
@@ -162,7 +162,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			<table class="scrolltable">
 				<thead>
 					<tr>
-						<th class="id"><h3>ID</h3></th>
+						<th class="id"><h3>신고 번호</h3></th>
 						<th class="loca"><h3>위치</h3></th>
 						<th class="date"><h3>날짜/시간</h3></th>
 						<th class="detail"><h3>상세보기</h3></th>
@@ -329,7 +329,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<tr>
 					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
 					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
-					<td class="id">&#128308;</td>
+					<td class="id"><img src="img/red.png" class="icon"></td>
 				</tr>
 				<%} %>
 			</tbody>
@@ -368,10 +368,10 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					
 					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
 						<td class="id">			
-						&#128994;</td>
+						<img src="img/green.png" class="icon"></td>
 					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
 						<td class="id">	
-						&#128308;</td>
+						<img src="img/red.png" class="icon"></td>
 					<%} %>
 				</tr>
 				<%} %>
@@ -626,12 +626,14 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				success : function(data) {
 					if (data=="false") {
 						alert("장치를 정상적으로 등록하였습니다.");
+						location.href = "Main.jsp#page5";
 					}else {
 				 		alert("이미 등록된 장치입니다.");
 					}
 				},
 				 error : function() { // 실패
 		               alert("잠시후 다시 시도해주세요");
+		               location.href = "Main.jsp#page5";
 		            }
 			})
 			}

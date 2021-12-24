@@ -501,6 +501,7 @@ tr {
    height: auto;
    position: fixed;
    left: 27vw;
+   border-radius: 10px;
 	
 	
 }
@@ -609,6 +610,10 @@ tr {
 .scrolltable_1 tbody tr:nth-child(2n+1) {
 	background-color: #f0f0f0;
 }
+.icon{
+	width:18px;
+	height : auto;
+}
 
 /* page5 */
 .delete_id{
@@ -618,6 +623,8 @@ tr {
 	cursor: pointer;
 	vertical-align: middle;
 	background-color: transparent;
+	text-decoration: none;
+	color : black;
 	
 }
 .delete_id:hover{
