@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import model.ReportDAO;
+
 @WebServlet("/FileRes")
 public class FileRes extends HttpServlet {
    private static final long serialVersionUID = 1L;
@@ -71,9 +73,24 @@ public class FileRes extends HttpServlet {
          String carPath = Carfile.toString();
          System.out.println(carPath);        		 
       }
-      String time = multi.getParameter("time");
-      String device = multi.getParameter("device");
-      System.out.println(time);
-      System.out.println(device);
+      
+      String rep_time = multi.getParameter("time");
+      String device_no = multi.getParameter("device");
+      String rep_file = "210.223.239.165:8088\\Fipl\\upload\\"+ CarName;
+      String car_no = CarName;
+      
+      System.out.println(rep_time);
+      System.out.println(device_no);
+      
+      
+      ReportDAO dao = new ReportDAO();
+      int cnt = dao.register(device_no, rep_file, car_no, rep_time);
+      
+      if (cnt > 0) {
+			System.out.println("신고 등록 성공!");
+		} else {
+			System.out.println("신고 등록 실패!");
+		}
+      
    }
 }
