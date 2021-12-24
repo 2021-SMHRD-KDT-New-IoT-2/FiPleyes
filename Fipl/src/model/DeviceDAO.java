@@ -77,7 +77,7 @@ public class DeviceDAO {
 		return cnt;
 	}
 
-	// 이상기기 장치목록
+	// 장치 중복
 	public boolean duplicateCheck(String device_no) {
 		boolean check = false;
 
