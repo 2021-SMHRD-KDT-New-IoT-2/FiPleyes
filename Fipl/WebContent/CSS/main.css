@@ -600,6 +600,14 @@ tr {
 	font-size : 1.2vw
 }
 
+/* tbody tr:nth-child(2n) {
+    background-color: white;
+  }
+  
+tbody tr:nth-child(2n+1) {
+    background-color: ;
+  } */
+
 .scrolltable_1 th, .scrolltable_1 td {
 	padding: 10px;
 	text-align: left;
