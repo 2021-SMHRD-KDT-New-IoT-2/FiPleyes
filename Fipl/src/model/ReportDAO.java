@@ -52,19 +52,25 @@ public class ReportDAO {
 	}
 
 	// 신고 등록
-	public int register(String device_no, String rep_file, String car_no) {
+	public int register(String device_no, String rep_file, String car_no, String rep_time) {
+		
+		DeviceDAO dao = new DeviceDAO();
+		String dept_no = dao.getDept_no(device_no);
+		
 		try {
 
 			Connection();
 
-			String sql = "insert into reports (device_no, rep_time, rep_file, car_no) values (?, sysdate, ?, ?)";
+			String sql = "insert into reports (device_no, rep_time, rep_file, car_no, rep_dept) values (?, sysdate, ?, ?, ?)";
 			psmt = conn.prepareStatement(sql);
 
 			// 신고번호 : 자동생성, 실내일경우 차량번호가 null로 들어감
 			// 처리 상태는 0(정상)이 디폴트 값, 처리 담당자는 추후에 지정됨
 			psmt.setString(1, device_no);
+//			psmt.setString(2, rep_time);
 			psmt.setString(2, rep_file);
 			psmt.setString(3, car_no);
+			psmt.setString(4, dept_no);
 
 			cnt = psmt.executeUpdate();
 
