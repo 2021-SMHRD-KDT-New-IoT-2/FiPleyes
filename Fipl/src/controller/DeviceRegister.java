@@ -28,32 +28,26 @@ public class DeviceRegister extends HttpServlet {
 		String device_no = request.getParameter("device_no");
 		String device_loc = request.getParameter("device_loc");
 		
+		System.out.println(device_no + ", " + device_loc);
+		
 		// 세션 가져오기
 		HttpSession session = request.getSession();
-		
-		System.out.println(device_no);
 
 		// 현재 로그인한 사용자의 정보
 		EmployeeVO Evo = (EmployeeVO) session.getAttribute("employee");
 		String device_dept = Evo.getDept_no(); // 사용자 세션에 등록된 부서 번호
-		System.out.println(device_dept);
-		System.out.println(device_no);
-		System.out.println(device_loc);
-		
 		
 		DeviceDAO dao = new DeviceDAO();
-		int cnt = dao.register(device_no, device_loc, device_dept);
-		
-		boolean check = false;
-		PrintWriter out = response.getWriter();
-		
-		if (cnt > 0) {
-			System.out.println("장치 등록 성공!");
-			check = true;
-		} else {
-			System.out.println("장치 등록 실패!");
-			
+		boolean check = dao.duplicateCheck(device_no);
+		int cnt =0;
+		if(!check) {
+			cnt = dao.register(device_no, device_loc, device_dept);
 		}
+		
+		System.out.println("cnt/ check 값 : "+cnt + "/ "+check);
+		
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
 
 		out.print(check);
 	}

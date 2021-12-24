@@ -624,10 +624,10 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				url :  "DeviceRegister", // 데이터를 전송하는 페이지
 				dataType : "text", // 응답데이터의 형식
 				success : function(data) {
-					if (data == "true") {
+					if (data=="false") {
 						alert("장치를 정상적으로 등록하였습니다.");
 					}else {
-				 		alert("장치 등록에 실패하였습니다.");
+				 		alert("이미 등록된 장치입니다.");
 					}
 				},
 				 error : function() { // 실패
