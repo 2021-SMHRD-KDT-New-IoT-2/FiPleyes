@@ -72,7 +72,7 @@ if(cookies != null){
 				<hr>
 				<br> <input name="emp_pw" class="log_t" type="password" placeholder="  PW"><br>
 				<hr>
-				<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<br> <input type="checkbox" name="logincheck" value="true"><a>&nbsp; 로그인유지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	             <a id = "modal_btn">비밀번호 찾기</a>
 				<br> <br> <input type="submit" value="로그인" class="login_s">
 			</div>
@@ -85,13 +85,13 @@ if(cookies != null){
 	<div class="pw_h"><h3>비밀번호 찾기</h3></div>
 	<div class="pw_d">
 			<form action="SendPwEmail" method="post">
-				<input type="text" name="emp_name" placeholder="이름" class="log_t"><br>
+				<input type="text" name="emp_name" placeholder="이름" class="log_t" required="required"><br>
 				<hr class="modal_hr">
 				<br> 
 				<input type="text" name="emp_phone" placeholder="전화번호" class="log_t" required="required" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" title="###-####-#### 형식으로 입력"><br>
 				<hr class="modal_hr">
 				<br> 
-				<input type="text" name="emp_email" placeholder="이메일" class="log_t"><br>
+				<input type="text" name="emp_email" placeholder="이메일" class="log_t" required="required" title="이메일 형식으로 입력해주세요"><br>
 				<hr class="modal_hr">
 				<br>
 				<br> <input type="submit" value="임시 비밀번호 발급" class="login_m">

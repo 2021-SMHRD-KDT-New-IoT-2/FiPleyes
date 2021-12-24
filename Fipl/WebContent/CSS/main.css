@@ -610,6 +610,10 @@ tr {
 .scrolltable_1 tbody tr:nth-child(2n+1) {
 	background-color: #f0f0f0;
 }
+.icon{
+	width:18px;
+	height : auto;
+}
 
 /* page5 */
 .delete_id{
