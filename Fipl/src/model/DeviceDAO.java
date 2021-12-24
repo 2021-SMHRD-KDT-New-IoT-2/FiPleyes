@@ -286,5 +286,34 @@ public class DeviceDAO {
 		return check;
 	}
 	
+	// 장치를 통한 부서 번호 가지고 오기
+	public String getDept_no(String device_no) {
+		String getDept_no = "";
+
+		try {
+			Connection();
+
+			String sql = "select * from DEVICES where DEVICE_no=?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, device_no);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				getDept_no = rs.getString("device_dept");
+			}
+
+		} catch (Exception e) {
+			System.out.println("장치를 통한 부서번호 가져오는 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+
+		return getDept_no;
+		
+	}
 	
 }
