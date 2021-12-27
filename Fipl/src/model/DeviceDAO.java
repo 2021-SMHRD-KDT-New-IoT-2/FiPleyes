@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DeviceDAO {
 
@@ -127,7 +129,8 @@ public class DeviceDAO {
 				String get_device_dept = rs.getString(5);
 
 				vo = new DeviceVO(get_device_no, get_device_date, get_device_loc, get_device_status, get_device_dept);
-
+				
+				System.out.println(vo);
 				al.add(vo);
 
 			}
@@ -139,6 +142,11 @@ public class DeviceDAO {
 		} finally {
 			close();
 		}
+		
+		
+		Collections.sort(al);
+		
+		
 		return al;
 	}
 

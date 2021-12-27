@@ -3,6 +3,8 @@ package android;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +39,9 @@ public class SearchDeviceStatus_android extends HttpServlet {
 		}else {//이상기기 검색
 			list = dao.errorDevice(dept_no);
 		}
+		
+		
+		
 
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();

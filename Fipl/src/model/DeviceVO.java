@@ -1,6 +1,6 @@
 package model;
 
-public class DeviceVO {
+public class DeviceVO implements Comparable<DeviceVO>{
 
 	private String device_no;
 	private String device_date;
@@ -66,5 +66,12 @@ public class DeviceVO {
 		return "DeviceVO [device_no=" + device_no + ", device_date=" + device_date + ", device_loc=" + device_loc
 				+ ", device_status=" + device_status + ", device_dept=" + device_dept + "]";
 	}
+
+	@Override
+	public int compareTo(DeviceVO o) {
+		// TODO Auto-generated method stub
+		return this.device_no.compareTo(o.device_no);
+	}
+
 
 }
