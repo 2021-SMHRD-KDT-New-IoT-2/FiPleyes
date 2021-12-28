@@ -26,6 +26,8 @@ public class DeleteDevice_android extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
+		System.out.println("디바이스 삭제 동작 cnt : "+cnt);
+		
 		if(cnt>0) {
 			out.print("기기 삭제 완료");
 		}else {

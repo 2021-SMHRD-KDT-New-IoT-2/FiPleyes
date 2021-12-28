@@ -38,6 +38,8 @@ public class SendEmail {
 	public void sendMail(String emp_email, String temp_pw) {
 		// 메일 인코딩
 		final String bodyEncoding = "UTF-8"; // 콘텐츠 인코딩
+		
+		System.out.println("sendMail 들어옴");
 
 		String subject = "Fipl.net 임시비밀번호 발급";
 		String fromEmail = "ybyun76@gmail.com";
@@ -70,8 +72,12 @@ public class SendEmail {
 			Authenticator auth = new Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(username, password);
+					
+					
 				}
 			};
+			
+			System.out.println("서버 인증 계정 설정");
 
 			// 메일 세션 생성
 			Session session = Session.getInstance(props, auth);
@@ -91,6 +97,7 @@ public class SendEmail {
 			// 메일 콘텐츠 - 내용
 			mTextPart.setText(html, bodyEncoding, "html");
 			mParts.addBodyPart(mTextPart);
+			System.out.println("메인 콘텐츠 내용");
 
 			// 메일 콘텐츠 설정
 			message.setContent(mParts);

@@ -24,13 +24,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>FiPl.net</title>
 <link rel="stylesheet" href="CSS/main.css">
 <link rel="stylesheet" href="CSS/Font.css">
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/script.js" defer></script>
 <script src="assets/js/jquery.scrolly.min.js"></script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
+<link rel="shortcut icon" href="img/favicon.png">
 
 </head>
 <body class="layout">
@@ -103,24 +104,35 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	<!-- 메인 화면 -->
 	<section id="page1" class="page">
 		<div class="fullD">
+		 
 			<div class=d1 onclick="window.location.href='#page2'">
-				<a class="box_text">미처리신고</a> <img src="img/fireplug.png"
+				<a class="box_text">미처리신고</a> 
+				<img src="img/fireplug.png"
 					class="fireplug_1">
+				<div class="casenum_position"><a>27</a></div>
 			</div>
+			<!-- <a class="mi_po">36</a> -->
+		
 			<div class=d2 onclick="window.location.href='#page3'">
 				<a class="box_text">보류 신고</a> <img src="img/pages_4.png"
 					class="pages">
+					<div class="casenum_position"><a>8</a></div>
 			</div>
-
+		
 			<div class=d3 onclick="window.location.href='#page4'">
 				<a class="box_text">이상 기기 관리</a> <img src="img/machine.png"
 					class="machine">
+					<div class="casenum_position"><a>3</a></div>
 			</div>
+			
+		
 			<div class=d4 onclick="window.location.href='#page5'">
 				<a class="box_text">MY 기기 관리</a> <img src="img/my_machine.png"
 					class="my_machine">
+					<div class="casenum_position"><a>21</a></div>
 			</div>
 		</div>
+		
 
 	</section>
 
@@ -195,7 +207,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						<img id="detail_rep_img" src="" class="numberpad">
 						<table class="detail_t">
 							<tr>
-								<td class="id_d"><h3>ID</h3></td>
+								<td class="id_d"><h3>신고 번호</h3></td>
 								<td id="detail_rep_no"></td>
 							</tr>
 							<tr>
@@ -218,7 +230,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						</table>
 
 						<div class="btn_p">
-							<a id="hold_rep" href="">보류</a> <a id="fine_rep" href="">신고</a>
+							<a id="hold_rep" class="modal_close_2">보류</a> <a id="fine_rep">신고</a>
 						</div>
 						<div class="modal_close_div">
 							<a class="modal_close_1_1">close</a>
@@ -242,7 +254,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 		<table class="scrolltable">
 			<thead>
 				<tr>
-					<td class="id"><h3>ID</h3></td>
+					<td class="id"><h3>신고 번호</h3></td>
 					<td class="loca"><h3>위치</h3></td>
 					<td class="date"><h3>날짜/시간</h3></td>
 					<td class="detail"><h3>상세보기</h3></td>
@@ -271,7 +283,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					<img id="hold_rep_img" src="" class="numberpad">
 					<table class="detail_t">
 						<tr>
-							<td class="id_d"><h3>ID</h3></td>
+							<td class="id_d"><h3>신고 번호</h3></td>
 							<td id="detail_hold_no"></td>
 						</tr>
 						<tr>
@@ -320,6 +332,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						<td class="id"><h3>ID</h3></td>
 						<td class="loca"><h3>위치</h3></td>
 						<td class="id"><h3>현재 상태</h3></td>
+						
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -410,7 +424,6 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 							<hr class="hr_one">
 							<br> <br> <button onclick = "deviceRegi()">등록하기</button>
 						</div>
-					</form>
 				</div>
 			</article>
 		</div>
