@@ -36,17 +36,25 @@ public class ReportStatusUp extends HttpServlet {
 		//사용자가 어떤 상태로 변경을 선택했는지 가져오기
 		String status = request.getParameter("status");
 		System.out.println("서블릿 상태값"+status);
+		String kind = request.getParameter("kind");
 
 		int cnt = dao.statusUpdate(rep_no, status, emp_no);
 
 		if (cnt > 0) {
 			System.out.println("신고 상태 바꾸기 성공");
-			// ★신고 상태 바꾸기 성공시 페이지 이동
-			response.sendRedirect("Main.jsp#page3");
+			if(kind.equals("1")) {
+				response.sendRedirect("Main.jsp#page2");
+			}else if(kind.equals("2")){
+				response.sendRedirect("Main.jsp#page3");
+			}
+			
 		} else {
 			System.out.println("신고 상태 바꾸기 실패");
-			// ★신고 상태 바꾸기 실패시 페이지 이동
-			response.sendRedirect("Main.jsp");
+			if(kind.equals("1")) {
+				response.sendRedirect("Main.jsp#page2");
+			}else if(kind.equals("2")){
+				response.sendRedirect("Main.jsp#page3");
+			}
 		}
 
 	}
