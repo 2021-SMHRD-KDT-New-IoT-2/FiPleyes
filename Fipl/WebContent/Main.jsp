@@ -230,7 +230,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						</table>
 
 						<div class="btn_p">
-							<a id="hold_rep" class="modal_close_2" href="">보류</a> <a id="fine_rep" href="">신고</a>
+
+							<a id="hold_rep" href ="">보류</a> <a id="fine_rep" href ="">신고</a>
 						</div>
 						<div class="modal_close_div">
 							<a class="modal_close_1_1">close</a>
