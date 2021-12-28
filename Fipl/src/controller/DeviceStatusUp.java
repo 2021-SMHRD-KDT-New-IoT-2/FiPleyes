@@ -20,10 +20,12 @@ public class DeviceStatusUp extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("euc-kr");
-		
 		// 장치에서 들어오는 데이터 -> 디비에 입력
 		// ★장지에서 들어오는 데이터 값이 일정시간 이상 끊기면? false -> true가 됨
 		boolean status = false;
+		
+	while(true) {
+		String url = "172.30.1.9:5000";
 		
 //		★if("장치의 상태가 일정 시간 끊기면") {
 //			status = true;
@@ -39,19 +41,16 @@ public class DeviceStatusUp extends HttpServlet {
 			if(cnt > 0) {
 				System.out.println("장치 상태 수정 성공");
 				
-				// ★장치 상태 수정 성공시 페이지 이동
-				//response.sendRedirect("main.jsp");
-				
 			}else {
 				System.out.println("장치 상태 수정 실패");
-				// ★장치 상태 수정 실패시 페이지 이동
-				//response.sendRedirect("main.jsp");
+
 			}
 			
 		} else {
-			// ★ 장치 상태가 정상일 때 해야하는 동작
+			System.out.println();
 		}
 
+		}
 	}
 
 }

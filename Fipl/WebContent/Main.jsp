@@ -516,8 +516,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					$("#detail_rep_data").html(res.rep_time);
 					$("#detail_car_no").html(res.car_no);
 					$("#detail_total_report").html(res.total_report);
-					$("#hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=1");
-					$("#fine_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
+					$("#hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=1&kind=1");
+					$("#fine_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2&kind=1");
 					$("#detail_rep_img").attr("src", res.rep_file);
 				},
 				 error : function() { // 실패
@@ -544,8 +544,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					$("#detail_hold_date").html(res.rep_time);
 					$("#detail_hold_car_no").html(res.car_no);
 					$("#detail_hold_total_report").html(res.total_report);
-					$("#fine_hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2");
-					$("#delet_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=3");
+					$("#fine_hold_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=2&kind=2");
+					$("#delet_rep").attr("href", "ReportStatusUp?rep_no=" + res.rep_no + "&status=3&kind=2");
 					$("#hold_rep_img").attr("src", res.rep_file);
 				},
 				 error : function() { // 실패
