@@ -42,11 +42,11 @@ public class ReportStatusUp extends HttpServlet {
 		if (cnt > 0) {
 			System.out.println("신고 상태 바꾸기 성공");
 			// ★신고 상태 바꾸기 성공시 페이지 이동
-			response.sendRedirect("Main.jsp#detail_rep");
+			response.sendRedirect("Main.jsp#page3");
 		} else {
 			System.out.println("신고 상태 바꾸기 실패");
 			// ★신고 상태 바꾸기 실패시 페이지 이동
-			response.sendRedirect("Main.jsp#detail_rep");
+			response.sendRedirect("Main.jsp");
 		}
 
 	}

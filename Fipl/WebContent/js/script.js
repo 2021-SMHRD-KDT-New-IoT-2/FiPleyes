@@ -52,6 +52,18 @@ $('.modal_close_div_1').click(function() {
 	$('.black_bg, .window').hide();
 });
 
+$('.modal_close_2').click(function() {
+	$('.container').removeClass('modal-open');
+	$('.black_bg, .window').hide();
+});
+
+/*$('.btn_p').click(function() {
+	$('.container-1').removeClass('modal-open-1');
+	$('.black_bg, .window').hide();
+});
+*/
+
+
 //기기 추가 모달
 
 
