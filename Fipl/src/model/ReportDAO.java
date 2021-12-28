@@ -335,4 +335,59 @@ public ReportVO getReport2(String rep_no) {
 		return al.size() - 1;
 	}
 
+	// 미처리 신고 전체 갯수 세기
+	public String countReport(String dept_no) {
+		String count = "0";
+		try {
+			Connection();
+
+			String sql = "select count(*) from reports where rep_dept = ? and rep_status = '0' ";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, dept_no);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getString(1);
+			}
+
+		} catch (Exception e) {
+			System.out.println("보류 신고 전체 갯수 가져오는 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+
+		return count;
+	}
+	
+	// 미처리 신고 전체 갯수 세기
+	public String countHoldReport(String dept_no) {
+		String count = "0";
+		try {
+			Connection();
+
+			String sql = "select count(*) from reports where rep_dept = ? and rep_status = '1' ";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, dept_no);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getString(1);
+			}
+
+		} catch (Exception e) {
+			System.out.println("미처리 신고 전체 갯수 가져오는 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+
+		return count;
+	}
 }

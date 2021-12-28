@@ -109,27 +109,27 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				<a class="box_text">미처리신고</a> 
 				<img src="img/fireplug.png"
 					class="fireplug_1">
-				<div class="casenum_position"><a>27</a></div>
+				<div class="casenum_position"><a id="rep_count"><%=reportDao.countReport(dept_no) %></a></div>
 			</div>
 			<!-- <a class="mi_po">36</a> -->
 		
 			<div class=d2 onclick="window.location.href='#page3'">
 				<a class="box_text">보류 신고</a> <img src="img/pages_4.png"
 					class="pages">
-					<div class="casenum_position"><a>8</a></div>
+					<div class="casenum_position"><a id="hold_count"><%=reportDao.countHoldReport(dept_no) %></a></div>
 			</div>
 		
 			<div class=d3 onclick="window.location.href='#page4'">
 				<a class="box_text">이상 기기 관리</a> <img src="img/machine.png"
 					class="machine">
-					<div class="casenum_position"><a>3</a></div>
+					<div class="casenum_position"><a id="err_device"><%=deviceDao.countErrorDevice(dept_no)%></a></div>
 			</div>
 			
 		
 			<div class=d4 onclick="window.location.href='#page5'">
 				<a class="box_text">MY 기기 관리</a> <img src="img/my_machine.png"
 					class="my_machine">
-					<div class="casenum_position"><a>21</a></div>
+					<div class="casenum_position"><a id="my_device"><%=deviceDao.countDevice(dept_no)%></a></div>
 			</div>
 		</div>
 		
@@ -230,7 +230,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						</table>
 
 						<div class="btn_p">
-							<a id="hold_rep" class="modal_close_2">보류</a> <a id="fine_rep">신고</a>
+							<a id="hold_rep" class="modal_close_2" href="">보류</a> <a id="fine_rep" href="">신고</a>
 						</div>
 						<div class="modal_close_div">
 							<a class="modal_close_1_1">close</a>

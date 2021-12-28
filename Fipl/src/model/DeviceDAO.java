@@ -321,7 +321,61 @@ public class DeviceDAO {
 		}
 
 		return getDept_no;
-		
 	}
 	
+	// 전체 갯수 세기
+	public String countDevice(String dept_no) {
+		String count = "0";
+		try {
+			Connection();
+
+			String sql = "select count(*) from devices where DEVICE_DEPT = ?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, dept_no);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getString(1);
+			}
+
+		} catch (Exception e) {
+			System.out.println("장치 전체 갯수 가져오는 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+
+		return count;
+	}
+	
+	// 이상기기 갯수 세기
+	public String countErrorDevice(String dept_no) {
+		String count = "0";
+		try {
+			Connection();
+
+			String sql = "select count(*) from devices where DEVICE_DEPT = ? and DEVICE_STATUS = '1'";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, dept_no);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getString(1);
+			}
+
+		} catch (Exception e) {
+			System.out.println("이상기기 갯수 가져오는 DAO 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+
+		return count;
+	}
 }
