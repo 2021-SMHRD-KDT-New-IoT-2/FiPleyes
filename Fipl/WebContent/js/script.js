@@ -15,18 +15,11 @@ window.onload = function() {
 		onClick);
 	document.querySelector('.modal_close').addEventListener('click',
 		offClick);
+	document.querySelector('.black_bg').addEventListener('click',
+		offClick);	
 
 };
 
-/* 메뉴 상단바 색깔 변경*/
-
-$(function(){
-	
-	$('li').click(function(){
-		$('li').removeClass()
-			$(this).addClass('on')
-	})
-})
 
 /*page2 팝업  */
 $('.js-click-modal').click(function() {
@@ -52,16 +45,12 @@ $('.modal_close_div_1').click(function() {
 	$('.black_bg, .window').hide();
 });
 
-$('.modal_close_2').click(function() {
-	$('.container').removeClass('modal-open');
-	$('.black_bg, .window').hide();
-});
 
-/*$('.btn_p').click(function() {
+$('.black_bg').click(function () {  
+	$('.container').removeClass('modal-open');
 	$('.container-1').removeClass('modal-open-1');
 	$('.black_bg, .window').hide();
 });
-*/
 
 
 //기기 추가 모달
@@ -81,6 +70,8 @@ window.addEventListener('load',function() {
 	document.getElementById('add_btn').addEventListener('click',
 		onClick);
 	document.querySelector('.add_close').addEventListener('click',
+		offClick);
+	document.querySelector('.add_bg').addEventListener('click',
 		offClick);
 
 });
