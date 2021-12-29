@@ -1,12 +1,14 @@
 @charset "EUC-KR";
 
-
 @font-face {
-    font-family: 'Pretendard-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
+	font-family: 'Pretendard-Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+		format('woff');
+	font-weight: 700;
+	font-style: normal;
 }
+
 * {
 	margin: 0;
 	padding: 0;
@@ -26,7 +28,7 @@ header {
 	top: 0;
 	width: 100%;
 	height: 10vh;
-	background-color: whitesmoke; 
+	background-color: whitesmoke;
 	/* margin: 0 auto; */
 	display: flex;
 	justify-content: space-between;
@@ -34,8 +36,9 @@ header {
 	z-index: 7;
 	font-size: 2vh;
 }
-.name_s{
-	color:grey;
+
+.name_s {
+	color: grey;
 }
 
 .head {
@@ -72,14 +75,15 @@ nav>ul>li>a {
 }
 
 nav>ul>li>a:hover {
-	color:#667db6;
+	color: #667db6;
 }
 
-.clear{
-	clear:both;
+.clear {
+	clear: both;
 }
-.li.on{
-	color:#1726aa;
+
+.li.on {
+	color: #1726aa;
 }
 
 .fullD {
@@ -114,23 +118,35 @@ nav>ul>li>a:hover {
 	opacity: 1;
 	filter: alpha(opacity = 100);
 }
-.d1:hover > .casenum_position{
-	color:  #252D59;
-}
-.casenum_position{
-	position : relative;
-	right : 0.6vw;
-	bottom : -43.5vh;
-	font-size : 100px;
-	z-index : 5;
-	background: whitesmoke;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: bold;
-    text-align:right;
-    
 
+/* .d1:hover>.casenum_position {
+	color: #F7CC02;
+}
+
+.d2:hover>.casenum_position {
+	color: #F7CC02
+}
+
+.d3:hover>.casenum_position {
+	color: #F7CC02
+}
+
+.d4:hover>.casenum_position {
+	color: #F7CC02
+} */
+
+.casenum_position {
+	position: relative;
+	right: 0.6vw;
+	bottom: -43.5vh;
+	font-size: 100px;
+	z-index: 5;
+	background: whitesmoke;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	font-weight: bold;
+	text-align: right;
 }
 
 .pages {
@@ -230,7 +246,6 @@ nav>ul>li>a:hover {
 	-o-transform: scale(1.05);
 }
 
-
 .page {
 	float: left;
 	width: 100%;
@@ -240,11 +255,9 @@ nav>ul>li>a:hover {
 	padding: 0.073% 0 0 0;
 	text-align: center;
 	padding: 0 auto;
-	
 }
 
 /* page2 */
-
 .scrolltable {
 	table-layout: fixed;
 	border-collapse: collapse;
@@ -264,7 +277,7 @@ nav>ul>li>a:hover {
 	overflow: auto;
 	height: 550px;
 	scrollbar-width: thin;
-	font-size : 1.2vw
+	font-size: 1.2vw
 }
 
 tbody::-webkit-scrollbar {
@@ -340,7 +353,7 @@ tbody::-webkit-scrollbar-thumb {
 	height: 100%;
 	background: url(https://img.icons8.com/metro/26/000000/close-window.png);
 	text-indent: -9999px;
-	cursor : pointer;
+	cursor: pointer;
 }
 
 .modal_btn {
@@ -362,14 +375,14 @@ tbody::-webkit-scrollbar-thumb {
 	position: relative;
 	top: 11vh;
 }
-.pw_input {
-	width : 13vw;
-	height : 3vh;
-    border : 0 solid;
-    padding : 3px;
-    margin : 3px;
-}
 
+.pw_input {
+	width: 13vw;
+	height: 3vh;
+	border: 0 solid;
+	padding: 3px;
+	margin: 3px;
+}
 
 input {
 	width: 13vw;
@@ -423,8 +436,8 @@ input {
 .modal_main {
 	padding: 50px;
 	font: 300 16px Lato;
-	position : relative;
-	top :1vh;
+	position: relative;
+	top: 1vh;
 }
 
 .btn {
@@ -445,7 +458,7 @@ input {
 	left: 10vw;
 }
 
-.btn, #hold_rep, #fine_rep, #fine_hold_rep, #delet_rep{
+.btn, #hold_rep, #fine_rep, #fine_hold_rep, #delet_rep {
 	background: #041159;
 	padding: 10px 25px;
 	display: inline-block;
@@ -465,10 +478,11 @@ input {
 	position: relative;
 	top: 2.5vh;
 	left: 31vw;
-	text-align:left;
+	text-align: left;
 }
-.detail_t > td:nth-child(1){
-	text-align:center;
+
+.detail_t>td:nth-child(1) {
+	text-align: center;
 }
 
 tr {
@@ -478,7 +492,6 @@ tr {
 .id_d {
 	width: 5vw;
 }
-
 
 .id {
 	width: 8vw;
@@ -496,7 +509,6 @@ tr {
 	width: 10vw;
 }
 
-
 .modal_close_div {
 	width: 26px;
 	height: 26px;
@@ -505,15 +517,14 @@ tr {
 	right: 0;
 }
 
-.numberpad{
+.numberpad {
 	width: 25vw;
-   height: auto;
-   position: fixed;
-   left: 27vw;
-   border-radius: 10px;
-	
-	
+	height: auto;
+	position: fixed;
+	left: 27vw;
+	border-radius: 10px;
 }
+
 .modal_close_1 {
 	display: block;
 	width: 100%;
@@ -540,7 +551,6 @@ tr {
 }
 
 /* page3 */
-
 .container-1>.btn {
 	margin: 60px;
 	padding: 20px 40px;
@@ -587,7 +597,6 @@ tr {
 }
 
 /* page4 */
-
 .scrolltable_1 {
 	position: relative;
 	top: 25vh;
@@ -606,7 +615,7 @@ tr {
 	overflow: auto;
 	height: 350px;
 	scrollbar-width: thin;
-	font-size : 1.2vw
+	font-size: 1.2vw
 }
 
 .scrolltable_1 th, .scrolltable_1 td {
@@ -619,24 +628,24 @@ tr {
 .scrolltable_1 tbody tr:nth-child(2n+1) {
 	background-color: #f0f0f0;
 }
-.icon{
-	width:18px;
-	height : auto;
+
+.icon {
+	width: 18px;
+	height: auto;
 }
 
 /* page5 */
-.delete_id{
-	
+.delete_id {
 	border: 0;
 	outline: none;
 	cursor: pointer;
 	vertical-align: middle;
 	background-color: transparent;
 	text-decoration: none;
-	color : black;
-	
+	color: black;
 }
-.delete_id:hover{
+
+.delete_id:hover {
 	color: #667db6;
 }
 
@@ -668,7 +677,6 @@ tr {
 	margin: -250px 0 0 -250px;
 	background: #fff;
 	z-index: 3;
-	
 }
 
 .add_close {
@@ -685,8 +693,7 @@ tr {
 	height: 100%;
 	background: url(https://img.icons8.com/metro/26/000000/close-window.png);
 	text-indent: -9999px;
-	cursor : pointer;
-	
+	cursor: pointer;
 }
 
 .add_bg {
@@ -699,41 +706,41 @@ tr {
 	top: 0;
 	left: 0;
 	z-index: 2;
-
-}
-.add_t{
-	position:relative;
-	left : -5vw;
 }
 
+.add_t {
+	position: relative;
+	left: -5vw;
+}
 
 .add_input {
-	width : 13vw;
-	height : 3vh;
-    border : 0 solid;
-    padding : 3px;
-    margin : 3px;
+	width: 13vw;
+	height: 3vh;
+	border: 0 solid;
+	padding: 3px;
+	margin: 3px;
 }
+
 .add_input:focus {
 	outline: none;
 }
 
 input:focus::-webkit-input-placeholder {
-	color:transparent; }
+	color: transparent;
+}
 
-
-#adding_btn{
+#adding_btn {
 	border: 2px solid #252D59;
 	background-color: #252D59;
-	color : #fff;
+	color: #fff;
 	padding: 5px;
-    border-radius: 5px;
-    font-weight:bold;
-    font-size: 18px;
-    cursor : pointer;
-    width: 13vw;
-    height: 4.5vh;
-    font-family: 'Pretendard-Bold';
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 18px;
+	cursor: pointer;
+	width: 13vw;
+	height: 4.5vh;
+	font-family: 'Pretendard-Bold';
 }
 
 .hr_one {
@@ -746,14 +753,13 @@ footer {
 	width: 100%;
 	height: 200px;
 	background-color: #252D59;
-	text-align : center;
-	position:relative;
-	top:35vh;
-	color : whitesmoke;
-	font-size : 13px
+	text-align: center;
+	position: relative;
+	top: 35vh;
+	color: whitesmoke;
+	font-size: 13px
 }
-p{
-	line-height : 20px;
+
+p {
+	line-height: 20px;
 }
-	
-	
