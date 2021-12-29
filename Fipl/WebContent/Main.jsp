@@ -8,16 +8,14 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 
-<%!
-	public String getCookieValue(Cookie[] cookies, String cookieName){
+<%!public String getCookieValue(Cookie[] cookies, String cookieName) {
 		for (Cookie cookie : cookies) {
-			if(cookie.getName().equals(cookieName)){
+			if (cookie.getName().equals(cookieName)) {
 				return cookie.getValue();
 			}
 		}
 		return "";
-}
-%>
+	}%>
 
 <html lang="en">
 <head>
@@ -36,27 +34,25 @@
 </head>
 <body class="layout">
 	<%
+		String emp_no = null;
+	String emp_name = null; //가져올 값 지정하기 
+	String dept_no = null;
+	String emp_pw = null;
+	String emp_phone = null;
+	String emp_email = null;
 
-String emp_no = null;
-String emp_name =null; //가져올 값 지정하기 
-String dept_no =null;
-String emp_pw = null;
-String emp_phone = null;
-String emp_email = null;
-
-
-// 자동로그인을 위한 쿠키 가져오기
-/* Cookie[] cookies = request.getCookies();
-if(cookies != null){
-	for(Cookie tempCookie : cookies){
-			emp_no = getCookieValue(cookies, "emp_no");
-			emp_pw = getCookieValue(cookies, "emp_pw");
-			emp_phone = getCookieValue(cookies, "emp_phone");
-			emp_email = getCookieValue(cookies, "emp_email");
-			emp_name = getCookieValue(cookies, "emp_name");
-			dept_no = getCookieValue(cookies, "dept_no");
-	}
-} */
+	// 자동로그인을 위한 쿠키 가져오기
+	/* Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(Cookie tempCookie : cookies){
+		emp_no = getCookieValue(cookies, "emp_no");
+		emp_pw = getCookieValue(cookies, "emp_pw");
+		emp_phone = getCookieValue(cookies, "emp_phone");
+		emp_email = getCookieValue(cookies, "emp_email");
+		emp_name = getCookieValue(cookies, "emp_name");
+		dept_no = getCookieValue(cookies, "dept_no");
+		}
+	} */
 
 	EmployeeVO vo = (EmployeeVO) session.getAttribute("employee");
 	emp_name = vo.getEmp_name(); //가져올 값 지정하기 
@@ -66,16 +62,16 @@ if(cookies != null){
 	emp_phone = vo.getEmp_phone();
 	emp_email = vo.getEmp_phone();
 
-//신고 리스트
-ReportDAO reportDao = new ReportDAO();
-ArrayList<ReportVO> report_yet = reportDao.reportList(dept_no, "0");
-ArrayList<ReportVO> report_hold = reportDao.reportList(dept_no, "1");
-ArrayList<ReportVO> report_delete = reportDao.reportList(dept_no, "2");
+	//신고 리스트
+	ReportDAO reportDao = new ReportDAO();
+	ArrayList<ReportVO> report_yet = reportDao.reportList(dept_no, "0");
+	ArrayList<ReportVO> report_hold = reportDao.reportList(dept_no, "1");
+	ArrayList<ReportVO> report_delete = reportDao.reportList(dept_no, "2");
 
-DeviceDAO deviceDao = new DeviceDAO();
-ArrayList<DeviceVO> allDevice = deviceDao.allList(dept_no);
-ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
-%>
+	DeviceDAO deviceDao = new DeviceDAO();
+	ArrayList<DeviceVO> allDevice = deviceDao.allList(dept_no);
+	ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
+	%>
 	<header>
 		<div class="head">
 
@@ -85,7 +81,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 
 		<div>
 			<h3 class="name_s">
-				<%= emp_name %>님 환영합니다.
+				<%=emp_name%>님 환영합니다.
 			</h3>
 		</div>
 
@@ -104,35 +100,42 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	<!-- 메인 화면 -->
 	<section id="page1" class="page">
 		<div class="fullD">
-		 
+
 			<div class=d1 onclick="window.location.href='#page2'">
-				<a class="box_text">미처리신고</a> 
-				<img src="img/fireplug.png"
+				<a class="box_text">미처리신고</a> <img src="img/fireplug.png"
 					class="fireplug_1">
-				<div class="casenum_position"><a id="rep_count"><%=reportDao.countReport(dept_no) %></a></div>
+				<div class="casenum_position">
+					<a id="rep_count"><%=reportDao.countReport(dept_no)%></a>
+				</div>
 			</div>
 			<!-- <a class="mi_po">36</a> -->
-		
+
 			<div class=d2 onclick="window.location.href='#page3'">
 				<a class="box_text">보류 신고</a> <img src="img/pages_4.png"
 					class="pages">
-					<div class="casenum_position"><a id="hold_count"><%=reportDao.countHoldReport(dept_no) %></a></div>
+				<div class="casenum_position">
+					<a id="hold_count"><%=reportDao.countHoldReport(dept_no)%></a>
+				</div>
 			</div>
-		
+
 			<div class=d3 onclick="window.location.href='#page4'">
 				<a class="box_text">이상 기기 관리</a> <img src="img/machine.png"
 					class="machine">
-					<div class="casenum_position"><a id="err_device"><%=deviceDao.countErrorDevice(dept_no)%></a></div>
+				<div class="casenum_position">
+					<a id="err_device"><%=deviceDao.countErrorDevice(dept_no)%></a>
+				</div>
 			</div>
-			
-		
+
+
 			<div class=d4 onclick="window.location.href='#page5'">
 				<a class="box_text">MY 기기 관리</a> <img src="img/my_machine.png"
 					class="my_machine">
-					<div class="casenum_position"><a id="my_device"><%=deviceDao.countDevice(dept_no)%></a></div>
+				<div class="casenum_position">
+					<a id="my_device"><%=deviceDao.countDevice(dept_no)%></a>
+				</div>
 			</div>
 		</div>
-		
+
 
 	</section>
 
@@ -148,8 +151,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				id="pw_check"></em>
 			<hr class="hr_one">
 			<button onclick="pwcheck()" class="login_m">확인하기</button>
-			<br>
-			<input type="text" name="new_emp_pw1" id="new_emp_pw1"
+			<br> <input type="text" name="new_emp_pw1" id="new_emp_pw1"
 				class="pw_input" placeholder="변경할 비밀번호를 입력해주세요"><br>
 			<hr class="hr_one">
 			<input type="text" name="new_emp_pw2" id="new_emp_pw2"
@@ -182,7 +184,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				</thead>
 				<tbody>
 
-					<%for (int i = 0; i < report_yet.size(); i++) {%>
+					<%
+						for (int i = 0; i < report_yet.size(); i++) {
+					%>
 					<tr>
 						<td id="rep_no" class="id"><%=report_yet.get(i).getRep_no()%></td>
 						<td class="loca"><%=reportDao.reportLoc(report_yet.get(i).getDevice_no())%></td>
@@ -190,7 +194,9 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						<td class="detail"><a class="btn js-click-modal"
 							onclick="repDetail(<%=report_yet.get(i).getRep_no()%>)">상세보기</a></td>
 					</tr>
-					<%}%>
+					<%
+						}
+					%>
 				</tbody>
 
 			</table>
@@ -231,7 +237,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 
 						<div class="btn_p">
 
-							<a id="hold_rep" href ="">보류</a> <a id="fine_rep" href ="">신고</a>
+							<a id="hold_rep" href="">보류</a> <a id="fine_rep" href="">신고</a>
 						</div>
 						<div class="modal_close_div">
 							<a class="modal_close_1_1">close</a>
@@ -263,16 +269,19 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			</thead>
 			<tbody>
 				<%
-				for(int i = 0; i< report_hold.size(); i++){ %>
+					for (int i = 0; i < report_hold.size(); i++) {
+				%>
 				<tr>
 
 					<td class="id"><%=report_hold.get(i).getRep_no()%></td>
-					<td class="loca"><%=reportDao.reportLoc(report_hold.get(i).getDevice_no()) %></td>
-					<td class="date"><%=report_hold.get(i).getRep_time() %></td>
+					<td class="loca"><%=reportDao.reportLoc(report_hold.get(i).getDevice_no())%></td>
+					<td class="date"><%=report_hold.get(i).getRep_time()%></td>
 					<td class="detail"><a class="btn js-click-modal-1"
-						onclick="holdDetail(<%= report_hold.get(i).getRep_no()%>)">상세보기</a></td>
+						onclick="holdDetail(<%=report_hold.get(i).getRep_no()%>)">상세보기</a></td>
 				</tr>
-				<%} %>
+				<%
+					}
+				%>
 			</tbody>
 
 		</table>
@@ -301,7 +310,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						</tr>
 						<tr>
 							<td class="accu"><h3>누적</h3></td>
-							<td id = "detail_hold_total_report"></td>
+							<td id="detail_hold_total_report"></td>
 						</tr>
 					</table>
 
@@ -333,21 +342,24 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 						<td class="id"><h3>ID</h3></td>
 						<td class="loca"><h3>위치</h3></td>
 						<td class="id"><h3>현재 상태</h3></td>
-						
-						
+
+
 					</tr>
 				</thead>
 				<tbody>
 					<%
-				for(int i = 0; i< errorDevice.size(); i++){ %>
+						for (int i = 0; i < errorDevice.size(); i++) {
+					%>
 
-				<tr>
-					<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
-					<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
-					<td class="id"><img src="img/red.png" class="icon"></td>
-				</tr>
-				<%} %>
-			</tbody>
+					<tr>
+						<td class="id"><%=errorDevice.get(i).getDevice_no()%></td>
+						<td class="loca"><%=errorDevice.get(i).getDevice_loc()%></td>
+						<td class="id"><img src="img/red.png" class="icon"></td>
+					</tr>
+					<%
+						}
+					%>
+				</tbody>
 
 
 			</table>
@@ -374,23 +386,32 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 				</thead>
 				<tbody>
 					<%
-				for(int i = 0; i< allDevice.size(); i++){ %>
+						for (int i = 0; i < allDevice.size(); i++) {
+					%>
 
-				<tr>
-					<td class="id"><a href = "DeviceDelete?device_no=<%=allDevice.get(i).getDevice_no() %>" 
-					onclick = "if(!confirm('삭제 하시겠습니까?')){return false;}" class = "delete_id"><%=allDevice.get(i).getDevice_no()%></a></td>
-					<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
-					
-					<% if(allDevice.get(i).getDevice_status().equals("0")){%>
-						<td class="id">			
-						<img src="img/green.png" class="icon"></td>
-					<%} else if (allDevice.get(i).getDevice_status().equals("1")) {%>
-						<td class="id">	
-						<img src="img/red.png" class="icon"></td>
-					<%} %>
-				</tr>
-				<%} %>
-			</tbody>
+					<tr>
+						<td class="id"><a
+							href="DeviceDelete?device_no=<%=allDevice.get(i).getDevice_no()%>"
+							onclick="if(!confirm('삭제 하시겠습니까?')){return false;}"
+							class="delete_id"><%=allDevice.get(i).getDevice_no()%></a></td>
+						<td class="loca"><%=allDevice.get(i).getDevice_loc()%></td>
+
+						<%
+							if (allDevice.get(i).getDevice_status().equals("0")) {
+						%>
+						<td class="id"><img src="img/green.png" class="icon"></td>
+						<%
+							} else if (allDevice.get(i).getDevice_status().equals("1")) {
+						%>
+						<td class="id"><img src="img/red.png" class="icon"></td>
+						<%
+							}
+						%>
+					</tr>
+					<%
+						}
+					%>
+				</tbody>
 
 
 			</table>
@@ -412,27 +433,26 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 					<div class="pw_h">
 						<h3>새로운 기기 등록</h3>
 					</div>
-						<div class="pw_d">
-							<h4 class="add_t">기기 번호</h4>
-							<br> <input id = "device_no" type="text" placeholder="기기 번호를 입력해주세요"
-								class="add_input" name="device_no"><br>
-							<hr class="hr_one">
-							<br>
-							<br>
-							<h4 class="add_t">기기 위치</h4>
-							<br> <input id="device_loc" type="text" placeholder="기기의 위치를 입력해주세요"
-								class="add_input" name="device_loc"><br>
-							<hr class="hr_one">
-							<br> <br> <button onclick = "deviceRegi()">등록하기</button>
-						</div>
+					<div class="pw_d">
+						<h4 class="add_t">기기 번호</h4>
+						<br> <input id="device_no" type="text"
+							placeholder="기기 번호를 입력해주세요" class="add_input" name="device_no"><br>
+						<hr class="hr_one">
+						<br> <br>
+						<h4 class="add_t">기기 위치</h4>
+						<br> <input id="device_loc" type="text"
+							placeholder="기기의 위치를 입력해주세요" class="add_input" name="device_loc"><br>
+						<hr class="hr_one">
+						<br> <br>
+						<button onclick="deviceRegi()">등록하기</button>
+					</div>
 				</div>
 			</article>
 		</div>
 
 		<footer>
 			<div class="fl_p">
-				<br>
-				<br>
+				<br> <br>
 				<p>(주)FiPl ㅣ 대표 : 조우경 ㅣ fipl.net@gmail.com</p>
 				<p>주소 : 광주광역시 동구 예술길 21-15 3층</p>
 				<br>
@@ -543,7 +563,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 	</script>
 
 
-<!-- 선택한 보류 신고 상세보기  -->
+	<!-- 선택한 보류 신고 상세보기  -->
 
 	<script>
 		function holdDetail(rep_no) {
@@ -570,7 +590,7 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 
 	</script>
 
-<!-- 장치 삭제 -->
+	<!-- 장치 삭제 -->
 	<script>
 		function deviceDelete(device_no) {
 			alert("함수 호출 가능");
@@ -596,8 +616,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			}
 		}
 	</script>
-	
-<!-- 장치 중복 확인  -->
+
+	<!-- 장치 중복 확인  -->
 	<script>
 		function deviceCheck() {
 			var input = $('#input_device_no').val();
@@ -622,8 +642,8 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			
 		}
 	  </script>
-	
-<!-- 장치 등록 -->
+
+	<!-- 장치 등록 -->
 	<script>
 		function deviceRegi() {
 			var input1 = $('#device_no').val();
@@ -652,4 +672,3 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			})
 			}
 	</script>
-
