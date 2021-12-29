@@ -652,4 +652,3 @@ ArrayList<DeviceVO> errorDevice = deviceDao.errorDevice(dept_no);
 			})
 			}
 	</script>
-
