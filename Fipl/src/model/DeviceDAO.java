@@ -378,4 +378,54 @@ public class DeviceDAO {
 
 		return count;
 	}
+	
+	// 디바이스 번호 찾기
+	public String findDeviceId(String device_url) {
+		String device_no = null;
+		System.out.println(device_url);
+		try {
+			Connection();
+
+			String sql = "select device_no from devices where device_url = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, device_url);
+			rs = psmt.executeQuery();
+			
+			if (rs.next()) {
+				device_no = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Url을 통해, id를 찾지 못함");
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return device_no;
+	}
+	// 디바이스  url 가져오기
+	public ArrayList<String> DeviceUrl(){
+		
+		ArrayList<String> al = new ArrayList<String>();
+		try {
+			Connection();
+			String sql = "select device_url from DEVICES";
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				String get_device_url = rs.getString(1);
+				System.out.println(get_device_url);
+				al.add(get_device_url);
+			}
+		} catch (Exception e) {
+			System.out.println("장치 URL 목록 실패");
+			e.printStackTrace();
+
+		} finally {
+			close();
+		}
+		return al;
+	}
+	
+	
 }

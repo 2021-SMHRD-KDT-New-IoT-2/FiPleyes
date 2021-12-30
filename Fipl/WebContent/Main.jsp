@@ -673,3 +673,43 @@
 			}
 
 	</script>
+<script>
+	$(document).ready(function() {
+		/* let url_0 = "http://172.30.1.29:3000/check";
+		let url_1 = "http://172.30.1.9:3000/check";  */
+		<%for(int i = 0; i<2; i++){%>
+			$.ajax({
+				type : "get",
+				url : "<%=deviceDao.DeviceUrl().get(i)%>",
+				dataType : "text",
+				success : function(data) {
+					alert("성공");
+					alert(data);
+				}, error : function(request,status,error) {
+					alert("실패");
+					console.log(request.status);
+					if (request.status == "0" || request.status == "404" || request.status == "500"){
+						console.log("<%=deviceDao.DeviceUrl().get(i)%>");
+						console.log("<%=deviceDao.findDeviceId(deviceDao.DeviceUrl().get(i))%>");
+						let device_no = "<%=deviceDao.findDeviceId(deviceDao.DeviceUrl().get(i))%>";
+						$.ajax({
+							url:"DeviceStatusUp",
+							data : {"device_no" : device_no},	
+							success : function(data){
+								console.log("DB업데이트 성공");
+							}, error : function(){
+								console.log("DB업데이트 실패");							
+							}
+						})
+					}  
+					console.log(request.responseText);
+					console.log(error);
+				}
+			})
+		<%}%>	
+	})
+</script>
+	
+	
+	
+	
